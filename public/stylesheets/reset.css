@@ -1,0 +1,50 @@
+/*------------------------------------------
+	Reset (from the Yahoo UI Library)
+------------------------------------------*/
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+ol,ul{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+q:before,q:after{content:'';}
+abbr,acronym{border:0;}
+
+a{outline: none;}
+
+/*------------------------------------------
+	Reusable Classes
+------------------------------------------*/
+
+.hide{display: none !important;}
+.strikethrough{text-decoration: line-through !important;}
+
+#grid{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(/images/temp/960grid.png) repeat-y center 0;
+    z-index: 50;
+}
+.temp_column{
+    float: left;
+    width: 120px;
+    margin-right: 20px;
+    padding-right: 20px;
+    border-right: 1px solid #eee;
+    min-height: 250px;
+}
+.temp_column h4{
+    font-size: 11px !important;
+    font-weight: bold;
+    font-family: "lucida grande", verdana, sans-serif !important;
+}
+.temp_column ol li{
+    list-style-type: decimal;
+    list-style-position: inside;
+    font-family: "lucida grande", verdana, sans-serif;
+    font-size: 11px;
+    line-height: 1.63em;
+}

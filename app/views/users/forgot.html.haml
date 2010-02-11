@@ -1,0 +1,9 @@
+.wrap
+  %h2 Forgot my password
+  = error_messages_for :user
+  - form_for @user, :user, :url => forgot_path do |f|
+    %fieldset
+      %p
+        = f.label "Email"
+        = f.text_field :email, :size => "25"
+    %p.buttons= f.submit 'Submit'

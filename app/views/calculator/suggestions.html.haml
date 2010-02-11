@@ -1,0 +1,10 @@
+#bar-2
+  .wrap
+    %ul
+      %li= link_to('My footprint', :action => 'result', :address => params[:address], :tags => params[:tags]) #better way to do this?
+      %li= link_to('Reduce my footprint', "#", :class => 'current')
+
+#suggestions
+  = render :file => "/static/what_i_can_do" #better way to do this?
+  
+//This page can eventually be dynamically generated!

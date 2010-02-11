@@ -1,0 +1,17 @@
+#placeholder{:style => "width:600px;height:300px"}
+
+:javascript
+  $(function () {
+  	var data = [#{@calculator_result.per_module_results.collect{|k, v| "{label: '#{k.pretty_module_name}', data: #{v[:footprint]}}"}.join(',')}];
+    
+    $.plot($("#placeholder"), data, {
+      series: {
+        pie: { 
+          show: true,
+        }
+      },
+      legend: {
+          show: true
+      }
+    });
+  });

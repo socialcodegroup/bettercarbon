@@ -1,0 +1,10 @@
+%ul#nav-meta
+  - if logged_in?
+    %li= link_to("Better Carbon", root_path)
+    %li= current_user.email
+    %li= link_to("Settings", edit_user_path(current_user))
+    %li= link_to("Sign Out", logout_path)
+  - else
+    %li Welcome to Better Carbon!
+    %li= link_to("Create an account", new_user_path)
+    %li= link_to("Sign in", login_path)

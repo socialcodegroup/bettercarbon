@@ -1,0 +1,23 @@
+%h2.what_to_do Your carbon footprint is determined based on the footprints of nearby and similar people. The footprint calculated for your community helps estimate your own emissions.
+
+#placeholder{:style => "width:600px;height:300px"}
+
+:javascript
+  $(function () {
+      var vals = [#{@gvalues.enum_with_index.collect {|v,i|"[#{i}, #{v}]"}.join(',')}];
+      var labels = [#{@gkeys.enum_with_index.collect {|v,i|"[#{i+0.5}, #{v}]"}.join(',')}];
+      
+      $.plot($("#placeholder"), [
+          {
+              data: vals,
+              bars: { show: true },
+              color: ["#31549F"]
+          }
+        ],
+        {
+          xaxis: {
+      			ticks: labels
+      		}
+      	}
+      );
+  });

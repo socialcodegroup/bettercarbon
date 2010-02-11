@@ -1,0 +1,12 @@
+.wrap
+  %h2 Log In
+  - form_for(@user_session, :url => user_session_path, :html => {:method => :post}) do |f|
+    %fieldset
+      %p
+        = f.label 'email'
+        = f.text_field 'email'
+      %p
+        = f.label 'password'
+        = f.password_field 'password'
+    %p.buttons= submit_tag 'Log in'
+  %p= link_to("Forgot your password? Click here", forgot_path)

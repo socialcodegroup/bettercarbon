@@ -1,0 +1,11 @@
+.wrap
+  %h2= "You are about to view the carbon profile for #{@calculator_input.user_input.full_address}. Please confirm that you want to add this address to your account."
+  
+  - if @not_an_address
+    %p Sorry, you can only claim residential addresses
+  - else
+    %p
+      .button-bar
+        = link_to('Yes and continue.', claimed_addresses_path(:claimed_address => @calculator_input.address), :method => :post, :class => 'action-button')
+        or
+        = link_to('Cancel', result_calculator_path(:address => @calculator_input.address))

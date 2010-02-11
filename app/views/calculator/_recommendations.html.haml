@@ -1,0 +1,7 @@
+#info
+  - suggestions = suggestions_by_proximity(@calculator_input.user_input.lat, @calculator_input.user_input.lng)
+  - unless suggestions.blank?
+    %h3 People nearby to you take the following actions to reduce their carbon footprints:
+    %ul#suggestions
+      - suggestions.each do |query|
+        %li= "\"#{query.suggestion}\" <i>(#{query.city}, #{query.state})</i>"

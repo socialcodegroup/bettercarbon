@@ -1,0 +1,19 @@
+!!! 1.1
+%html{:lang => 'en' }
+  %header
+    - if yield(:page_title)
+      %title= yield(:page_title)
+    - else
+      %title Better Carbon Calculator
+    = render :partial => "layouts/sections/meta_tags"
+    = stylesheet_includes
+    = javascript_includes
+    = render :partial => "layouts/sections/javascripts_load"
+  %body
+    #container
+      = render(:partial => "layouts/sections/header")
+      %hr{:class => "hide"}
+      = render(:partial => "layouts/sections/content")
+      %hr{:class => "hide"}
+      = render(:partial => "layouts/sections/footer")
+    = render(:partial => "layouts/sections/uservoice")

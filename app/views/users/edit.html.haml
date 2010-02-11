@@ -1,0 +1,26 @@
+.wrap
+  %h2 Settings
+  = error_messages_for :user
+  - form_for @user, :user, :url => user_path(@user) do |f|
+    %fieldset
+      %p
+        = f.label "Email"
+        = f.text_field :email
+      %p
+        = f.label "Password"
+        = f.password_field :password
+      %p
+        = f.label "Password Confirmation"
+        = f.password_field :password_confirmation
+      %h3 Claimed Addresses
+      - if @user.claimed_addresses.count < 1
+        %p You have not claimed any addresses!
+      - @user.claimed_addresses.each_with_index do |claimed_address, i|
+        - fields_for "claimed_addresses" do |claimed_addresses|
+          %p
+            = claimed_addresses.label "Address"
+            = claimed_addresses.text_field "[#{i}][address]", :value => claimed_address.query.input
+          %p
+              = claimed_addresses.label "What is one thing you do to reduce your carbon footprint"
+            = claimed_addresses.text_field "[#{i}][suggestion]", :value => claimed_address.query.suggestion
+    %p.buttons= f.submit 'Save'

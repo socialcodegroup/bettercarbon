@@ -1,0 +1,30 @@
+%div{:id => "module-values-#{index}"}
+  %table
+    %tr.module-title
+      %td{:colspan => 4}
+        = module_name.pretty_module_name
+        = "(#{number_with_precision(module_values[:footprint], :precision => 2)} tons)"
+    %tr
+      %td.param 
+      %td.field Your Household
+      %td.calc_method
+      %td.data
+        = @calculator_input.user_input.city
+        %span (Avg)
+    - module_name.possible_inputs.each do |input|
+      %tr
+        %td
+          %label= input[:title]
+        - input_class = module_values[input[:name].to_sym][:calculation] == :average ? "estimated" : "exact"
+        %td{:class => input_class}
+          = render_field_for_module_input(module_name, input, module_values[input[:name].to_sym][:value])
+        %td
+          - if module_values[input[:name].to_sym][:calculation] == :average
+            (estimated)
+          - else
+            (exact)
+        - avg_val = module_name.average_value_for_input_variable_for_city_state_country(input[:name], @calculator_input.user_input.city, @calculator_input.user_input.state, @calculator_input.user_input.country)
+        - if avg_val.blank?
+          %td.no-data (no data)
+        - else
+          %td= number_with_precision(module_name.average_value_for_input_variable_for_city_state_country(input[:name], @calculator_input.user_input.city, @calculator_input.user_input.state, @calculator_input.user_input.country), :precision => 2)

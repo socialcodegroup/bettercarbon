@@ -1,0 +1,9 @@
+.wrap
+  %h2 Pick a new password
+  = error_messages_for :user
+  - form_for @user, :user, :url => reset_path, :html => {:method => :post} do |f|
+    %fieldset
+      %p
+        = f.label "Password"
+        = f.password_field :password
+    %p.buttons= f.submit 'Reset'

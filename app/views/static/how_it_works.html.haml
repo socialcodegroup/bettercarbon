@@ -1,0 +1,72 @@
+#content-panel
+  .wrap#content-panel-wrap
+    .static
+      %h1 How Does The Better Carbon Calculator Work?
+      %p This page documents how the Better Carbon calculator produces its numbers.
+      
+      %h2 Calculating Carbon Footprint
+      %p.detail 
+        Our carbon footprint calculation is based on the 
+        =link_to("method","http://coolclimate.berkeley.edu/documentation")
+        used by the
+        =link_to("Cool Climate", "http://coolclimate.berkeley.edu/")
+        calculator created at the University of California, Berkeley. However, we do not yet include some of the state-specific variables used in that system.
+      %p.detail Our footprint calculation is currently based based on 4 areas of a person's life: <b>car travel</b>, <b>air travel</b>, <b>home energy</b>, and <b>foods, goods, and services</b>.
+      %p.detail The carbon footprint provided is measured in metric tons of CO<sub>2</sub> produced or CO<sub>2</sub> equivalents (abbreviated as <b>tCO<sub>2</sub>e</b>). This is the weight of the annual emissions a person produces.
+      
+      %h3 Car Travel
+      %p.detail We calculate emissions from car travel based on two factors: the amount a person drives and the efficiency of their car. This lets us determine the number of gallons of gasoline a person burns, from which we can calculate carbon emissions. This calculation is:
+      %div.equation
+        %p emissions from fuel = (miles driven / mpg) * (direct emissions per gallon + indirect emissions per gallon)
+        %p emissions from fuel = (miles driven / mpg) * (9,109 gCO<sub>2</sub>e/gallon + 2,389 gCO<sub>2</sub>e/gallon)
+        %p emissions from manufacturing = miles driven * (manufacturing emissions per vehicle ton * average vehicle weight / vehicle lifetime in miles)
+        %p emissions from manufacturing = miles driven * (7,890,776 gCO<sub>2</sub>e/ton * 1.49005094 tons / 160,000 mi)
+        %p total emissions from car travel = emissions from fuel + emissions from manufacturing
+      
+      %h3 Air Travel
+      %p.detail We calculate emissions from air travel based on the number of trips a person takes. The level of emissions is based on the length of the trip--longer flights produce less overall emissions per person. We also include an indirect atmospheric radiative forcing multiplication factor. This calculation is:
+      %div.equation
+        %p emissions from short trips = number of short trips * 300 mi/trip average * 254 gCO<sub>2</sub>e/mi
+        %p emissions from medium trips = number of medium trips * 950 mi/trip average * 204 gCO<sub>2</sub>e/mi
+        %p emissions from long trips = number of long trips * 2,250 mi/trip average * 181 gCO<sub>2</sub>e/mi
+        %p emissions from extended trips = number of extended trips * 5,000 mi/trip average * 172 gCO<sub>2</sub>e/mi
+        %p total emissions from air travel = (emissions from trips) * indirect well-to-pump emissions multiplication factor * indirect atmospheric radiative forcing multiplication factor
+        %p total emissions from air travel = (emissions from short trips + emissions from medium trips + emissions from long trips + emissions from extended trips) * 1.2 * 1.9
+      
+      %h3 Home Energy
+      %p.detail We calculate emissions from home energy based on the amount of money spent on home energy (either from electricity, natural gases, or other fuel sources), the amount of money spent on water and sewage, and the emissions resulting from home construction based on the square footage of the home. This calculation is:
+      %div.equation
+        %p emissions from electricity = (amount spent on electricity per month / $0.1035/kWh) * 600.5 gCO<sub>2</sub>e/kWh
+        %p emissions from natural gas = (amount spent on natural gas per month / $1.545/kWh) * 5311 gCO<sub>2</sub>e/kWh
+        %p emissions from other fuels = amount spent on other fuels per month * 879 gCO<sub>2</sub>e/$
+        %p emissions from water and sewage = amount spent on water and sewage per month * 4042 gCO<sub>2</sub>e/$
+        %p emissions from housing construction = square_feet_of_household * 965 gCO<sub>2</sub>e/ft^2
+        %p total emissions form home energy = (emissions from electricity + emissions from natural gas + emissions from other fuels + emissions from water and sewage) * 12 months + emissions from housing construction
+      
+      %h3 Foods, Goods, and Services
+      %p.detail We calculate emissions from other aspect of a person's lifestyle based on how much they spend on foods, goods, and other services. Each category of consumption creates a different amount of CO<sub>2</sub>, based on the emissions caused from that good's production. This calculation is:
+      %div.equation
+        %p emissions from foods per month = (amount spent on meat fish and protein * 1452 gCO<sub>2</sub>e/$) + (amount spent on cereals and bakery products * 741 gCO<sub>2</sub>e/$) + (amount spent on dairy * 1911 gCO<sub>2</sub>e/$) + (amount spent on fruits and vegetables * 1176 gCO<sub>2</sub>e/$) + (amount spent on eating out * 368 gCO<sub>2</sub>e/$) + (amount spent on other foods * 436 gCO<sub>2</sub>e/$)
+        %p emissions from goods per month = (amount spent on clothing * 436 gCO<sub>2</sub>e/$) + (amount spent on furnishings * 459 gCO<sub>2</sub>e/$) + (amount spent on other goods * 338 gCO<sub>2</sub>e/$)
+        %p emissions from services per month = (amount spent on services * 178 gCO<sub>2</sub>e/$)
+        %p total emissions from foods, goods, and services = (emissions from foods per month + emissions from goods per month + emissions from services per month) * 12 months
+      
+      %h2 Estimating Personal Information
+      %p.detail The Better Carbon calculator estimates the above variables (such as miles driven, square feet of household, or amount spent on meat fish and protein) if those variables are not specified for the user. So if the user does not fill in the exact miles-per-gallon their car gets, our system makes an educated guess at this value based on the other information the user provides.
+      %h3.detail Location-Based Estimate:
+      %p.detail When a user first visits the Better Carbon calculator, they are asked to put in their address and a number of descriptive tags. We use this information to provide an initial estimate about the user's carbon lifestyle in order to calculate their carbon footprint. Our initial estimate is based on the specified values provided by other, nearby users--we take previous people who live closest to the current user and average their information in order to provide a guess. We have found that the nearer people live, the more likely they are to have similar carbon lifestyles. Thus by estimating based only on the average of people near you, we can provide a better estimate than one based on the average of the larger population as a whole.
+      %h3 Refinement on Similarity:
+      %p.detail Users are able to refine the estimated information, providing values specific to their lives. For example, our system may initially guess that a user's car gets 18mpg, but they really get around 25mpg. The user can refine this variable to use the correct value.
+      %p.detail Once the user has entered a refined value, our system re-estimates values for other aspects of a user's carbon lifestyle based on their similarity to other people. If the user specifies their car's mpg, then our system provides estimates based on other people who reported their car as having similar fuel efficiency. The more fields a user specifies, the more accurate the remaining fields will be since the system can find people who are more and more similar!
+      %p.detail 
+        This process is similar to that found in 
+        = "#{link_to("recommendation systems", "http://en.wikipedia.org/wiki/Recommender_system")},"
+        such as the movie suggestions provided by Netflix. But while Netflix may suggest a movie enjoyed by people who like the same kinds of movies as you, the Better Carbon calculator provides carbon footprint estimates similar to those of people who have a similar carbon lifestyle.
+      %p.detail 
+        We find similar users to base our estimates on using 
+        = "#{link_to("cosine similarity", "http://en.wikipedia.org/wiki/Cosine_similarity")}."
+        We treat the information provided by the user as an ordered vector, and then check to see what other people's ordered vectors are have the most similar direction. The similarity calculated is then used as a weight to determine how much that similar person's information contributes to the estimation. So if Person A is 90% similar to the user and Person B is only 10% similar, then the estimated value will be much closer to Person A's (because that person is so much similar).
+      %p.detail Thus we are able to provide accurate carbon footprint estimates without requiring the user to fill out ever single field--though the more fields they fill out, the more accurate the estimate will be!
+      
+      
+      

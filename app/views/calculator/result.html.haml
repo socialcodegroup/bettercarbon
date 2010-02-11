@@ -1,0 +1,30 @@
+- content_for :page_title, "#{single_line_geolocated_address(@calculator_input)} - Better Carbon"
+
+= render :partial => 'result_information_bar'
+
+#result
+  #content-panel
+    .wrap#content-panel-wrap
+      - unless flash[:notice].blank?
+        %p{:style => "background-color: #c47070; font-size: 16px;text-align: center;font-weight: bold;color:#fff; margin: 10px 0; padding: 10px 0;"}= flash[:notice]
+      
+      - unless ["address", "zip+4"].include?(@calculator_input.user_input.percision)
+        #error-notice
+          %p You're looking at the footprint of a location that is not a home address. You can only personalize the carbon profile of a specific household.
+      
+      #result-header
+        #total-footprint
+          %span.value= number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))
+          %span.units tons CO<sub>2</sub>/year
+          %span.more-info= "(#{link_to("How was this calculated?", how_it_works_path)})"
+        .description
+          / %p Refine your footprint profile to get a more accurate analysis of your impact on the environment.
+          %p To get a more <b>accurate estimate</b> and improve the estimate of your entire community, click to <b>personalize your carbon profile.</b>
+        #refine-button= link_to('Personalize Profile', :action => 'refine', :address => params[:address], :tags => params[:tags])
+      
+      #left-nav
+        %ul
+          %li{:class => params[:view].blank? ? 'cur' : nil}= link_to('Overview', :view => nil, :address => params[:address])
+          %li{:class => params[:view] == 'details' ? 'cur' : nil}= link_to('Details', :view => 'details', :address => params[:address])
+          %li{:class => params[:view] == 'recs' ? 'cur' : nil}= link_to('Recommendations', :view => 'recs', :address => params[:address])
+      #results-panel= render(:partial => @partial_for_view)

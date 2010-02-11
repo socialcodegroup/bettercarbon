@@ -1,0 +1,32 @@
+.wrap
+  %h2 You can only view & refine the carbon profile of locations when logged in.
+  
+  %h3 Why do I need to have an account?
+  %ul#signup_reasons
+    %li For your privacy we require accounts for anyone who wants to view the profile of their residential address.
+    %li Connect with other Better Carbon users
+    %li
+      Keep track of and lock down addresses.
+      / Once you create a profile for an address no one else can view or modify its profile
+  
+  %h2 Sign Up
+  - @user.password = @user.password_confirmation = nil
+  = error_messages_for :user
+  - form_for @user, :user, :url => users_path do |f|
+    %fieldset
+      %p
+        = f.label "Email"
+        = f.text_field :email, :size => "25"
+      %p
+        = f.label "Password"
+        = f.password_field :password, :size => "25"
+      %p
+        = f.label "Address"
+        = f.text_field :address, :value => @not_an_address ? nil : params[:address], :size => "35"
+      %p
+        = f.label "What is one thing you do to reduce your carbon footprint and live more sustainably?"
+        = f.text_field :suggestion, :size => "60"
+    %p.buttons
+      = f.submit 'Sign up'
+      or
+      = link_to('Login to an existing account.', login_path)

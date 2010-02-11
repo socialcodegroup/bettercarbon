@@ -1,0 +1,24 @@
+<div class="wrap">
+  <% unless flash[:notice].blank? -%>
+    <p style="background-color: red; font-size: 16px;text-align: center;font-weight: bold;color:#fff; margin: 10px 0; padding: 5px 0;">
+      <%= flash[:notice] %>
+    </p>
+  <% end -%>
+  
+  <div id="twitter-lookup-panel">
+    <h2>(@<%=@twitter_user%>) you'll need to pull up your carbon profile using your home address.</h2>
+    <% form_tag result_calculator_path, :method => :get do -%>
+      <%= text_field_tag :address, nil, :onclick => '$("#input_address").select()', :id => 'twitter_calculator_input_address' %>
+      <%= submit_tag 'Go', :class => 'lookup-profile-button' %>
+    <% end -%>
+    <br />
+    <h2>Tweet about Better Carbon!</h2>
+  </div>
+  
+  <div id="privacy-policy" style="display:none;">
+    <p id="privacy-policy-close"><%= link_to_function('Close', '$("#privacy-policy").hide();') %></p>
+    <p>Thanks for visiting Better Carbon! Your privacy is very important to us. All information entered into the Better Carbon calculator is used to 1) directly estimate your carbon footprint, and 2) indirectly help provide estimates for future users. All information you provide will remain strictly anonymous. It will not be shared with anyone, and will be used by the research team only for the purposes of evaluating the system. If you have any comments, concerns, or questions regarding the conduct of this research, please contact the <a href="mailto:jwross@uci.edu">lead researcher</a>.</p>
+  </div>
+</div>
+
+<%= javascript_tag tag_suggestion_dropdown_init_js("calculator_input_tags", "calculator_input_tags-dropdown-options") %>

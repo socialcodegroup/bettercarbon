@@ -1,0 +1,8 @@
+#bar-2
+  .wrap
+    .buttons
+      = link_to('Change location', root_path)
+    #address
+      %p
+        %span Carbon footprint for:
+        = single_line_geolocated_address(@calculator_input)
