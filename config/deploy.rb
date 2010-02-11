@@ -8,7 +8,7 @@ set :application, "bettercarbon"
 set :scm, :git
 # set :git_enable_submodules, 1
 #set :deploy_via, :remote_cache
-set :repository,  "git@github.com:ns/bettercarbon.git"
+set :repository,  "git@github.com:socialcodegroup/bettercarbon.git"
 set :branch, "master"
 set :ssh_options, { :forward_agent => true }
 
