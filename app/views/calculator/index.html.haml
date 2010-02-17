@@ -38,7 +38,9 @@
               %li= link_to(claimed_address.query.full_address, result_calculator_path(:address => claimed_address.query.full_address))
     - else
       #signup-box
-        = link_to('Create an account', new_user_path)
+        %ul
+          %li= link_to('Create an account', new_user_path, :class => 'create')
+          %li= authlogic_facebook_login_button(:js => :jquery, :size => :large, :v => 2, :class => 'fb-login')
     #right-panel-blue-box
       #info
         %p{:style => "text-align:center;"} Better Carbon estimates your carbon footprint based on the footprint of your local community.

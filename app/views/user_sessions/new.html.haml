@@ -8,5 +8,7 @@
       %p
         = f.label 'password'
         = f.password_field 'password'
-    %p.buttons= submit_tag 'Log in'
+    %p.buttons
+      = submit_tag 'Log in'
+      = authlogic_facebook_login_button(:js => :jquery)
   %p= link_to("Forgot your password? Click here", forgot_path)

@@ -16,4 +16,7 @@
       %p
         = f.label "What is one thing you do to reduce your carbon footprint and live more sustainably?"
         = f.text_field :suggestion, :size => "60"
-    %p.buttons= f.submit 'Sign up'
+    %p.buttons
+      = f.submit 'Sign up'
+      or
+      = authlogic_facebook_login_button(:js => :jquery)

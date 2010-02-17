@@ -3,15 +3,16 @@
   = error_messages_for :user
   - form_for @user, :user, :url => user_path(@user) do |f|
     %fieldset
-      %p
-        = f.label "Email"
-        = f.text_field :email
-      %p
-        = f.label "Password"
-        = f.password_field :password
-      %p
-        = f.label "Password Confirmation"
-        = f.password_field :password_confirmation
+      - if current_user.facebook_uid.blank?
+        %p
+          = f.label "Email"
+          = f.text_field :email
+        %p
+          = f.label "Password"
+          = f.password_field :password
+        %p
+          = f.label "Password Confirmation"
+          = f.password_field :password_confirmation
       %h3 Claimed Addresses
       - if @user.claimed_addresses.count < 1
         %p You have not claimed any addresses!
