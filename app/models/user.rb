@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
     c.login_field = :email
   end
   
-  
-  
-  
+  def before_connect(facebook_session)
+    self.name = facebook_session.user.name
+  end
   
   
   

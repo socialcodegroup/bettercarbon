@@ -1,0 +1,19 @@
+development:
+ api_key: 1dc72cb358a3f8735031212803742ef3
+ secret_key: b4674d31565b9ceb123d21bb7ba4b6fe
+ # canvas_page_name: facebooker_tutorial
+ # callback_url: http://staging.travelerstable.com:8888
+ # pretty_errors: true
+ # set_asset_host_to_callback_url: true
+ # tunnel:
+ #     public_host_username: fooberryfoo
+ #     public_host: staging.travelerstable.com
+ #     public_port: 8888
+ #     local_port: 3000
+ #     server_alive_interval: 0
+test:
+  api_key: 1dc72cb358a3f8735031212803742ef3
+  secret_key: b4674d31565b9ceb123d21bb7ba4b6fe
+production:
+  api_key: 1dc72cb358a3f8735031212803742ef3
+  secret_key: b4674d31565b9ceb123d21bb7ba4b6fe

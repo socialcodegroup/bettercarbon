@@ -8,3 +8,4 @@
     %li Welcome to Better Carbon!
     %li= link_to("Create an account", new_user_path)
     %li= link_to("Sign in", login_path)
+    %li= authlogic_facebook_login_button(:js => :jquery)
