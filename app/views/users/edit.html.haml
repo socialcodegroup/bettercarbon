@@ -21,6 +21,6 @@
             = claimed_addresses.label "Address"
             = claimed_addresses.text_field "[#{i}][address]", :value => claimed_address.query.input
           %p
-              = claimed_addresses.label "What is one thing you do to reduce your carbon footprint"
+            = claimed_addresses.label "What is one thing you do to reduce your carbon footprint"
             = claimed_addresses.text_field "[#{i}][suggestion]", :value => claimed_address.query.suggestion
     %p.buttons= f.submit 'Save'
