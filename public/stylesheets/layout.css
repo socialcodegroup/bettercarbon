@@ -1214,16 +1214,7 @@ h2.what_to_do {
 	font-size: 18px;
 }
 
-#claimed-addresses ul {
-	list-style: none;
-	margin: 5px 0 10px 15px;
-}
-
-#claimed-addresses ul li {
-	margin: 5px 0;
-}
-
-#claimed-addresses ul li a {
+#claimed-addresses a {
 	display: block;
 	color: red;
 	font-size: 16px;

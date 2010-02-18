@@ -1,6 +1,6 @@
 development:
- api_key: 1dc72cb358a3f8735031212803742ef3
- secret_key: b4674d31565b9ceb123d21bb7ba4b6fe
+ api_key: 5f3c45dfddfabb4cce9621bd71e35b17
+ secret_key: 0b00fd94eeff88a9d9c9631dfb1c9e57
  # canvas_page_name: facebooker_tutorial
  # callback_url: http://staging.travelerstable.com:8888
  # pretty_errors: true
@@ -12,8 +12,8 @@ development:
  #     local_port: 3000
  #     server_alive_interval: 0
 test:
-  api_key: 1dc72cb358a3f8735031212803742ef3
-  secret_key: b4674d31565b9ceb123d21bb7ba4b6fe
+  api_key: 5f3c45dfddfabb4cce9621bd71e35b17
+  secret_key: 0b00fd94eeff88a9d9c9631dfb1c9e57
 production:
-  api_key: 1dc72cb358a3f8735031212803742ef3
-  secret_key: b4674d31565b9ceb123d21bb7ba4b6fe
+  api_key: 5f3c45dfddfabb4cce9621bd71e35b17
+  secret_key: 0b00fd94eeff88a9d9c9631dfb1c9e57
