@@ -134,6 +134,7 @@ h3 {
   padding: 0.25em 0.5em;
   font-weight: bold;
   font-variant: small-caps !important;
+	text-decoration: none;
 
 	-moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -990,7 +991,7 @@ form input[type="submit"]:hover {
 }
 
 #signup-box {
-  margin-bottom: 70px;
+  margin-bottom: 20px;
 }
 
 #signup-box .create {
@@ -999,13 +1000,11 @@ form input[type="submit"]:hover {
 	color: #ffffff;
 	font-size: 18px;
 	padding: 10px;
-	width: 200px;
 	display: block;
 	text-decoration: none;
 	-moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   text-align: center;
-	float: left;
 }
 
 #signup-box .create:hover {
