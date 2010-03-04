@@ -15,6 +15,10 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resource :calculator, :collection => {:result => :get, :refine => :get}, :controller => 'calculator'
   
+  map.namespace :facebook do |facebook|
+    facebook.resource :calculator, :conditions => {:canvas => true}
+  end
+  
   map.how_it_works  '/how_it_works', :controller => 'static', :action => 'how_it_works'
   map.faq           '/faq', :controller => 'static', :action => 'faq'
   map.what_i_can_do '/what_i_can_do', :controller => 'static', :action => 'what_i_can_do'
