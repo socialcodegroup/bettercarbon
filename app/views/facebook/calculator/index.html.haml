@@ -3,7 +3,7 @@
 %hr
 
 %ul
-  = @facebook_session.user.friend_ids.each_with_index do |friend, i|
+  - @facebook_session.user.friend_ids.each_with_index do |friend, i|
     - if i < 20
       - f = Facebooker::User.new(friend)
       %li= f.name

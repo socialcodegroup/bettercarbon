@@ -1,0 +1,21 @@
+!!! 1.1
+%html{:lang => 'en' }
+  %header
+    - if yield(:page_title)
+      %title= yield(:page_title)
+    - else
+      %title Better Carbon Calculator
+    = facebook_stylesheet_includes
+    = facebook_javascript_includes
+    = render :partial => "layouts/sections/javascripts_load"
+  %body
+    #container
+      #header
+        .wrap
+          #brand
+            %h1{:style => 'font-size:24px;'}= link_to('Carbon Footprint', root_path)
+      %hr{:class => "hide"}
+      = render(:partial => "layouts/sections/content")
+      %hr{:class => "hide"}
+      = render(:partial => "layouts/sections/footer")
+    = render(:partial => "layouts/sections/uservoice")
