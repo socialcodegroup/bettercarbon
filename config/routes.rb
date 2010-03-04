@@ -10,14 +10,15 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :user_session
   map.resources :claimed_addresses
-
+  
+  map.namespace :facebook do |facebook|
+    facebook.resource :calculator, :conditions => {:canvas => true}, :controller => 'calculator'
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   
   map.resource :calculator, :collection => {:result => :get, :refine => :get}, :controller => 'calculator'
   
-  map.namespace :facebook do |facebook|
-    facebook.resource :calculator, :conditions => {:canvas => true}
-  end
   
   map.how_it_works  '/how_it_works', :controller => 'static', :action => 'how_it_works'
   map.faq           '/faq', :controller => 'static', :action => 'faq'
