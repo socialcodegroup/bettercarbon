@@ -1,7 +1,3 @@
-= debug(@facebook_session.user.name)
-
-%hr
-
 %ul
   - @facebook_session.user.friend_ids.each_with_index do |friend, i|
     - if i < 20
