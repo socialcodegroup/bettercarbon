@@ -2,4 +2,5 @@
 
 %hr
 
-= debug(@facebook_session.friends!)
+= @facebook_session.user.friends.each do |friend|
+  %li= f.name
