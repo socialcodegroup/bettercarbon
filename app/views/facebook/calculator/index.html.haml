@@ -2,5 +2,10 @@
 
 %hr
 
-= @facebook_session.user.friend_ids.each do |friend|
-  %li= friend
+%ul
+  = @facebook_session.user.friend_ids.each_with_index do |friend, i|
+    - if i < 20
+      - f = Facebooker::User.new(friend)
+        %li= f.name
+      - else
+        %li= friend
