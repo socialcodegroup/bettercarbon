@@ -2,5 +2,5 @@
 
 %hr
 
-= @facebook_session.user.friends.each do |friend|
-  %li= friend.name
+= @facebook_session.user.friend_ids.each do |friend|
+  %li= friend
