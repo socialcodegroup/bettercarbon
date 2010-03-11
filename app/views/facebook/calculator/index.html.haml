@@ -1,5 +1,7 @@
 = debug(@facebook_session.user.uid)
 
+= link_to "count_friends", :action => "test"
+
 %ul
   - @facebook_session.user.friend_ids.each_with_index do |friend, i|
     - if i < 10
