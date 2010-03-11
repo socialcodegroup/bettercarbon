@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100128072547) do
+ActiveRecord::Schema.define(:version => 20100304180004) do
 
   create_table "claimed_addresses", :force => true do |t|
     t.integer  "query_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20100128072547) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "suggestion"
+    t.integer  "facebook_uid",          :limit => 8
   end
 
   add_index "queries", ["city"], :name => "index_queries_on_city"
@@ -216,6 +217,8 @@ ActiveRecord::Schema.define(:version => 20100128072547) do
     t.datetime "remember_token_expires_at"
     t.string   "reset_code"
     t.string   "persistence_token",                                        :null => false
+    t.integer  "facebook_uid",              :limit => 8
+    t.string   "facebook_session_key"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
