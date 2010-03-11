@@ -12,7 +12,7 @@ class Facebook::CalculatorController < ApplicationController
   end
   
   def result
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.uid)
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session[:uid])
     @calculator_result = CarbonCalculator.process(@calculator_input)
   end
 end
