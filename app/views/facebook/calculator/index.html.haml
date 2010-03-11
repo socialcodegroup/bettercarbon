@@ -1,7 +1,5 @@
 = debug(@facebook_session.user.uid)
 
-= link_to "count_friends", :action => "test", :target => "_top"
-
 %ul
   - @facebook_session.user.friend_ids.each_with_index do |friend, i|
     - if i < 10
@@ -10,4 +8,4 @@
     - else
       %li= friend
 
-= link_to('Results', :url => {:controller => 'facebook/calculator', :action => 'result'}, :target => "_top")
+= link_to('Results', {:controller => 'facebook/calculator', :action => 'result'}, :target => "_top")
