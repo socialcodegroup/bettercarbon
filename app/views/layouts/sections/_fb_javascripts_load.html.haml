@@ -1,0 +1,2 @@
+= javascript_tag "$(document).ready(function() {document.domain = \"bettercarbon.com\";#{yield(:jquery_onload_js)}});" unless yield(:jquery_onload_js).blank?
+= render(:partial => 'layouts/sections/google_analytics') if Rails.env != 'development'
