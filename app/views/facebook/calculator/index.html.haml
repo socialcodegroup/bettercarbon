@@ -10,4 +10,4 @@
     - else
       %li= friend
 
-= link_to('Results', {:controller => 'facebook/calculator', :action => 'result'}, {:target => "_top"})
+= link_to('Results', :url => {:controller => 'facebook/calculator', :action => 'result'}, :target => "_top")
