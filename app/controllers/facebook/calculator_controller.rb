@@ -7,7 +7,12 @@ class Facebook::CalculatorController < ApplicationController
   layout "facebook"
   
   def index
-    @user = current_user(:facebook => true)
+    # @user = current_user(:facebook => true)
     # render :text => facebook_session.user.name
+  end
+  
+  def result
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.id)
+    @calculator_result = CarbonCalculator.process(@calculator_input)
   end
 end
