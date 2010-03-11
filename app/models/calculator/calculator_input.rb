@@ -15,7 +15,7 @@ class CalculatorInput
     if facebook == true
       self.user_input = Query.locate_from_fb_id(fb_user_id)
       unless self.user_input
-        self.user_input = Query.create(:facebook__uid => fb_user_id)
+        self.user_input = Query.create(:facebook_uid => fb_user_id)
       else
         # update the tags
         # QueryTag.delete_all("query_id = #{self.user_input.id}")
