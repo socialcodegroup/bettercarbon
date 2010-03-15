@@ -45,8 +45,8 @@ class Query < ActiveRecord::Base
     Rails.cache.delete("similar_inputs/#{lat},#{lng}/#{NEIGHBORHOOD_SIZE}")
   end
   
-  def similar_inputs
-    if facebook_uid.blank?
+  def similar_inputs(params)
+    if !facebook_uid.blank? && params[:facebook]
       similar_inputs_via_facebook
     else
       similar_inputs_via_location
