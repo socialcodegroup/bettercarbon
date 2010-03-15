@@ -1,11 +1,1 @@
-= debug(@facebook_session.user.uid)
-
-%ul
-  - @facebook_session.user.friend_ids.each_with_index do |friend, i|
-    - if i < 10
-      - f = Facebooker::User.new(friend)
-      %li= f.name
-    - else
-      %li= friend
-
-= link_to('Results', {:controller => 'facebook/calculator', :action => 'result'}, :target => "_top")
+= link_to('Calculate', {:controller => 'facebook/calculator', :action => 'result'}, :target => "_top")
