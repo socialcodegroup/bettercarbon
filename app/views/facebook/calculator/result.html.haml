@@ -1,7 +1,7 @@
 %h2.what_to_do Replace the estimated values below with your <u>actual</u> information to get a more accurate carbon footprint, and to help others get better estimates in the future.
 %h2 Carbon Profile
 #footprint-breakdown
-  - form_tag({:action => :do_refine}, :target => "_top") do
+  - form_tag(:action => :do_refine, {:target => "_top"}) do
     - index = 0
     - @calculator_result.per_module_results.each do |module_name, module_values|
       = render :partial => 'refine_fields_for_module', :locals => {:module_name => module_name, :module_values => module_values, :index => index}
