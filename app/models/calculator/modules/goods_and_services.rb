@@ -11,10 +11,10 @@ class Modules::GoodsAndServices
   end
   
   def process
-    clothing                = self.class.actual_value_for_variable(@calculator_input.user_input, :clothing)
-    furnishings             = self.class.actual_value_for_variable(@calculator_input.user_input, :furnishings)
-    other_goods             = self.class.actual_value_for_variable(@calculator_input.user_input, :other_goods)
-    services                = self.class.actual_value_for_variable(@calculator_input.user_input, :services)
+    clothing                = self.class.actual_value_for_variable(@calculator_input.user_input, :clothing, :facebook => @calculator_input.facebook)
+    furnishings             = self.class.actual_value_for_variable(@calculator_input.user_input, :furnishings, :facebook => @calculator_input.facebook)
+    other_goods             = self.class.actual_value_for_variable(@calculator_input.user_input, :other_goods, :facebook => @calculator_input.facebook)
+    services                = self.class.actual_value_for_variable(@calculator_input.user_input, :services, :facebook => @calculator_input.facebook)
     
     footprint = self.class.result_for_values(
       clothing[:value],
@@ -49,10 +49,10 @@ class Modules::GoodsAndServices
   # do not modify
   def self.actual_value_for_variable(input, variable, options = {})
     if (input.send(REFINED_MODEL).blank? || input.send(REFINED_MODEL)[variable.to_sym].blank?) && !options[:only_exact]
-      if input.similar_inputs(:facebook => @calculator_input.facebook).blank?
+      if input.similar_inputs(:facebook => options[:facebook]).blank?
         self.average_result[variable.to_sym]
       else
-        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => @calculator_input.facebook), variable)
+        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => options[:facebook]), variable)
       end
     elsif input.send(REFINED_MODEL)
       value = input.send(REFINED_MODEL)[variable.to_sym]

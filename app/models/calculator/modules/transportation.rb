@@ -11,11 +11,11 @@ class Modules::Transportation
   end
   
   def process
-    miles_driven            = self.class.actual_value_for_variable(@calculator_input.user_input, :miles_driven)
-    mpg                     = self.class.actual_value_for_variable(@calculator_input.user_input, :mpg)
-    miles_public_transport  = self.class.actual_value_for_variable(@calculator_input.user_input, :miles_public_transport)
-    fuel_type               = self.class.actual_value_for_variable(@calculator_input.user_input, :fuel_type)
-    vehicle_size            = self.class.actual_value_for_variable(@calculator_input.user_input, :vehicle_size)
+    miles_driven            = self.class.actual_value_for_variable(@calculator_input.user_input, :miles_driven, :facebook => @calculator_input.facebook)
+    mpg                     = self.class.actual_value_for_variable(@calculator_input.user_input, :mpg, :facebook => @calculator_input.facebook)
+    miles_public_transport  = self.class.actual_value_for_variable(@calculator_input.user_input, :miles_public_transport, :facebook => @calculator_input.facebook)
+    fuel_type               = self.class.actual_value_for_variable(@calculator_input.user_input, :fuel_type, :facebook => @calculator_input.facebook)
+    vehicle_size            = self.class.actual_value_for_variable(@calculator_input.user_input, :vehicle_size, :facebook => @calculator_input.facebook)
     
     footprint = self.class.result_for_values(
       miles_driven[:value],
@@ -53,10 +53,10 @@ class Modules::Transportation
   # do not modify
   def self.actual_value_for_variable(input, variable, options = {})
     if (input.send(REFINED_MODEL).blank? || input.send(REFINED_MODEL)[variable.to_sym].blank?) && !options[:only_exact]
-      if input.similar_inputs(:facebook => @calculator_input.facebook).blank?
+      if input.similar_inputs(:facebook => options[:facebook]).blank?
         self.average_result[variable.to_sym]
       else
-        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => @calculator_input.facebook), variable)
+        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => options[:facebook]), variable)
       end
     elsif input.send(REFINED_MODEL)
       value = input.send(REFINED_MODEL)[variable.to_sym]

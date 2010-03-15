@@ -11,10 +11,10 @@ class Modules::AirTravel
   end
   
   def process
-    num_short_trips    = self.class.actual_value_for_variable(@calculator_input.user_input, :num_short_trips)
-    num_medium_trips   = self.class.actual_value_for_variable(@calculator_input.user_input, :num_medium_trips)
-    num_long_trips     = self.class.actual_value_for_variable(@calculator_input.user_input, :num_long_trips)
-    num_extended_trips = self.class.actual_value_for_variable(@calculator_input.user_input, :num_extended_trips)
+    num_short_trips    = self.class.actual_value_for_variable(@calculator_input.user_input, :num_short_trips, :facebook => @calculator_input.facebook)
+    num_medium_trips   = self.class.actual_value_for_variable(@calculator_input.user_input, :num_medium_trips, :facebook => @calculator_input.facebook)
+    num_long_trips     = self.class.actual_value_for_variable(@calculator_input.user_input, :num_long_trips, :facebook => @calculator_input.facebook)
+    num_extended_trips = self.class.actual_value_for_variable(@calculator_input.user_input, :num_extended_trips, :facebook => @calculator_input.facebook)
     
     footprint = self.class.result_for_values(
       num_short_trips[:value],
@@ -49,10 +49,10 @@ class Modules::AirTravel
   # do not modify
   def self.actual_value_for_variable(input, variable, options = {})
     if (input.send(REFINED_MODEL).blank? || input.send(REFINED_MODEL)[variable.to_sym].blank?) && !options[:only_exact]
-      if input.similar_inputs(:facebook => @calculator_input.facebook).blank?
+      if input.similar_inputs(:facebook => options[:facebook]).blank?
         self.average_result[variable.to_sym]
       else
-        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => @calculator_input.facebook), variable)
+        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => options[:facebook]), variable)
       end
     elsif input.send(REFINED_MODEL)
       value = input.send(REFINED_MODEL)[variable.to_sym]

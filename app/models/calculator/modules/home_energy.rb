@@ -18,11 +18,11 @@ class Modules::HomeEnergy
   end
   
   def process
-    electricity_costs         = self.class.actual_value_for_variable(@calculator_input.user_input, :electricity_costs)
-    natural_gas_costs         = self.class.actual_value_for_variable(@calculator_input.user_input, :natural_gas_costs)
-    other_fuel_costs          = self.class.actual_value_for_variable(@calculator_input.user_input, :other_fuel_costs)
-    water_and_sewage_costs    = self.class.actual_value_for_variable(@calculator_input.user_input, :water_and_sewage_costs)
-    square_feet_of_household  = self.class.actual_value_for_variable(@calculator_input.user_input, :square_feet_of_household)
+    electricity_costs         = self.class.actual_value_for_variable(@calculator_input.user_input, :electricity_costs, :facebook => @calculator_input.facebook)
+    natural_gas_costs         = self.class.actual_value_for_variable(@calculator_input.user_input, :natural_gas_costs, :facebook => @calculator_input.facebook)
+    other_fuel_costs          = self.class.actual_value_for_variable(@calculator_input.user_input, :other_fuel_costs, :facebook => @calculator_input.facebook)
+    water_and_sewage_costs    = self.class.actual_value_for_variable(@calculator_input.user_input, :water_and_sewage_costs, :facebook => @calculator_input.facebook)
+    square_feet_of_household  = self.class.actual_value_for_variable(@calculator_input.user_input, :square_feet_of_household, :facebook => @calculator_input.facebook)
     
     
     if @calculator_input.user_input.state.blank?
@@ -86,10 +86,10 @@ class Modules::HomeEnergy
   # do not modify
   def self.actual_value_for_variable(input, variable, options = {})
     if (input.send(REFINED_MODEL).blank? || input.send(REFINED_MODEL)[variable.to_sym].blank?) && !options[:only_exact]
-      if input.similar_inputs(:facebook => @calculator_input.facebook).blank?
+      if input.similar_inputs(:facebook => options[:facebook]).blank?
         self.average_result[variable.to_sym]
       else
-        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => @calculator_input.facebook), variable)
+        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => options[:facebook]), variable)
       end
     elsif input.send(REFINED_MODEL)
       value = input.send(REFINED_MODEL)[variable.to_sym]

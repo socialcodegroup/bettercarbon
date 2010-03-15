@@ -11,13 +11,13 @@ class Modules::Food
   end
   
   def process
-    meat_fish_protein       = self.class.actual_value_for_variable(@calculator_input.user_input, :meat_fish_protein)
-    cereals_bakery_products = self.class.actual_value_for_variable(@calculator_input.user_input, :cereals_bakery_products)
-    dairy                   = self.class.actual_value_for_variable(@calculator_input.user_input, :dairy)
-    fruits_and_veg          = self.class.actual_value_for_variable(@calculator_input.user_input, :fruits_and_veg)
-    eating_out              = self.class.actual_value_for_variable(@calculator_input.user_input, :eating_out)
-    other_foods             = self.class.actual_value_for_variable(@calculator_input.user_input, :other_foods)
-    eat_organic_food        = self.class.actual_value_for_variable(@calculator_input.user_input, :eat_organic_food)
+    meat_fish_protein       = self.class.actual_value_for_variable(@calculator_input.user_input, :meat_fish_protein, :facebook => @calculator_input.facebook)
+    cereals_bakery_products = self.class.actual_value_for_variable(@calculator_input.user_input, :cereals_bakery_products, :facebook => @calculator_input.facebook)
+    dairy                   = self.class.actual_value_for_variable(@calculator_input.user_input, :dairy, :facebook => @calculator_input.facebook)
+    fruits_and_veg          = self.class.actual_value_for_variable(@calculator_input.user_input, :fruits_and_veg, :facebook => @calculator_input.facebook)
+    eating_out              = self.class.actual_value_for_variable(@calculator_input.user_input, :eating_out, :facebook => @calculator_input.facebook)
+    other_foods             = self.class.actual_value_for_variable(@calculator_input.user_input, :other_foods, :facebook => @calculator_input.facebook)
+    eat_organic_food        = self.class.actual_value_for_variable(@calculator_input.user_input, :eat_organic_food, :facebook => @calculator_input.facebook)
     
     footprint = self.class.result_for_values(
       meat_fish_protein[:value],
@@ -61,10 +61,10 @@ class Modules::Food
   # do not modify
   def self.actual_value_for_variable(input, variable, options = {})
     if (input.send(REFINED_MODEL).blank? || input.send(REFINED_MODEL)[variable.to_sym].blank?) && !options[:only_exact]
-      if input.similar_inputs(:facebook => @calculator_input.facebook).blank?
+      if input.similar_inputs(:facebook => options[:facebook]).blank?
         self.average_result[variable.to_sym]
       else
-        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => @calculator_input.facebook), variable)
+        calculate_average_on_users_for_variable(input.similar_inputs(:facebook => options[:facebook]), variable)
       end
     elsif input.send(REFINED_MODEL)
       value = input.send(REFINED_MODEL)[variable.to_sym]
