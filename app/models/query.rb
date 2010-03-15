@@ -57,7 +57,7 @@ class Query < ActiveRecord::Base
     Rails.cache.fetch("similar_inputs/#{facebook_uid}", :expires_in => 300) {
       fb_user = Facebooker::User.new(facebook_uid)
       
-      fb_ids_with_app = @facebook_session.user.friend_ids_with_this_app
+      fb_ids_with_app = fb_user.friend_ids_with_this_app
       fb_ids_with_app = fb_ids_with_app[0..NEIGHBORHOOD_SIZE] if fb_ids_with_app.length > NEIGHBORHOOD_SIZE
       
       if fb_ids_with_app > 0
