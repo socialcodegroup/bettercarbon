@@ -60,7 +60,7 @@ class Query < ActiveRecord::Base
       fb_ids_with_app = fb_user.friend_ids_with_this_app
       fb_ids_with_app = fb_ids_with_app[0..NEIGHBORHOOD_SIZE] if fb_ids_with_app.length > NEIGHBORHOOD_SIZE
       
-      if fb_ids_with_app.count > 0
+      if fb_ids_with_app.size > 0
         similar_inputs = Query.find(:all, :conditions => ['facebook_uid in (?)', fb_ids_with_app.join(', ')], :limit => NEIGHBORHOOD_SIZE)
       else
         similar_inputs = []
