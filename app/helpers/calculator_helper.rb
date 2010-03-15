@@ -125,14 +125,14 @@ module CalculatorHelper
     top_100_cities[rand(top_100_cities.size)]
   end
   
-  def render_field_for_module_input(module_name, input, value)
+  def render_field_for_module_input(module_name, input, value, params = {})
     case input[:type]
     when :text_field
-      text_field_tag("profile[#{module_name.to_s}][#{input[:name]}]", number_with_precision(value, :precision => 2))
+      text_field_tag("profile[#{module_name.to_s}][#{input[:name]}]", params[:show_value]==false ? nil : number_with_precision(value, :precision => 2))
     when :check_box
       check_box_tag("profile[#{module_name.to_s}][#{input[:name]}]", 1, (value + 0.5).to_i == 1)
     when :select
-      select_tag("profile[#{module_name.to_s}][#{input[:name]}]", options_for_select(input[:options], value.round.to_s))
+      select_tag("profile[#{module_name.to_s}][#{input[:name]}]", options_for_select(input[:options], params[:show_value]==false ? nil : value.round.to_s))
     else
       "Unknown"
     end
