@@ -1,3 +1,7 @@
+= debug(@inputs_set1)
+====================
+= debug(@inputs_set2)
+
 %div{:id => "module-values-#{index}"}
   %table
     %tr.module-title
@@ -8,9 +12,10 @@
       %td.param 
       %td.field Your Household
     - module_name.possible_inputs.each do |input|
-      %tr
-        %td
-          %label= input[:title]
-        - input_class = module_values[input[:name].to_sym][:calculation] == :average ? "estimated" : "exact"
-        %td{:class => input_class}
-          = render_field_for_module_input(module_name, input, module_values[input[:name].to_sym][:value], :show_value => module_values[input[:name].to_sym][:calculation] != :average)
+      - if @inputs_set1.include?(input[:name].to_sym])
+        %tr
+          %td
+            %label= input[:title]
+          - input_class = module_values[input[:name].to_sym][:calculation] == :average ? "estimated" : "exact"
+          %td{:class => input_class}
+            = render_field_for_module_input(module_name, input, module_values[input[:name].to_sym][:value], :show_value => module_values[input[:name].to_sym][:calculation] != :average)

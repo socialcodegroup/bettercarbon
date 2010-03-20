@@ -9,6 +9,9 @@ class Facebook::CalculatorController < ApplicationController
   def index
     @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
     @calculator_result = CarbonCalculator.process(@calculator_input)
+    
+    @inputs_set1 = [:miles_driven, :miles_public_transport, :mpg, :vehicle_size, :water_and_sewage_costs, :square_feet_of_household, :meat_fish_protein, :eat_organic_food, :num_short_trips]
+    @inputs_set2 = CarbonCalculator.modules.collect{|m|m.possible_inputs.collect{|i|i[:name].to_sym}}.flatten - @inputs_set1
   end
   
   def do_refine

@@ -1,3 +1,4 @@
+
 class Modules::Transportation
   REFINED_MODEL = :refined_transportation_value
   
