@@ -428,8 +428,8 @@ h3 {
     display: none;
 }
 
-#footprint-breakdown.compact tr td.label {
-    width: 600px;
+#footprint-breakdown tr td.label {
+    width: 500px;
 }
 
 #footprint-breakdown tr.module-title td {
