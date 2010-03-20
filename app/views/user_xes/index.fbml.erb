@@ -1,0 +1,20 @@
+<h1>Listing user_xes</h1>
+
+<table>
+  <tr>
+    <th>Facebook uid</th>
+  </tr>
+
+<% for user_x in @user_xes %>
+  <tr>
+    <td><%=h user_x.facebook_uid %></td>
+    <td><%= link_to 'Show', user_x %></td>
+    <td><%= link_to 'Edit', edit_user_x_path(user_x) %></td>
+    <td><%= button_to 'Destroy', user_x, :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New user_x', new_user_x_path %>

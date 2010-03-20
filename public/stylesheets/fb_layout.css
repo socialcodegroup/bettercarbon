@@ -440,7 +440,7 @@ h3 {
 }
 
 #footprint-breakdown .save-buttons {
-  margin: 20px 30px;
+  margin: 20px 125px;
   text-align: right;
 }
 
@@ -461,7 +461,10 @@ h3 {
   background-color: #b90000;
 }
 
-
+#footprint-breakdown #fill-out-more {
+    margin: 0 0 0 10px;
+    font-size: 14px;
+}
 
 
 

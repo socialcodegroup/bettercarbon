@@ -1,0 +1,15 @@
+<h1>New user_x</h1>
+
+<% form_for(@user_x) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :facebook_uid %><br />
+    <%= f.text_field :facebook_uid %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', user_xes_path %>

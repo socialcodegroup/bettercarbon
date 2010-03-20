@@ -1,0 +1,11 @@
+<h1>Editing user_x</h1>
+
+<% facebook_form_for(@user_x) do |f| %>
+  <%= f.error_messages %>
+
+    <%= f.text_field :facebook_uid %>
+    <%= f.buttons "Update" %>
+<% end %>
+
+<%= link_to 'Show', @user_x %> |
+<%= link_to 'Back', user_xes_path %>

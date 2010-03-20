@@ -8,4 +8,4 @@
     .save-buttons
       = submit_tag('Calculate')
 
-  = link_to_function("Fill out a more detailed profile", "$('#footprint-breakdown').removeClass('compact').slideDown('slow');$('#footprint-breakdown tr.row').removeClass('hide').slideDown('slow')")
+    #fill-out-more= link_to_function("Fill out a more detailed profile", "$('#footprint-breakdown').removeClass('compact').slideDown('slow');$('#footprint-breakdown tr.row').removeClass('hide').slideDown('slow');$(this).hide()")
