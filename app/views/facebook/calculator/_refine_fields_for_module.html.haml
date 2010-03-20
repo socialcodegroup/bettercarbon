@@ -8,7 +8,7 @@
       %td.param 
       %td.field Your Household
     - module_name.possible_inputs.each do |input|
-      %tr.row{:style => @all_allowed_inputs.include?(input[:name].to_sym) ? 'show' :'hide'}
+      %tr.row{:class => @all_allowed_inputs.include?(input[:name].to_sym) ? 'show' :'hide'}
         %td
           %label= input[:title]
         - input_class = module_values[input[:name].to_sym][:calculation] == :average ? "estimated" : "exact"
