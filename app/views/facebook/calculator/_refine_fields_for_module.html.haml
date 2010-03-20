@@ -4,9 +4,6 @@
       %td{:colspan => 4}
         = module_name.pretty_module_name
         = "(#{number_with_precision(module_values[:footprint], :precision => 2)} tons)"
-    %tr
-      %td.param 
-      %td.field Your Household
     - module_name.possible_inputs.each do |input|
       %tr.row{:class => @all_allowed_inputs.include?(input[:name].to_sym) ? 'show' :'hide'}
         %td

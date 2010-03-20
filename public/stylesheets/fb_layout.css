@@ -424,6 +424,10 @@ h3 {
   padding: 5px 10px;
 }
 
+#footprint-breakdown.compact tr.module-title {
+    display: none;
+}
+
 #footprint-breakdown tr.module-title td {
   background-color: #cadd96;
   font-weight: bold;

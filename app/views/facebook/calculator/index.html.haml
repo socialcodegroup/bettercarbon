@@ -1,5 +1,5 @@
 %h2.what_to_do Fill in as many fields as you can to calculate your carbon profile
-#footprint-breakdown
+#footprint-breakdown.compact
   - form_tag('/facebook/calculator/do_refine', :target => "_top") do
     - index = 0
     - @calculator_result.per_module_results.each do |module_name, module_values|
@@ -7,4 +7,5 @@
       - index += 1
     .save-buttons
       = submit_tag('Calculate')
-  = link_to_function("Fill out a more detailed profile", "$('#footprint-breakdown tr.row').removeClass('hide').slideDown('slow')")
+
+  = link_to_function("Fill out a more detailed profile", "$('#footprint-breakdown').removeClass('compact').slideDown('slow');$('#footprint-breakdown tr.row').removeClass('hide').slideDown('slow')")
