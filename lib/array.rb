@@ -1,5 +1,5 @@
 class Array
   def shuffle
-    sort_by { rand <=> rand }
+    sort_by { |a| rand <=> rand }
   end
 end
