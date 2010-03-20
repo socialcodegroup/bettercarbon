@@ -13,4 +13,5 @@
           %label= input[:title]
         - input_class = module_values[input[:name].to_sym][:calculation] == :average ? "estimated" : "exact"
         %td{:class => input_class}
-          = render_field_for_module_input(module_name, input, module_values[input[:name].to_sym][:value], :show_value => false)
+          = debug(module_values[input[:name].to_sym])
+          = render_field_for_module_input(module_name, input, module_values[input[:name].to_sym][:value], :show_value => module_values[input[:name].to_sym][:calculation] != :average)
