@@ -13,8 +13,8 @@ class Facebook::CalculatorController < ApplicationController
     possible_inputs_set1 = [:miles_driven, :miles_public_transport, :mpg, :vehicle_size, :water_and_sewage_costs, :square_feet_of_household, :meat_fish_protein, :eat_organic_food, :num_short_trips]
     possible_inputs_set2 = CarbonCalculator.modules.collect{|m|m.possible_inputs.collect{|i|i[:name].to_sym}}.flatten - possible_inputs_set1
 
-    @inputs_set1 = possible_inputs_set1.sort_by{rand}.take(3)
-    @inputs_set2 = possible_inputs_set2.sort_by{rand}.take(2)
+    @inputs_set1 = possible_inputs_set1.sort_by{rand}[0..2]
+    @inputs_set2 = possible_inputs_set2.sort_by{rand}[0..1]
 
     @all_allowed_inputs = @inputs_set1 + @inputs_set2
   end
