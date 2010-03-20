@@ -428,6 +428,10 @@ h3 {
     display: none;
 }
 
+#footprint-breakdown.compact tr td.label {
+    width: 600px;
+}
+
 #footprint-breakdown tr.module-title td {
   background-color: #cadd96;
   font-weight: bold;

@@ -6,7 +6,7 @@
         = "(#{number_with_precision(module_values[:footprint], :precision => 2)} tons)"
     - module_name.possible_inputs.each do |input|
       %tr.row{:class => @all_allowed_inputs.include?(input[:name].to_sym) ? 'show' :'hide'}
-        %td
+        %td.label
           %label= input[:title]
         - input_class = module_values[input[:name].to_sym][:calculation] == :average ? "estimated" : "exact"
         %td{:class => input_class}
