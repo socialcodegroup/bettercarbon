@@ -55,4 +55,3 @@ Rails::Initializer.run do |config|
 end
 
 require 'enumerator'
-require 'lib/array'
