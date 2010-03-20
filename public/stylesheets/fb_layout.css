@@ -368,6 +368,10 @@ h3 {
   border-top: 1px solid #ccc;
 }
 
+#footprint-breakdown tr.row.hide {
+  display:none;
+}
+
 #footprint-breakdown tr:first-child {
   border-top: none;
 }

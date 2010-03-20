@@ -7,3 +7,4 @@
       - index += 1
     .save-buttons
       = submit_tag('Calculate')
+  = link_to_function("Fill out a more detailed profile", "$('#footprint-breakdown tr.row').removeclass('hide').slideDown('slow')")
