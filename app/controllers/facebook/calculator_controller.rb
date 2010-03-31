@@ -34,6 +34,16 @@ class Facebook::CalculatorController < ApplicationController
     @calculator_input.destroy_cache
     @calculator_result = CarbonCalculator.process(@calculator_input)
     @calculator_input.user_input.update_attribute(:algorithmic_footprint, @calculator_result.total_footprint)
+    
+    average_footprint = Query.sum(:algorithmic_footprint) / Query.count(:all)
+    
+    @gvalues = [
+        @calculator_result.total_footprint,
+        average_footprint,
+        5
+      ]
+    
+    @gkeys = ["\'Your footprint\'", "\'Average Footprint\'", "'World'"]
   end
   
   private
