@@ -45,7 +45,7 @@
     });
 
     $('#invite_friends').click(function() {
-      var box = new FB.UI.FBMLPopupDialog("Send invites to your 'friends'",'<fb:fbml><fb:request-form action="' + location.href + '" method="GET" invite="true" type="Quiz Hater" content="Hey, since you like to take quizes, I thought that you might like to take this one!' + htmlentities('<fb:req-choice url="http://apps.facebook.com/thequizhater" label="Take the quiz!" />') + '"><fb:multi-friend-selector rows="2" cols="3" showborder="false" bypass="cancel" actiontext="Send a not-so-subtle message to those who like to take and publish too many quizes!"></fb:request-form></fb:fbml>');
+      var box = new FB.UI.FBMLPopupDialog("Send invites to your friends",'<fb:fbml><fb:request-form action="' + location.href + '" method="GET" invite="true" type="Environment" content="I thought you might want to know your carbon footprint and how to improve it' + htmlentities('<fb:req-choice url="http://apps.facebook.com/bettercarbon" label="Calculate my footprint!" />') + '"><fb:multi-friend-selector rows="2" cols="3" showborder="false" bypass="cancel" actiontext="Send a not-so-subtle message to those who would want to calculate their footprint!"></fb:request-form></fb:fbml>');
       box.setContentWidth(700);
       box.setContentHeight(520);
       box.set_placement(FB.UI.PopupPlacement.center);
