@@ -46,6 +46,11 @@ class Facebook::CalculatorController < ApplicationController
     @gkeys = ["\'Your footprint\'", "\'Average Footprint\'", "'World'"]
   end
   
+  def publish_to_friends
+    acct_array = []
+    BcPublisher.deliver_notification(acnt_array, @facebook_session.user)
+  end
+  
   private
     
     def strip_existing_values_from_refined_values(cal_mod_results, refined_values)

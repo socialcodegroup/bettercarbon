@@ -18,3 +18,8 @@
       = render(:partial => "layouts/sections/content")
       %hr{:class => "hide"}
       = render(:partial => "layouts/sections/footer")
+    %script{:src => "http://static.ak.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php", :type => "text/javascript"}
+    :javascript
+      FB_RequireFeatures( ["XFBML"], function() {
+        FB.Facebook.init( '#{Facebooker.api_key}', '/xd_receiver.htm', null);
+      });
