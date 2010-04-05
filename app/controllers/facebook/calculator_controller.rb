@@ -44,6 +44,8 @@ class Facebook::CalculatorController < ApplicationController
       ]
     
     @gkeys = ["\'Your footprint\'", "\'Average Footprint\'", "'World'"]
+    
+    FacebookerPublisher.deliver_templatized_news_feed(facebook_session.user)
   end
   
   def publish_to_friends

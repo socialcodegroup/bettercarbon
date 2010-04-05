@@ -1,12 +1,6 @@
 %h2= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))}"
-
-%a#post_results Post results
-%a#invite_friends Tell your friends
-
-=link_to_function '| Zaproś znajomych!',  "fb_connect_invite_friends({type: 'Facebooker on Rails', invitation_copy:'Please accept this invitation to Facebooker on Rails.', request_action_text:'Invite your friends to join Facebooker on Rails'})"
  	
 #placeholder{:style => "width:600px;height:300px"}
-
 
 :javascript
   $(function () {
@@ -26,32 +20,4 @@
       		}
       	}
       );
-  });
-
-  $(function() {
-    $('#post_results').click(function() {
-      var template_data = {
-        "title" : 'I just calculated my Carbon Footprint',
-        "description": "Footprint",
-        "images": [
-          {
-            'src' : "http://",
-            'href' : 'http://apps.facebook.com/bettercarbon'
-          }
-        ]
-      };
-      FB.Connect.showFeedDialog(
-        '132048690621',
-        template_data
-      );
-    });
-
-    $('#invite_friends').click(function() {
-      var box = new FB.UI.FBMLPopupDialog("Send invites to your friends",'<fb:fbml><fb:request-form action="' + location.href + '" method="GET" invite="true" type="Environment" content="I thought you might want to know your carbon footprint and how to improve it' + htmlentities('<fb:req-choice url="http://apps.facebook.com/bettercarbon" label="Calculate my footprint!" />') + '"><fb:multi-friend-selector rows="2" cols="3" showborder="false" bypass="cancel" actiontext="Send a not-so-subtle message to those who would want to calculate their footprint!"></fb:request-form></fb:fbml>');
-      box.setContentWidth(700);
-      box.setContentHeight(520);
-      box.set_placement(FB.UI.PopupPlacement.center);
-      box.show();
-    });
-
   });
