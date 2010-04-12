@@ -7,11 +7,11 @@
     .wrap#content-panel-wrap
       = link_to('Back to the overview', result_calculator_path(:address => @calculator_input.address, :tags => ''), :id => "back-link")
       %h2.what_to_do Replace the estimated values below with your <u>actual</u> information to get a more accurate carbon footprint, and to help others get better estimates in the future.
-      %h2 Carbon Profile
       #footprint-breakdown
         - form_tag(:action => :do_refine, :address => params[:address], :tags => params[:tags], :update_id => params[:update_id]) do
           - index = 0
           .save-buttons
+            %span.label Carbon Profile
             = link_to('Cancel', { :action => :result, :address => @calculator_input.address, :tags => @calculator_input.tags })
             = submit_tag('Save')
           - @calculator_result.per_module_results.each do |module_name, module_values|

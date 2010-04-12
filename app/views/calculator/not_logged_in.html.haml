@@ -1,6 +1,8 @@
 .wrap
   %h2 You can only view & refine the carbon profile of locations when logged in.
   
+  %p= authlogic_facebook_login_button(:js => :jquery)
+  
   %h3 Why do I need to have an account?
   %ul#signup_reasons
     %li For your privacy we require accounts for anyone who wants to view the profile of their residential address.

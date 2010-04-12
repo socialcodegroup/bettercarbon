@@ -31,7 +31,25 @@ class UsersController < ApplicationController
   
   def update
     @user = @current_user # makes our views "cleaner" and more consistent
-    if @user.update_attributes(params[:user])
+    
+    if @user.facebook_uid.blank?
+      if @user.update_attributes(params[:user])
+        @user.claimed_addresses.each{|a|a.destroy}
+        (params[:claimed_addresses]||[]).each do |i, claimed_address|
+          calculator_input = CalculatorInput.new(:address => claimed_address[:address], :tags => '') rescue nil
+
+          if calculator_input && ["address", "zip+4"].include?(calculator_input.user_input.percision)
+            calculator_input.user_input.update_attribute(:suggestion, claimed_address[:suggestion])
+            claimed_address = ClaimedAddress.create(:query_id => calculator_input.user_input.id, :user_id => current_user.id)
+          end
+        end
+
+        flash[:notice] = "Account updated!"
+        redirect_to(root_path)
+      else
+        render :action => :edit
+      end
+    else
       @user.claimed_addresses.each{|a|a.destroy}
       (params[:claimed_addresses]||[]).each do |i, claimed_address|
         calculator_input = CalculatorInput.new(:address => claimed_address[:address], :tags => '') rescue nil
@@ -44,8 +62,6 @@ class UsersController < ApplicationController
       
       flash[:notice] = "Account updated!"
       redirect_to(root_path)
-    else
-      render :action => :edit
     end
   end
   

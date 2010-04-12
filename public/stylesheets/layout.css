@@ -428,8 +428,13 @@ h3 {
 }
 
 #footprint-breakdown .save-buttons {
-  margin: 20px 30px;
+  margin: 10px 0px;
   text-align: right;
+}
+
+#footprint-breakdown .save-buttons span.label {
+	float: left;
+	font-size: 24px;
 }
 
 #footprint-breakdown .save-buttons input[type="submit"] {
