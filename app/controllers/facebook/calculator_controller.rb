@@ -75,7 +75,7 @@ class Facebook::CalculatorController < ApplicationController
         values.each do |k, v|
           result = specific_cal_mod_results.select{|var_name, params|var_name.to_s == k}.first
           
-          _mod = CarbonCalculator.modules.select{|m|m.to_s == mod}.first
+          _mod = CarbonCalculator.modules.select{|m|m.to_s.gsub(':', '') == mod}.first
           var_info = _mod.possible_inputs.select{|pi|pi[:name]==k}.first
           
           if var_info[:type] == :text_field
