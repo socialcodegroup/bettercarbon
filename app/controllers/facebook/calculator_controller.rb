@@ -63,7 +63,11 @@ class Facebook::CalculatorController < ApplicationController
       
       refined_values.each do |mod, values|
         RAILS_DEFAULT_LOGGER.error "))))))))))))))))))))))))))))))))))))))))))))))))))))))"
-        RAILS_DEFAULT_LOGGER.error cal_mod_results.select{|m,v|m.to_s == mod}.inspect
+        RAILS_DEFAULT_LOGGER.error cal_mod_results.select{|m,v|m.to_s == mod;
+          
+          RAILS_DEFAULT_LOGGER.error "a: #{m.to_s}"
+          RAILS_DEFAULT_LOGGER.error "b: #{mod}"
+          }.inspect
         RAILS_DEFAULT_LOGGER.error "))))))))))))))))))))))))))))))))))))))))))))))))))))))"
         
         
