@@ -2,6 +2,8 @@ class Facebook::CalculatorController < ApplicationController
   ensure_authenticated_to_facebook
   ensure_application_is_installed_by_facebook_user
   
+  skip_before_filter :verify_authenticity_token
+  
   filter_parameter_logging :fb_sig_friends, :password
   
   layout "facebook"
