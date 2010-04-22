@@ -62,6 +62,11 @@ class Facebook::CalculatorController < ApplicationController
       refined_values = {} if refined_values.nil?
       
       refined_values.each do |mod, values|
+        puts "))))))))))))))))))))))))))))))))))))))))))))))))))))))"
+        puts cal_mod_results.select{|m,v|m.to_s == mod}.inspect
+        puts "))))))))))))))))))))))))))))))))))))))))))))))))))))))"
+        
+        
         specific_cal_mod_results = cal_mod_results.select{|m,v|m.to_s == mod}.first[1]
         values.each do |k, v|
           result = specific_cal_mod_results.select{|var_name, params|var_name.to_s == k}.first
