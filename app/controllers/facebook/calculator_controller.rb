@@ -62,15 +62,6 @@ class Facebook::CalculatorController < ApplicationController
       refined_values = {} if refined_values.nil?
       
       refined_values.each do |mod, values|
-        RAILS_DEFAULT_LOGGER.error "))))))))))))))))))))))))))))))))))))))))))))))))))))))"
-        RAILS_DEFAULT_LOGGER.error cal_mod_results.select{|m,v|m.to_s.gsub(':', '') == mod;
-          
-          RAILS_DEFAULT_LOGGER.error "a: #{m.to_s.gsub(':', '')}"
-          RAILS_DEFAULT_LOGGER.error "b: #{mod}"
-          }.inspect
-        RAILS_DEFAULT_LOGGER.error "))))))))))))))))))))))))))))))))))))))))))))))))))))))"
-        
-        
         specific_cal_mod_results = cal_mod_results.select{|m,v|m.to_s.gsub(':', '') == mod}.first[1]
         values.each do |k, v|
           result = specific_cal_mod_results.select{|var_name, params|var_name.to_s == k}.first
