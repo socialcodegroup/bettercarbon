@@ -18,14 +18,7 @@
       var json = {
           "id": "0",
           "name": "You",
-          "children": [
-            - @friends_footprints.each do |friend_footprint|
-              {
-                "id" : "#{friend_footprint.friend.uid}",
-                "name" : "#{friend_footprint.friend.uid} - #{friend_footprint.footprint}",
-                "children" : []
-              }
-          ],
+          "children": [#{friends_footprints_json}],
           "data": []
       };
       //end
