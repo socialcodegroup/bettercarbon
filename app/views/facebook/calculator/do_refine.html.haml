@@ -5,6 +5,8 @@
 
 #placeholder{:style => "width:600px;height:300px"}
 
+= render(:partial => 'hypertree')
+
 :javascript
   $(function () {
       var vals = [#{@gvalues.enum_with_index.collect {|v,i|"[#{i}, #{v}]"}.join(',')}];

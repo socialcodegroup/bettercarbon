@@ -1,0 +1,113 @@
+#infovis{:style => 'height:500px;'}
+
+:javascript
+  var Log = {
+      elem: false,
+      write: function(text){
+      }
+  };
+
+  function addEvent(obj, type, fn) {
+      if (obj.addEventListener) obj.addEventListener(type, fn, false);
+      else obj.attachEvent('on' + type, fn);
+  };
+
+
+  function init_hypertree() {
+      //init data
+      var json = {
+          "id": "0",
+          "name": "You",
+          "children": [
+            - @friends_footprints.each do |friend_footprint|
+              {
+                "id" : "#{friend_footprint.friend.uid}",
+                "name" : "#{friend_footprint.friend.uid} - "#{friend_footprint.footprint}"",
+                "children" : []
+              }
+          ],
+          "data": []
+      };
+      //end
+      var infovis = document.getElementById('infovis');
+      var w = infovis.offsetWidth - 50, h = infovis.offsetHeight - 50;
+
+      //init canvas
+      //Create a new canvas instance.
+      var canvas = new Canvas('mycanvas', {
+          'injectInto': 'infovis',
+          'width': w,
+          'height': h
+      });
+      //end
+      var style = document.getElementById('mycanvas').style;
+      style.marginLeft = style.marginTop = "25px";
+      //init Hypertree
+      var ht = new Hypertree(canvas, {
+          //Change node and edge styles such as
+          //color, width and dimensions.
+          Node: {
+              dim: 10,
+              color: "#f00"
+          },
+
+          Edge: {
+              lineWidth: 2,
+              color: "#088"
+          },
+
+          onBeforeCompute: function(node){
+              Log.write("centering");
+          },
+          //Attach event handlers and add text to the
+          //labels. This method is only triggered on label
+          //creation
+          onCreateLabel: function(domElement, node){
+              domElement.innerHTML = node.name;
+              addEvent(domElement, 'click', function () {
+                  ht.onClick(node.id);
+              });
+          },
+          //Change node styles when labels are placed
+          //or moved.
+          onPlaceLabel: function(domElement, node){
+              var style = domElement.style;
+              style.display = '';
+              style.cursor = 'pointer';
+              if (node._depth <= 1) {
+                  style.fontSize = "0.8em";
+                  style.color = "#ff0000";
+
+              } else if(node._depth == 2){
+                  style.fontSize = "0.7em";
+                  style.color = "#000000";
+
+              } else {
+                  style.display = 'none';
+              }
+
+              var left = parseInt(style.left);
+              var top = parseInt(style.top);
+              var w = domElement.offsetWidth;
+              style.top = (top + 15) + 'px';
+              style.left = (left - w / 2) + 'px';
+          },
+
+          onAfterCompute: function(){
+              Log.write("done");
+          }
+      });
+      
+      TreeUtil.each(ht, function(node) { 
+        return node;
+      });
+
+      //load JSON data.
+      ht.loadJSON(json);
+      //compute positions and plot.
+      ht.refresh();
+      //end
+      ht.controller.onAfterCompute();
+  }
+
+- content_for(:jquery_onload_js, 'init_hypertree()')
