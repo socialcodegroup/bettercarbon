@@ -1,8 +1,8 @@
 %h2= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))}"
 
-#placeholder{:style => "width:600px;height:300px"}
-
 = render(:partial => 'hypertree')
+
+#placeholder{:style => "width:600px;height:300px"}
 
 :javascript
   $(function () {
