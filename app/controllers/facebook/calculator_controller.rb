@@ -64,7 +64,7 @@ class Facebook::CalculatorController < ApplicationController
     }.compact
     
     @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
-      "{'id' : '#{friend_footprint.friend.uid}', 'name' : '#{friend_footprint.friend.uid}', 'children' : []}"
+      "{'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].uid}', 'children' : []}"
     }.join(',')
     
     FacebookerPublisher.deliver_templatized_news_feed(facebook_session.user)
