@@ -47,6 +47,11 @@ class Facebook::CalculatorController < ApplicationController
     
     @gkeys = ["\'Your footprint\'", "\'Average Footprint\'", "'World'"]
     
+    
+    
+    # lookup footprint of friends (who have calculated their footprint)
+    @friends_with_app = facebook_session.user.friends_with_this_app
+    
     FacebookerPublisher.deliver_templatized_news_feed(facebook_session.user)
   end
   
