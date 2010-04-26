@@ -5,7 +5,7 @@ module ApplicationHelper
               'jquery', 'jquery-ui', 'jrails', 'js-class', 'excanvas',
               'bluff-min', 'swfobject', 'raphael-min', 'g.raphael/g.raphael-min',
               'g.raphael/g.pie-min', 'g.raphael/g.bar', 'application', 'flot/jquery.flot.min',
-              'flot/jquery.flot.pie'
+              'flot/jquery.flot.pie', 'jit-yc'
             ]
     javascript_include_tag(files, :cache => "_javascript")
   end
@@ -19,7 +19,7 @@ module ApplicationHelper
               'jquery', 'jquery-ui', 'jrails', 'js-class', 'excanvas',
               'bluff-min', 'swfobject', 'raphael-min', 'g.raphael/g.raphael-min',
               'g.raphael/g.pie-min', 'g.raphael/g.bar', 'application', 'flot/jquery.flot.min',
-              'flot/jquery.flot.pie'
+              'flot/jquery.flot.pie', 'jit-yc'
             ]
     javascript_include_tag(files, :cache => "_fB_javascript")
   end
