@@ -67,20 +67,21 @@
               var style = domElement.style;
               style.display = '';
               style.cursor = 'pointer';
+              
+              style.display = 'none';
+              
               if (node._depth <= 1) {
                   style.fontSize = "1em";
                   style.color = "#000000";
               } else if(node._depth == 2){
                   style.fontSize = "0.7em";
                   style.color = "#000000";
-              } else {
-                  style.display = 'none';
               }
 
               var left = parseInt(style.left);
               var top = parseInt(style.top);
               var w = domElement.offsetWidth;
-              style.top = (top + 15) + 'px';
+              // style.top = (top + 15) + 'px';
               style.left = (left - w / 2) + 'px';
           },
 
