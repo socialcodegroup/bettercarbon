@@ -131,9 +131,12 @@ class Facebook::CalculatorController < ApplicationController
     
     def redirect_if_auth_key
       if( params[:auth_token])
-        redirect_to( url_for(:controller => "facebook/calculator", :action => "master_redirect", :canvas => true, :only_path => false))
+        redirect_to( master_redirect_calculator_path(:canvas => true) )
         return false
       else
+        puts params[:controller].inspect
+        puts "---"
+        puts params[:action].inspect
         cookies[:last_request] = url_for(:controller => params[:controller], :action => params[:action], :only_path => false, :canvas => true)
         return true
       end
