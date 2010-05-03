@@ -137,7 +137,7 @@ class Facebook::CalculatorController < ApplicationController
         RAILS_DEFAULT_LOGGER.error params[:controller].inspect
         RAILS_DEFAULT_LOGGER.error "---"
         RAILS_DEFAULT_LOGGER.error params[:action].inspect
-        cookies[:last_request] = url_for(:controller => params[:controller], :action => params[:action], :only_path => false, :canvas => true)
+        cookies[:last_request] = master_redirect_calculator_url(:canvas => true)
         return true
       end
     end
