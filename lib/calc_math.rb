@@ -20,4 +20,18 @@ module CalcMath
     end
     sum
   end
+  
+  def self.number_to_intensity(number, low = 0, high = 100)
+    red = ((Math.abs(30 - number) % 30) * 255)
+    green = 255 - ((Math.abs(30 - number) % 30) * 255)
+    
+    CalcMath::rgb_to_hex(red, green, 0)
+  end
+  
+  def self.rgb_to_hex(r, g, b)
+    red = "%02x" % r
+    green = "%02x" % g
+    blue = "%02x" % b
+    "##{red}#{green}#{blue}"
+  end
 end
