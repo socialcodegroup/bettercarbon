@@ -65,8 +65,8 @@ class ApplicationController < ActionController::Base
     current_user ? true : false
   end
   
-  # only for facebook
-  def after_facebook_login_url
-    request.request_uri
-  end
+  # # only for facebook
+  # def after_facebook_login_url
+  #   request.request_uri
+  # end
 end
