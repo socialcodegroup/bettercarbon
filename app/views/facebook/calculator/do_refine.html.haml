@@ -1,13 +1,7 @@
 %h2= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C02/year"
 
 
-= link_to_function 'Invite your Friends!', 
-   "fb_connect_invite_friends({
-       type: 'Facebooker on Rails', 
-       invitation_copy:'Please accept this invitation to Facebooker on Rails.', 
-       request_action_text:'Invite your friends to join Facebooker on Rails'
-    })"
-
+= link_to_function 'Invite your Friends!', "fb_connect_invite_friends({type: 'Facebooker on Rails', invitation_copy:'Please accept this invitation to Facebooker on Rails.', request_action_text:'Invite your friends to join Facebooker on Rails'})"
 
 %ul#tabs{:style => 'list-style:none;background-color:#cccccc;overflow: auto'}
   %li{:style => 'list-style:none;float:left;'}= link_to('Friend Graph', '?view=fg', :style => 'padding 5px 10px; display:block; font-size: 20px; text-decoration:none; margin: 5px 0; border-right: 4px solid #999999;padding: 0 10px;color:#0F23FF;', :target => "_top")
