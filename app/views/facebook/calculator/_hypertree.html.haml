@@ -19,7 +19,7 @@
           "id": "0",
           "name": "You",
           "children": [#{@friends_footprints_json}],
-          "data": []
+          "data": ['$dim' : #{@calculator_result.total_footprint.to_i}]
       };
       //end
       var infovis = document.getElementById('infovis');

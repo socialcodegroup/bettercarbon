@@ -64,7 +64,7 @@ class Facebook::CalculatorController < ApplicationController
     }.compact
     
     @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
-      "{'$dim' : #{friend_footprint[:footprint].to_i},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}', 'children' : []}"
+      "{'data' : ['$dim' : #{friend_footprint[:footprint].to_i}],  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}', 'children' : []}"
       # #{sprintf('%.2f', friend_footprint[:footprint])}
       
 # friend=<<FRIEND
