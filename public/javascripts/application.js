@@ -26,8 +26,11 @@ function htmlentities(txt) {
   return ret;
 }
 
+//
+//  
 function fb_connect_invite_friends(options) {
-  if ( typeof options != 'object' ) { options = {} }
+
+  if ( typeof options != 'object' ) { options = {} }  
   if ( options.title == undefined ) { options.title = "Invite your friends" }
   if ( options.type == undefined ) { options.type = window.location.hostname }
   if ( options.all_friends_invited == undefined ) { options.all_friends_invited = "<div style='padding: 10px; font-size: 1.2em;'>You've already invited all of your friends and they've accepted.</div>" }
@@ -39,7 +42,7 @@ function fb_connect_invite_friends(options) {
   if ( options.friend_selector_rows == undefined ) { options.friend_selector_rows = 3 }
   if ( options.friend_selector_email_invite == undefined ) { options.friend_selector_email_invite = 'true' }
   if ( options.friend_selector_bypass == undefined ) { options.friend_selector_bypass = 'cancel' }
-  if ( isNaN(options.width) ) { options.width = 750 }
+  if ( isNaN(options.width) ) { options.width = 600 }
   if ( isNaN(options.height) ) { options.height = 510 }
 
   var api = FB.Facebook.apiClient
@@ -48,6 +51,7 @@ function fb_connect_invite_friends(options) {
   var friends_app_users = api.friends_getAppUsers(sequencer)
 
   sequencer.execute(function() {
+
     var friend_ids = ''
     try {
       friend_ids = friends.result.sort().join(',')
@@ -94,4 +98,6 @@ function fb_connect_invite_friends(options) {
     }
     dialog.show()
   })
+
+
 }

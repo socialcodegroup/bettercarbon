@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   
   # include AuthenticatedSystem
   
+  
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -62,5 +63,10 @@ class ApplicationController < ActionController::Base
   
   def logged_in?
     current_user ? true : false
+  end
+  
+  # only for facebook
+  def after_facebook_login_url
+    request.request_uri
   end
 end
