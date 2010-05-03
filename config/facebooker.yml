@@ -4,7 +4,7 @@ development:
  canvas_page_name: bettercarbon
  # callback_url: http://staging.travelerstable.com:8888
  # pretty_errors: true
- set_asset_host_to_callback_url: true
+ # set_asset_host_to_callback_url: true
  # tunnel:
  #     public_host_username: fooberryfoo
  #     public_host: staging.travelerstable.com

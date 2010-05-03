@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   
   # The priority is based upon order of creation: first created -> highest priority.
   
-  map.resource :calculator, :collection => {:result => :get, :refine => :get, :master_redirect => :get}, :controller => 'calculator'
+  map.resource :calculator, :collection => {:result => :get, :refine => :get}, :controller => 'calculator'
   
   
   map.how_it_works  '/how_it_works', :controller => 'static', :action => 'how_it_works'
