@@ -64,7 +64,7 @@ class Facebook::CalculatorController < ApplicationController
     }.compact
     
     footprints = @friends_footprints.collect { |friend_footprint| friend_footprint[:footprint] }
-    footprints = footprints + @calculator_result.total_footprint,
+    footprints = footprints + [@calculator_result.total_footprint]
     
     @max = footprints.max
     
