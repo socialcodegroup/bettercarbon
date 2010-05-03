@@ -1,4 +1,9 @@
 class Facebook::CalculatorController < ApplicationController
+  # SAVE_URL_FOR_ADD_AND_LOGIN_TAG
+  before_filter :redirect_if_auth_key, :except => "master_redirect"
+  # REDIRECT_TO_LAST_REQUEST_TAG
+  before_filter :redirect_to_saved, :only => "master_redirect"
+  
   # ensure_authenticated_to_facebook
   ensure_application_is_installed_by_facebook_user :only => ["index", "do_refine"]
   
@@ -123,4 +128,18 @@ class Facebook::CalculatorController < ApplicationController
       
       filtered_refined_values
     end
+    
+    def redirect_if_auth_key
+      if( params[:auth_token])
+        redirect_to( url_for(:controller => "facebook/calculator", :action => "master_redirect", :canvas => true, :only_path => false))
+        return false
+      else
+        cookies[:last_request] = url_for(:controller => params[:controller], :action => params[:action], :only_path => false, :canvas => true)
+        return true
+      end
+    end
+    
+    def redirect_to_saved
+      redirect_to( cookies[:last_request] || url_for("/")) and return false
+    end  
 end
