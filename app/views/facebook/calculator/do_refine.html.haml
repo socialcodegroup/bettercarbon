@@ -1,30 +1,50 @@
 %h2= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C02/year"
 
-%ul#tabs{:style => 'list-style:none;background-color:#cccccc;'}
-  %li{:style => 'list-style:none;display:inline;padding: 5px 10px;'}= link_to('Friend Graph', '?view=fg')
-  %li{:style => 'list-style:none;display:inline;padding: 5px 10px;'}= link_to('Bar Graph', '?view=bg')
-  %li{:style => 'list-style:none;display:inline;padding: 5px 10px;'}= link_to('Footprint Breakdown', '?view=fb')
+%ul#tabs{:style => 'list-style:none;background-color:#cccccc;overflow: auto'}
+  %li{:style => 'list-style:none;float:left;'}= link_to('Friend Graph', '?view=fg', :style => 'padding 5px 10px; display:block; font-size: 20px; text-decoration:none; margin: 5px 0; border-right: 4px solid #999999;')
+  %li{:style => 'list-style:none;float:left;'}= link_to('Bar Graph', '?view=bg', :style => 'padding 5px 10px; display:block; font-size: 20px; text-decoration:none; margin: 5px 0; border-right: 4px solid #999999;')
+  %li{:style => 'list-style:none;float:left;'}= link_to('Footprint Breakdown', '?view=fb', :style => 'padding 5px 10px; display:block; font-size: 20px; text-decoration:none; margin: 5px 0;')
 
-= render(:partial => 'hypertree')
 
-#placeholder{:style => "width:600px;height:300px"}
+- if params[:view].blank? || params[:view] == 'fg'
+  = render(:partial => 'hypertree')
+- elsif params[:view] == 'bg'
+  #placeholder{:style => "width:600px;height:300px"}
 
-:javascript
-  $(function () {
-      var vals = [#{@gvalues.enum_with_index.collect {|v,i|"[#{i}, #{v}]"}.join(',')}];
-      var labels = [#{@gkeys.enum_with_index.collect {|v,i|"[#{i+0.5}, #{v}]"}.join(',')}];
+  :javascript
+    $(function () {
+        var vals = [#{@gvalues.enum_with_index.collect {|v,i|"[#{i}, #{v}]"}.join(',')}];
+        var labels = [#{@gkeys.enum_with_index.collect {|v,i|"[#{i+0.5}, #{v}]"}.join(',')}];
       
-      $.plot($("#placeholder"), [
+        $.plot($("#placeholder"), [
+            {
+                data: vals,
+                bars: { show: true },
+                color: ["#31549F"]
+            }
+          ],
           {
-              data: vals,
-              bars: { show: true },
-              color: ["#31549F"]
+            xaxis: {
+        			ticks: labels
+        		}
+        	}
+        );
+    });
+- elsif params[:view] == 'fb'
+  #placeholder{:style => "width:600px;height:300px"}
+
+  :javascript
+    $(function () {
+    	var data = [#{@calculator_result.per_module_results.collect{|k, v| "{label: '#{k.pretty_module_name}', data: #{v[:footprint]}}"}.join(',')}];
+
+      $.plot($("#placeholder"), data, {
+        series: {
+          pie: { 
+            show: true,
           }
-        ],
-        {
-          xaxis: {
-      			ticks: labels
-      		}
-      	}
-      );
-  });
+        },
+        legend: {
+            show: true
+        }
+      });
+    });
