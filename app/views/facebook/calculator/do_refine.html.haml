@@ -9,6 +9,8 @@
 - if params[:view].blank? || params[:view] == 'fg'
   = render(:partial => 'hypertree')
 - elsif params[:view] == 'bg'
+  %br{:clear => 'all'}
+  %br{:clear => 'all'}
   #placeholder{:style => "width:600px;height:300px"}
 
   :javascript
@@ -31,6 +33,8 @@
         );
     });
 - elsif params[:view] == 'fb'
+  %br{:clear => 'all'}
+  %br{:clear => 'all'}
   #placeholder{:style => "width:600px;height:300px"}
 
   :javascript
