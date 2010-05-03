@@ -134,9 +134,9 @@ class Facebook::CalculatorController < ApplicationController
         redirect_to( master_redirect_calculator_path(:canvas => true) )
         return false
       else
-        puts params[:controller].inspect
-        puts "---"
-        puts params[:action].inspect
+        RAILS_DEFAULT_LOGGER.error params[:controller].inspect
+        RAILS_DEFAULT_LOGGER.error "---"
+        RAILS_DEFAULT_LOGGER.error params[:action].inspect
         cookies[:last_request] = url_for(:controller => params[:controller], :action => params[:action], :only_path => false, :canvas => true)
         return true
       end
