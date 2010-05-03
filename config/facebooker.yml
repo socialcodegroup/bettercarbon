@@ -1,10 +1,10 @@
 development:
  api_key: 5f3c45dfddfabb4cce9621bd71e35b17
  secret_key: 0b00fd94eeff88a9d9c9631dfb1c9e57
- # canvas_page_name: facebooker_tutorial
+ canvas_page_name: bettercarbon
  # callback_url: http://staging.travelerstable.com:8888
  # pretty_errors: true
- # set_asset_host_to_callback_url: true
+ set_asset_host_to_callback_url: true
  # tunnel:
  #     public_host_username: fooberryfoo
  #     public_host: staging.travelerstable.com
