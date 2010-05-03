@@ -22,11 +22,11 @@ module CalcMath
   end
   
   def self.number_to_intensity(number, low = 0, high = 100)
-    number = 0 if number < 0
-    number = 255 if number > 255
+    number = 0 if number < low
+    number = 255 if number > high
     
-    red = number
-    green = 255 - number
+    red = number/high * 255
+    green = ((high - number)/high) * 255
     
     # red = (((30 - number).abs % 30) * 255)
     # green = 255 - (((30 - number).abs % 30) * 255)
