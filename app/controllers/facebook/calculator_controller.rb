@@ -63,7 +63,10 @@ class Facebook::CalculatorController < ApplicationController
       end
     }.compact
     
-    @max = @friends_footprints.collect { |friend_footprint| friend_footprint[:footprint] }.max
+    footprints = @friends_footprints.collect { |friend_footprint| friend_footprint[:footprint] }
+    footprints = footprints + @calculator_result.total_footprint,
+    
+    @max = footprints.max
     
     @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
       "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}', 'children' : []}"
