@@ -19,7 +19,10 @@
           "id": "0",
           "name": "You",
           "children": [#{@friends_footprints_json}],
-          "data": {'$dim' : #{@calculator_result.total_footprint.to_i}}
+          "data": {
+            '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
+            '$color' : #{CalcMath::number_to_intensity(@calculator_result.total_footprint, 0, @max)}
+          }
       };
       //end
       var infovis = document.getElementById('infovis');
