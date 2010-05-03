@@ -1,4 +1,9 @@
-%h2= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))}"
+%h2= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C02/year"
+
+%ul#tabs{:style => 'list-style:none;background-color:#cccccc;'}
+  %li{:style => 'list-style:none;display:inline;padding: 5px 10px;'}= link_to('Friend Graph', '?view=fg')
+  %li{:style => 'list-style:none;display:inline;padding: 5px 10px;'}= link_to('Bar Graph', '?view=bg')
+  %li{:style => 'list-style:none;display:inline;padding: 5px 10px;'}= link_to('Footprint Breakdown', '?view=fb')
 
 = render(:partial => 'hypertree')
 
