@@ -1,0 +1,8 @@
+- form_tag :action => 'send_invites' do
+  %ul
+    - @friends.each do |uid, name|
+      %li
+        %input{:type => "checkbox", :name => "friends[]", :value => uid}= name
+
+  %p You can only invite a maximum of ten people at once.
+  %input{:type => "submit", :value => "Invite"}
