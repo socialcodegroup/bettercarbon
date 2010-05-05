@@ -12,9 +12,9 @@
       #brand
         %h1{:style => 'font-size:24px;'}= link_to('Carbon Footprint', root_path, :canvas => false)
   %hr{:class => "hide"}
-  = render(:partial => "layouts/sections/content")
+  #body= yield
   %hr{:class => "hide"}
-  = render(:partial => "layouts/sections/footer")
+  = render(:partial => "layouts/sections/footer.html.erb")
 %script{:src => "http://static.ak.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php", :type => "text/javascript"}
 :javascript
   FB_RequireFeatures( ["XFBML"], function() {
