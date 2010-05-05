@@ -7,6 +7,7 @@
   %li{:style => 'list-style:none;float:left;'}= link_to('Friend Graph', '?view=fg', :style => 'padding 5px 10px; display:block; font-size: 20px; text-decoration:none; margin: 5px 0; border-right: 4px solid #999999;padding: 0 10px;color:#0F23FF;', :target => "_top")
   %li{:style => 'list-style:none;float:left;'}= link_to('Bar Graph', '?view=bg', :style => 'padding 5px 10px; display:block; font-size: 20px; text-decoration:none; margin: 5px 0; border-right: 4px solid #999999;padding: 0 10px;color:#0F23FF;', :target => "_top")
   %li{:style => 'list-style:none;float:left;'}= link_to('Footprint Breakdown', '?view=fb', :style => 'padding 5px 10px; display:block; font-size: 20px; text-decoration:none; margin: 5px 0;padding: 0 10px;color:#0F23FF;', :target => "_top")
+  %li{:style => 'list-style:none;float:left;'}= link_to('Invite Friends', '?view=i', :style => 'padding 5px 10px; display:block; font-size: 20px; text-decoration:none; margin: 5px 0;padding: 0 10px;color:#0F23FF;', :target => "_top")
 
 
 - if params[:view].blank? || params[:view] == 'fg'
@@ -55,3 +56,11 @@
         }
       });
     });
+- elsif params[:view] = 'i'
+  - fb_serverfbml do
+    %script{:type => "text/fbml"}
+      %fb:fbml
+        - content_for("invite_user") do
+          = "Check out my brand new FB Connect site.  Lots of good stuff in there!"
+        - fb_request_form("GetUnbored", "invite_user", root_url) do
+          = fb_multi_friend_selector("Invite your friends to check out this site", :showborder => true, :exclude_ids => facebook_session.user.friends_with_this_app.map(&:id).join(","), :condensed => false)
