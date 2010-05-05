@@ -5,10 +5,10 @@ module Facebooker
     require 'active_support/inflector'
     include  ActiveSupport::CoreExtensions::String::Inflections
     def facebook_path_prefix
-      puts "-----------------------------"
-      puts @facebook_path_prefix.inspect
-      puts canvas_page_name.inspect
-      puts "-----------------------------"
+      RAILS_DEFAULT_LOGGER.error "-----------------------------"
+      RAILS_DEFAULT_LOGGER.error @facebook_path_prefix.inspect
+      RAILS_DEFAULT_LOGGER.error canvas_page_name.inspect
+      RAILS_DEFAULT_LOGGER.error "-----------------------------"
       "/" + (@facebook_path_prefix || canvas_page_name || ENV['FACEBOOK_CANVAS_PATH'] || ENV['FACEBOOKER_RELATIVE_URL_ROOT'])
     end
 
