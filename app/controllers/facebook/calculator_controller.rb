@@ -24,6 +24,10 @@ class Facebook::CalculatorController < ApplicationController
     @inputs_set2 = possible_inputs_set2.sort_by{rand}[0..1]
 
     @all_allowed_inputs = @inputs_set1 + @inputs_set2
+    
+    respond_to do |format|
+      format.fbml
+    end
   end
   
   def do_refine
