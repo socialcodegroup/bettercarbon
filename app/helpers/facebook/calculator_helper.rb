@@ -13,4 +13,9 @@ module Facebook::CalculatorHelper
       "Unknown"
     end
   end
+  
+  def output_js_files_content(*files)
+    output = files.collect { |f| IO.read(File.join(RAILS_ROOT, 'public', 'javascripts', f)) }
+    output.join("\n")
+  end
 end

@@ -1,22 +1,10 @@
 = facebook_stylesheet_includes
 = facebook_javascript_includes
 
-= javascript_tag "document.domain = \"bettercarbon.com\";"
-= javascript_tag "$(document).ready(function() {document.domain = \"bettercarbon.com\";#{yield(:jquery_onload_js)}});" unless yield(:jquery_onload_js).blank?
-= render(:partial => 'layouts/sections/google_analytics.html.erb') if Rails.env != 'development'
+= javascript_tag "$(document).ready(function() {#{yield(:jquery_onload_js)}});" unless yield(:jquery_onload_js).blank?
 
-#container
-  #header
-    .wrap
-      #brand
-        %h1{:style => 'font-size:24px;'}= link_to('Carbon Footprint', root_path, :canvas => false)
+<fb:fbml version="1.1">
   = fb_dashboard
-  %hr{:class => "hide"}
   #body= yield
-  %hr{:class => "hide"}
-
-%script{:src => "http://static.ak.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php", :type => "text/javascript"}
-:javascript
-  FB_RequireFeatures( ["XFBML"], function() {
-    FB.Facebook.init( '#{Facebooker.api_key}', '/xd_receiver.htm', null);
-  });
+  = render(:partial => 'layouts/sections/google_analytics.html.erb') if Rails.env != 'development'
+</fb:fbml>

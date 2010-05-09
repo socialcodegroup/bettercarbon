@@ -21,7 +21,8 @@ module ApplicationHelper
               'g.raphael/g.pie-min', 'g.raphael/g.bar', 'application', 'flot/jquery.flot.min',
               'flot/jquery.flot.pie', 'jit-yc'
             ]
-    javascript_include_tag(files, :cache => "_fB_javascript")
+    # javascript_include_tag(files, :cache => "_fB_javascript")
+    javascript_tag output_js_files_content("jquery", "jquery-ui", "jrails", "js-class", "excanvas", "application", "jit-yc")
   end
   
   def facebook_stylesheet_includes

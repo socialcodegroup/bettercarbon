@@ -52,11 +52,3 @@
         }
       });
     });
-- elsif params[:view] = 'i'
-  - fb_serverfbml do
-    %script{:type => "text/fbml"}
-      %fb:fbml
-        - content_for("invite_user") do
-          = "Check out my brand new FB Connect site.  Lots of good stuff in there!"
-        - fb_request_form("GetUnbored", "invite_user", root_url) do
-          = fb_multi_friend_selector("Invite your friends to check out this site", :showborder => true, :exclude_ids => @friends_with_app.map(&:id).join(","), :condensed => false)
