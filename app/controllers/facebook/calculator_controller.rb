@@ -31,6 +31,8 @@ class Facebook::CalculatorController < ApplicationController
   end
   
   def do_refine
+    params[:calculator_profile] ||= {}
+    
     @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
     @old_calculator_result = CarbonCalculator.process(@calculator_input)
     
