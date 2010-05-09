@@ -12,8 +12,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :claimed_addresses
   
   map.namespace :facebook do |facebook|
-    facebook.resource :invites
-    facebook.resource :calculator, :collection => {:friend_graph => :get}
+    facebook.resources :invites
+    facebook.resource :calculator, :collection => {:friend_graph => :get}, :controller => 'calculator'
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
