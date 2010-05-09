@@ -7,7 +7,7 @@
   = fb_tab_item "Help &amp; Feedback", fb_about_url, :align => "right"
 
 - if params[:view].blank? || params[:view] == 'fg'
-  = fb_iframe :src => "http://google.com", :width => 500, :height => 350
+  = fb_iframe "http://google.com", :width => 500, :height => 350
   = render(:partial => 'hypertree')
 - elsif params[:view] == 'bg'
   %br{:clear => 'all'}
