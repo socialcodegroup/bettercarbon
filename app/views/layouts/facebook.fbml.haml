@@ -4,7 +4,7 @@
 = javascript_tag "$(document).ready(function() {#{yield(:jquery_onload_js)}});" unless yield(:jquery_onload_js).blank?
 
 <fb:fbml version="1.1">
-  = fb_dashboard
-  #body= yield
-  = render(:partial => 'layouts/sections/google_analytics.html.erb') if Rails.env != 'development'
+= fb_dashboard
+#body= yield
+= render(:partial => 'layouts/sections/google_analytics.html.erb') if Rails.env != 'development'
 </fb:fbml>
