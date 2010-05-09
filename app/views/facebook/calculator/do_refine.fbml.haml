@@ -1,6 +1,6 @@
 %h2= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C02/year"
 
-- fb_tab do
+- fb_tabs do
   = fb_tab_item "Friend Graph", '?view=fg', :selected => params['view'].blank? || params['view'] == 'fg'
   = fb_tab_item "Bar Graph", '?view=bg', :selected => params['view'] == 'bg'
   = fb_tab_item "Footprint Breakdown", '?view=fb', :selected => params['view'] == 'fb'
