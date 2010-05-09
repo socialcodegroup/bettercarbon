@@ -13,6 +13,10 @@ class Facebook::CalculatorController < ApplicationController
   
   layout "facebook"
   
+  def friend_graph
+    render :text => 'hi'
+  end
+  
   def index
     @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
     @calculator_result = CarbonCalculator.process(@calculator_input)
