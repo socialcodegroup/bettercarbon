@@ -1,13 +1,10 @@
 %h2= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C02/year"
 
-- if false
-  = link_to_function 'Invite your Friends!', "fb_connect_invite_friends({type: 'Facebooker on Rails', invitation_copy:'Please accept this invitation to Facebooker on Rails.', request_action_text:'Invite your friends to join Facebooker on Rails'})"
-
-%ul#tabs
-  %li= link_to('Friend Graph', '?view=fg', :target => "_top")
-  %li= link_to('Bar Graph', '?view=bg', :target => "_top")
-  %li= link_to('Footprint Breakdown', '?view=fb', :target => "_top")
-  %li= link_to('Invite Friends', '?view=i', :target => "_top")
+- fb_tab do
+  = fb_tab_item "Friend Graph", '?view=fg', :selected => params['view'].blank? || params['view'] == 'fg'
+  = fb_tab_item "Bar Graph", '?view=bg', :selected => params['view'] == 'bg'
+  = fb_tab_item "Footprint Breakdown", '?view=fb', :selected => params['view'] == 'fb'
+  = fb_tab_item "Help &amp; Feedback", fb_about_url, :align => "right"
 
 - if params[:view].blank? || params[:view] == 'fg'
   = render(:partial => 'hypertree')
