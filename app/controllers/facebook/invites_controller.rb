@@ -8,6 +8,14 @@ class Facebook::InvitesController < ApplicationController
   
   layout "facebook"
 
+  def new
+    @from_user_id = facebook_session.user.to_s
+  end
+  
+  def create
+    @sent_to_ids = params[:ids]
+  end
+  
   # def select
   #   fql =  "SELECT uid, name FROM user WHERE uid IN" +
   #   "(SELECT uid2 FROM friend WHERE uid1 = #{@current_fb_user_id}) " +
