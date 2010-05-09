@@ -1,0 +1,2 @@
+module Facebook::InvitesHelper
+end

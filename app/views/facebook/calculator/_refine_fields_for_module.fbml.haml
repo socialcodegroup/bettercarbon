@@ -1,13 +1,7 @@
 %div{:id => "module-values-#{index}"}
-  %table
-    %tr.module-title
-      %td{:colspan => 4}
-        = module_name.pretty_module_name
-        = "(#{number_with_precision(module_values[:footprint], :precision => 2)} tons)"
-    - module_name.possible_inputs.each do |input|
-      %tr.row{:class => @all_allowed_inputs.include?(input[:name].to_sym) ? 'show' :'hide'}
-        %td.label
-          %label= input[:title]
-        - input_class = module_values[input[:name].to_sym][:calculation] == :average ? "estimated" : "exact"
-        %td{:class => input_class}
-          = fb_render_field_for_module_input(form, module_name.to_s.gsub(':', ''), input, module_values[input[:name].to_sym][:value], :show_value => module_values[input[:name].to_sym][:calculation] != :average)
+  %h3
+    = module_name.pretty_module_name
+    = "(#{number_with_precision(module_values[:footprint], :precision => 2)} tons)"
+  %hr
+  - module_name.possible_inputs.each do |input|
+    = fb_render_field_for_module_input(form, module_name.to_s.gsub(':', ''), input, module_values[input[:name].to_sym][:value], :show_value => module_values[input[:name].to_sym][:calculation] != :average)
