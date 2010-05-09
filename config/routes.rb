@@ -11,9 +11,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.resources :claimed_addresses
   
-  # map.namespace :facebook do |facebook|
-  #   facebook.resource :calculator, :conditions => {:canvas => true}, :controller => 'calculator'
-  # end
+  map.namespace :facebook do |facebook|
+    facebook.resource :invites
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   
