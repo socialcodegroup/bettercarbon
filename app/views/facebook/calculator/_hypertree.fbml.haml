@@ -26,7 +26,8 @@
       };
       //end
       var infovis = document.getElementById('infovis');
-      var w = infovis.offsetWidth - 50, h = infovis.offsetHeight - 50;
+      var w = infovis.offsetWidth - 50;
+      var h = infovis.offsetHeight - 50;
 
       //init canvas
       //Create a new canvas instance.
@@ -83,8 +84,7 @@
               var left = parseInt(style.left);
               var top = parseInt(style.top);
               var w = domElement.offsetWidth;
-              // style.top = (top + 15) + 'px';
-              style.left = (left - w / 2) + 'px';
+              style.left = (left - (w / 2)) + 'px';
           },
 
           onAfterCompute: function(){
@@ -100,4 +100,6 @@
       ht.controller.onAfterCompute();
   }
   
-  init_hypertree();
+  window.onload = function() {
+    init_hypertree();
+  }
