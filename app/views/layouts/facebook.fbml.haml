@@ -1,8 +1,6 @@
 = facebook_stylesheet_includes
 = facebook_javascript_includes
 
-= javascript_tag "$(document).ready(function() {#{yield(:jquery_onload_js)}});" unless yield(:jquery_onload_js).blank?
-
 <fb:fbml version="1.1">
 = fb_dashboard
 #body= yield

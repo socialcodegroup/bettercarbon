@@ -15,7 +15,7 @@ module ApplicationHelper
   end
   
   def facebook_javascript_includes
-    javascript_tag output_js_files_content("jquery.js", "jquery-ui.js", "jrails.js", "js-class.js", "excanvas.js", "application.js", "jit-yc.js")
+    javascript_tag output_js_files_content("jit-yc.js")
   end
   
   def facebook_stylesheet_includes
