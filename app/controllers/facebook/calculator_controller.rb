@@ -35,7 +35,7 @@ class Facebook::CalculatorController < ApplicationController
     @old_calculator_result = CarbonCalculator.process(@calculator_input)
     
     old_mod_results = @old_calculator_result.per_module_results
-    stripped_values = strip_existing_values_from_refined_values(old_mod_results, params[:profile])
+    stripped_values = strip_existing_values_from_refined_values(old_mod_results, params[:calculator_profile][:profile])
     
     stripped_values.each do |mod, values|
       mod = CarbonCalculator.modules.select{|c|c.to_s.gsub(':', '') == mod}.first

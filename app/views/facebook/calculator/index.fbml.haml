@@ -1,18 +1,6 @@
-%h2.what_to_do Fill in as many fields as you can to calculate your carbon profile
-
-- facebook_form_for(:calculator_profile, CalculatorProfile.new, :url => url_for(:action => :do_refine), :labelwidth => '75', :width => '500') do |f|
+- facebook_form_for(:calculator_profile, CalculatorProfile.new, :url => url_for(:controller => 'facebook/calculator', :action => :do_refine), :labelwidth => '250', :width => '500') do |f|
   - index = 0
   - @calculator_result.per_module_results.each do |module_name, module_values|
     = render :partial => 'refine_fields_for_module', :locals => {:module_name => module_name, :module_values => module_values, :index => index, :form => f}
     - index += 1
   = f.buttons "Calculate"
-  
-  #fill-out-more= link_to_function("Fill out a more detailed profile", "$('#footprint-breakdown').removeClass('compact').slideDown('slow');$('#footprint-breakdown tr.row').removeClass('hide').slideDown('slow');$(this).hide()")
-  
-  
-
-  = f.text_field :input, :label=> "Input"
-  = f.text_field :input, :label=> "Input"
-  = f.text_field :input, :label=> "Input"
-  = f.text_field :input, :label=> "Input"
-  = f.text_field :input, :label=> "Input"
