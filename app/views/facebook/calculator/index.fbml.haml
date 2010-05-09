@@ -9,3 +9,13 @@
       = submit_tag('Calculate')
 
     #fill-out-more= link_to_function("Fill out a more detailed profile", "$('#footprint-breakdown').removeClass('compact').slideDown('slow');$('#footprint-breakdown tr.row').removeClass('hide').slideDown('slow');$(this).hide()")
+    
+    
+    
+- facebook_form_for(:task, Query.new, :url => url_for(:action => :create_task), :labelwidth => '75', :width => '500') do |f|
+  = f.text_field :input, :label=> "Input"
+  = f.text_field :input, :label=> "Input"
+  = f.text_field :input, :label=> "Input"
+  = f.text_field :input, :label=> "Input"
+  = f.text_field :input, :label=> "Input"
+  = f.buttons "Calculate"
