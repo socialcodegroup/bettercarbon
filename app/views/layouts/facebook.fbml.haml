@@ -1,7 +1,6 @@
 = facebook_stylesheet_includes
 = facebook_javascript_includes
 
-
 = javascript_tag "document.domain = \"bettercarbon.com\";"
 = javascript_tag "$(document).ready(function() {document.domain = \"bettercarbon.com\";#{yield(:jquery_onload_js)}});" unless yield(:jquery_onload_js).blank?
 = render(:partial => 'layouts/sections/google_analytics.html.erb') if Rails.env != 'development'
