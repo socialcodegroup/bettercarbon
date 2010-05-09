@@ -10,4 +10,4 @@
           %label= input[:title]
         - input_class = module_values[input[:name].to_sym][:calculation] == :average ? "estimated" : "exact"
         %td{:class => input_class}
-          = render_field_for_module_input(module_name.to_s.gsub(':', ''), input, module_values[input[:name].to_sym][:value], :show_value => module_values[input[:name].to_sym][:calculation] != :average)
+          = fb_render_field_for_module_input(form, module_name.to_s.gsub(':', ''), input, module_values[input[:name].to_sym][:value], :show_value => module_values[input[:name].to_sym][:calculation] != :average)
