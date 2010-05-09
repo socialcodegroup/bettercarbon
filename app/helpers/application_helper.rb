@@ -15,14 +15,7 @@ module ApplicationHelper
   end
   
   def facebook_javascript_includes
-    files = [
-              'jquery', 'jquery-ui', 'jrails', 'js-class', 'excanvas',
-              'bluff-min', 'swfobject', 'raphael-min', 'g.raphael/g.raphael-min',
-              'g.raphael/g.pie-min', 'g.raphael/g.bar', 'application', 'flot/jquery.flot.min',
-              'flot/jquery.flot.pie', 'jit-yc'
-            ]
-    # javascript_include_tag(files, :cache => "_fB_javascript")
-    javascript_tag output_js_files_content("jquery", "jquery-ui", "jrails", "js-class", "excanvas", "application", "jit-yc")
+    javascript_tag output_js_files_content("jquery.js", "jquery-ui.js", "jrails.js", "js-class.js", "excanvas.js", "application.js", "jit-yc.js")
   end
   
   def facebook_stylesheet_includes
