@@ -25,6 +25,6 @@ module ApplicationHelper
   end
   
   def facebook_stylesheet_includes
-    stylesheet_link_tag('reset', 'fb_layout', :cache => "_fb_stylesheet")
+    stylesheet_link_tag('fb_layout', :cache => "_fb_stylesheet")
   end
 end
