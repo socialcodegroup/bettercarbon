@@ -79,7 +79,8 @@ class Facebook::CalculatorController < ApplicationController
   #   }
   # FRIEND
     }.join(',')
-    render :layout => nil
+    
+    render :layout => false
   end
   
   def index
