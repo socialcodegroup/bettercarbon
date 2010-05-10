@@ -7,7 +7,7 @@
   = fb_tab_item "Help &amp; Feedback", fb_about_url, :align => "right"
 
 - if params[:view].blank? || params[:view] == 'fg'
-  = fb_iframe 'http://bettercarbon.com/facebook/calculator/friend_graph?format=html', :width => "100%", :height => 350
+  = fb_iframe 'http://bettercarbon.com/facebook/calculator/friend_graph?format=html', :width => "100%", :height => 400, :frameborder => 0
   = render(:partial => 'hypertree')
 - elsif params[:view] == 'bg'
   %br{:clear => 'all'}
