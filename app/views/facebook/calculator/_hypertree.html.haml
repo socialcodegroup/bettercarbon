@@ -55,8 +55,10 @@
           },
           
           request: function(nodeId, level, onComplete) {
+            alert('test');
+            console.log("dasdasd");
             $.ajax({
-              url: "#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :canvas => true)}",
+              url: "#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :canvas => true, :only_path => false)}",
               
               success: function(data) {
                 onComplete.onComplete(nodeId, data);
@@ -105,7 +107,7 @@
       //load JSON data.
       ht.loadJSON(json);
       
-      // ht.onClick(ht.root);
+      ht.onClick(ht.root);
       
       //compute positions and plot.
       ht.refresh();
