@@ -43,7 +43,7 @@
       var ht = new Hypertree(canvas, {
           //Change node and edge styles such as
           //color, width and dimensions.
-          levelDistance : 200,
+          
           Node: {
               dim: 10,
               color: "#f00",
@@ -53,18 +53,6 @@
           Edge: {
               lineWidth: 2,
               color: "#088"
-          },
-          
-          request: function(nodeId, level, onComplete) {
-            alert('test');
-            console.log("dasdasd");
-            $.ajax({
-              url: "#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :canvas => true, :only_path => false)}",
-              
-              success: function(data) {
-                onComplete.onComplete(nodeId, data);
-              }
-            });
           },
           
           onBeforeCompute: function(node){
@@ -108,15 +96,6 @@
       //load JSON data.
       ht.loadJSON(json);
       
-      // ht.onClick(ht.root);
-      
-      ht.onClick(node.id, { 
-        onComplete: function() { 
-          alert("test");
-          console.log("test2");
-        } 
-      });
-
       //compute positions and plot.
       ht.refresh();
       //end
