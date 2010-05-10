@@ -14,7 +14,7 @@ class Facebook::CalculatorController < ApplicationController
   
   layout "facebook"
   
-  def friend_graph
+  def framed_visualization
     params[:calculator_profile] ||= {}
 
     @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
