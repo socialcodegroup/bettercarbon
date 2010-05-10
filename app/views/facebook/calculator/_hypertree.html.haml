@@ -53,6 +53,15 @@
               lineWidth: 2,
               color: "#088"
           },
+          
+          request: function(nodeId, level, onComplete) {
+            $.ajax({
+              url: 'http://bettercarbon.com/facebook/calculator/hypertree_subtree',
+              success: function(data) {
+                onComplete.onComplete(nodeId, data);
+              }
+            });
+          },
 
           onBeforeCompute: function(node){
               Log.write("centering");
@@ -93,10 +102,13 @@
       });
 
       //load JSON data.
-      ht.loadJSON(json);
+      / ht.loadJSON(json);
+      ht.onClick(ht.root);
+      
       //compute positions and plot.
       ht.refresh();
       //end
+      
       ht.controller.onAfterCompute();
   }
   
