@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.namespace :facebook do |facebook|
     facebook.resources :invites
-    facebook.resource :calculator, :collection => {:framed_visualization => :get}, :controller => 'calculator'
+    # facebook.resource :calculator, :collection => {:framed_visualization => :get}, :controller => 'calculator'
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
