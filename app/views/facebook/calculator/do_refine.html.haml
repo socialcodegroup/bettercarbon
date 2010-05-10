@@ -1,0 +1,55 @@
+%h2= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C02/year"
+
+- fb_tabs do
+  = fb_tab_item "Friend Graph", '?view=fg', :selected => params['view'].blank? || params['view'] == 'fg'
+  = fb_tab_item "Bar Graph", '?view=bg', :selected => params['view'] == 'bg'
+  = fb_tab_item "Footprint Breakdown", '?view=fb', :selected => params['view'] == 'fb'
+  = fb_tab_item "Help &amp; Feedback", fb_about_url, :align => "right"
+
+- if params[:view].blank? || params[:view] == 'fg'
+  = fb_iframe 'http://bettercarbon.com/facebook/calculator/friend_graph', :width => "100%", :height => 350
+  = render(:partial => 'hypertree')
+- elsif params[:view] == 'bg'
+  %br{:clear => 'all'}
+  %br{:clear => 'all'}
+  #placeholder{:style => "width:600px;height:300px"}
+
+  :javascript
+    $(function () {
+        var vals = [#{@gvalues.enum_with_index.collect {|v,i|"[#{i}, #{v}]"}.join(',')}];
+        var labels = [#{@gkeys.enum_with_index.collect {|v,i|"[#{i+0.5}, #{v}]"}.join(',')}];
+      
+        $.plot($("#placeholder"), [
+            {
+                data: vals,
+                bars: { show: true },
+                color: ["#31549F"]
+            }
+          ],
+          {
+            xaxis: {
+        			ticks: labels
+        		}
+        	}
+        );
+    });
+- elsif params[:view] == 'fb'
+  %br{:clear => 'all'}
+  %br{:clear => 'all'}
+  #placeholder{:style => "width:600px;height:300px"}
+
+  :javascript
+    $(function () {
+    	var data = [#{@calculator_result.per_module_results.collect{|k, v| "{label: '#{k.pretty_module_name}', data: #{v[:footprint]}}"}.join(',')}];
+
+      $.plot($("#placeholder"), data, {
+        series: {
+          pie: { 
+            show: true,
+          }
+        },
+        legend: {
+            show: true
+        }
+      });
+    });
