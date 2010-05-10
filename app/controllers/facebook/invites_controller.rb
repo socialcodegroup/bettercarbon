@@ -18,15 +18,15 @@ class Facebook::InvitesController < ApplicationController
   
   def create
     
-    message = <<-MESSAGE
-<fb:fbml> Calculate your carbon footprint using your social graph!
-<a href="http://apps.facebook.com/bettercarbon/"> Go!</a>
-</fb:fbml>
-MESSAGE
+#     message = <<-MESSAGE
+# <fb:fbml> Calculate your carbon footprint using your social graph!
+# <a href="http://apps.facebook.com/bettercarbon/"> Go!</a>
+# </fb:fbml>
+# MESSAGE
     
     @sent_to_ids = params[:ids]
     
-    facebook_session.send_notification(@sent_to_ids, message)
+    # facebook_session.send_notification(@sent_to_ids, message)
     
     redirect_to('/bettercarbon/calculator/do_refine')
   end
