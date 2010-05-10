@@ -5,7 +5,7 @@ class Facebook::CalculatorController < ApplicationController
   # before_filter :redirect_to_saved, :only => "master_redirect"
   
   # ensure_authenticated_to_facebook
-  ensure_application_is_installed_by_facebook_user :only => ["index", "do_refine"]
+  ensure_application_is_installed_by_facebook_user
   # ensure_application_is_installed_by_facebook_user :only => ["index", "do_refine"]
   
   skip_before_filter :verify_authenticity_token
