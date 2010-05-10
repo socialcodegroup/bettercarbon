@@ -56,7 +56,7 @@
           
           request: function(nodeId, level, onComplete) {
             $.ajax({
-              url: "<%=url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :canvas => true)%>",
+              url: "#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :canvas => true)}",
               
               success: function(data) {
                 onComplete.onComplete(nodeId, data);
