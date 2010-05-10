@@ -7,13 +7,18 @@ class Facebook::InvitesController < ApplicationController
   filter_parameter_logging :fb_sig_friends, :password
   
   layout "facebook"
-
+  
+  def index
+    redirect_to('/bettercarbon/calculator/do_refine')
+  end
+  
   def new
     @from_user_id = facebook_session.user.to_s
   end
   
   def create
     @sent_to_ids = params[:ids]
+    redirect_to('/bettercarbon/calculator/do_refine')
   end
   
   # def select

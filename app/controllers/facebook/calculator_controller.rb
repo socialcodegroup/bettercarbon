@@ -235,7 +235,11 @@ class Facebook::CalculatorController < ApplicationController
 # FRIEND
     }.join(',')
     
-    FacebookerPublisher.deliver_templatized_news_feed(facebook_session.user)
+    if request.post?
+      redirect_to('/bettercarbon/invites/new')
+    end
+    
+    # FacebookerPublisher.deliver_templatized_news_feed(facebook_session.user)
   end
   
   def publish_to_friends
