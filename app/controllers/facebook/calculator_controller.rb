@@ -19,9 +19,11 @@ class Facebook::CalculatorController < ApplicationController
     params[:calculator_profile] ||= {}
     
     @facebook_session = Facebooker::Session.create
-    @fb_user = Facebooker::User.new(params[:fb_user_id])
+    @facebook_session.secure_with_session_secret!
+    # @fb_user = @facebook_session.secure_with!(session_key, params[:fb_user_id], 1.hour.from_now)
+    @facebook_session.secure_with!(@facebook_session, params[:fb_user_id], 1.hour.from_now)
     
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @fb_user.uid)
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
     @old_calculator_result = CarbonCalculator.process(@calculator_input)
 
     old_mod_results = @old_calculator_result.per_module_results
@@ -47,7 +49,7 @@ class Facebook::CalculatorController < ApplicationController
     @gkeys = ["\'Your footprint\'", "\'Average Footprint\'", "'World'"]
 
     # lookup footprint of friends (who have calculated their footprint)
-    @friends_with_app = @fb_user.friends_with_this_app
+    @friends_with_app = @facebook_session.user.friends_with_this_app
 
     @friends_footprints = @friends_with_app.collect { |friend|
       query = Query.find_by_facebook_uid(friend.uid)
