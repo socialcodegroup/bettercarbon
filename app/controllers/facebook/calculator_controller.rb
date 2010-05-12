@@ -296,11 +296,10 @@ class Facebook::CalculatorController < ApplicationController
     #   redirect_to( cookies[:last_request] || url_for("/")) and return false
     # end  
     
-    protected
-    
-      def set_facebook_params
-        @fb_params = params.inject({}) do |collection, pair|
+    def set_facebook_params
+      @fb_params = params.inject({}) do |collection, pair|
         collection[pair.first] = pair.second if pair.first =~ /^fb_sig/
         collection
       end
+    end
 end
