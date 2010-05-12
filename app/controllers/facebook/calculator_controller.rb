@@ -101,7 +101,7 @@ ROOTJSON
     }
   }
 ROOTJSON
-      render :text => @friends_footprints_json
+      render :text => root_json
     end
   end
   
