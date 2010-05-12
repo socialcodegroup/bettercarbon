@@ -68,7 +68,7 @@
                   
                   //st.onClick(node.id);
                   // Log.write("node:" + node.id);
-                  $.getJSON('/facebook/calculator/hypertree_subtree', function(data) {
+                  $.getJSON('#{rewrite_url_with_facebooker(:controller => 'facebook/calculator', :action => 'hypertree_subtree')}', function(data) {
                     var json = normalizeJSON(data);
                     if (node.loaded == undefined || node.loaded == false) {
                       ht.addSubtree(json, 'animate');
