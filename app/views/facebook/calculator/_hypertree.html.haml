@@ -80,7 +80,7 @@
                       duration: 1000, 
                       hideLabels: false, 
                       transition: Trans.Quart.easeOut,
-                      id: node.id
+                      id: "#{@facebook_session.user.uid}"
                     });
                     ht.refresh();
                     ht.controller.onAfterCompute();
