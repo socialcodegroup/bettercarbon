@@ -19,7 +19,7 @@ class Facebook::CalculatorController < ApplicationController
     params[:calculator_profile] ||= {}
     
     @facebook_session = Facebooker::Session.create
-    @facebook_session.secure_with_session_secret!
+    # @facebook_session.secure_with_session_secret!
     @fb_user = @facebook_session.secure_with!(params[:fb_sig_session_key], params[:fb_sig_user], 1.hour.from_now)
     # @facebook_session.secure_with!(@facebook_session, params[:fb_user_id], 1.hour.from_now)
     
