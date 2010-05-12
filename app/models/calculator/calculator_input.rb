@@ -1,7 +1,7 @@
 class CalculatorInput
   include Geokit::Geocoders
   
-  attr_accessor :address, :tags, :tags_array, :user_input, :facebook, :fb_user_id
+  attr_accessor :address, :tags, :tags_array, :user_input, :facebook, :fb_user#, :fb_user_id
   
   def destroy_cache
     user_input.reload
@@ -13,9 +13,9 @@ class CalculatorInput
     params.each{|k,v|send("#{k}=", v)} if params
     
     if facebook == true
-      self.user_input = Query.locate_from_fb_id(fb_user_id)
+      self.user_input = Query.locate_from_fb_id(fb_user.uid)
       unless self.user_input
-        self.user_input = Query.create(:facebook_uid => fb_user_id)
+        self.user_input = Query.create(:facebook_uid => fb_user.uid)
       else
         # update the tags
         # QueryTag.delete_all("query_id = #{self.user_input.id}")
@@ -25,6 +25,8 @@ class CalculatorInput
         #   QueryTag.create(:query_id => self.user_input.id, :tag_id => tag.id)
         # end
       end
+      
+      self.user_input.fb_user = fb_user
     else
       loc = MultiGeocoder.geocode(address)
       if loc.success && (loc.precision == "address" || loc.precision == "zip+4") && loc.country_code == "US"

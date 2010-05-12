@@ -21,7 +21,7 @@ class Facebook::CalculatorController < ApplicationController
     @facebook_session = Facebooker::Session.create
     @facebook_session.secure_with!(params[:fb_sig_session_key], params[:fb_sig_user], 1.hour.from_now)
     
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
     @calculator_result = CarbonCalculator.process(@calculator_input)
     
     

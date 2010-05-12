@@ -24,7 +24,7 @@ class Query < ActiveRecord::Base
   
   acts_as_mappable
   
-  attr_accessor :query_tags_ids, :percision
+  attr_accessor :query_tags_ids, :percision, :fb_user
   
   NEIGHBORHOOD_SIZE = 50
   
@@ -55,7 +55,7 @@ class Query < ActiveRecord::Base
   
   def similar_inputs_via_facebook
     Rails.cache.fetch("similar_inputs/#{facebook_uid}", :expires_in => 300) {
-      fb_user = Facebooker::User.new(facebook_uid)
+      # fb_user = Facebooker::User.new(facebook_uid)
       
       fb_ids_with_app = fb_user.friend_ids_with_this_app
       fb_ids_with_app = fb_ids_with_app[0..NEIGHBORHOOD_SIZE] if fb_ids_with_app.length > NEIGHBORHOOD_SIZE
