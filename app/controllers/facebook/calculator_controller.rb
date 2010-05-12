@@ -108,7 +108,7 @@ ROOTJSON
   def framed_visualization
     params[:calculator_profile] ||= {}
     
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
     @old_calculator_result = CarbonCalculator.process(@calculator_input)
 
     old_mod_results = @old_calculator_result.per_module_results
@@ -175,7 +175,7 @@ ROOTJSON
   end
   
   def index
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
     @calculator_result = CarbonCalculator.process(@calculator_input)
     
     possible_inputs_set1 = [:miles_driven, :miles_public_transport, :mpg, :vehicle_size, :water_and_sewage_costs, :square_feet_of_household, :meat_fish_protein, :eat_organic_food, :num_short_trips]
@@ -194,7 +194,7 @@ ROOTJSON
   def do_refine
     params[:calculator_profile] ||= {}
     
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
     @old_calculator_result = CarbonCalculator.process(@calculator_input)
     
     old_mod_results = @old_calculator_result.per_module_results
