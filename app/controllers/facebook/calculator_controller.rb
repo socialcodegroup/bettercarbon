@@ -9,7 +9,7 @@ class Facebook::CalculatorController < ApplicationController
   # ensure_application_is_installed_by_facebook_user :only => ["index", "do_refine"]
   
   skip_before_filter :verify_authenticity_token
-  before_filter :set_facebook_params, :only => :hypertree_subtree
+  before_filter :set_facebook_params, :only => [:hypertree_subtree, :framed_visualization]
   
   filter_parameter_logging :fb_sig_friends, :password
   
