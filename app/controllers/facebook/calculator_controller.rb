@@ -6,21 +6,22 @@ class Facebook::CalculatorController < ApplicationController
   
   
   skip_before_filter :verify_authenticity_token
-  before_filter :set_facebook_params, :only => [:hypertree_subtree, :framed_visualization]
-  
   filter_parameter_logging :fb_sig_friends, :password
   
   
   # ensure_authenticated_to_facebook
-  ensure_application_is_installed_by_facebook_user
+  ensure_application_is_installed_by_facebook_user, :except => :hypertree_subtree
   # ensure_application_is_installed_by_facebook_user :only => ["index", "do_refine"]
   
   layout "facebook"
   
   def hypertree_subtree
     params[:calculator_profile] ||= {}
-
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @facebook_session.user.uid)
+    
+    @facebook_session = Facebooker::Session.create
+    @fb_user = Facebooker::User.new(params[:fb_user_id])
+    
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user_id => @fb_user.uid)
     @old_calculator_result = CarbonCalculator.process(@calculator_input)
 
     old_mod_results = @old_calculator_result.per_module_results
@@ -46,7 +47,7 @@ class Facebook::CalculatorController < ApplicationController
     @gkeys = ["\'Your footprint\'", "\'Average Footprint\'", "'World'"]
 
     # lookup footprint of friends (who have calculated their footprint)
-    @friends_with_app = facebook_session.user.friends_with_this_app
+    @friends_with_app = @fb_user.friends_with_this_app
 
     @friends_footprints = @friends_with_app.collect { |friend|
       query = Query.find_by_facebook_uid(friend.uid)
