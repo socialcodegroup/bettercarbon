@@ -66,15 +66,19 @@
               addEvent(domElement, 'click', function () {
                   ht.onClick(node.id);
                   
-                  
-
-                  label.onclick = function() {
-                      //st.onClick(node.id);
-                      Log.write("node:" + node.id);
-                      
-                      console.log('hello');
-                      alert('hello');
-                  };
+                  //st.onClick(node.id);
+                  // Log.write("node:" + node.id);
+                  $.getJSON('/bettercarbon/calculator/hypertree_subtree', function(data) {
+                    var json = normalizeJSON(data);
+                    if (node.loaded == undefined || node.loaded == false) {
+                      ht.addSubtree(json, 'animate');
+                      node.loaded = true;
+                    } else {
+                      ht.removeSubtree(json[0].id, false, 'animate');
+                      node.loaded = false;
+                    }
+                    ht.refresh();
+                  });
               });
           },
           //Change node styles when labels are placed
