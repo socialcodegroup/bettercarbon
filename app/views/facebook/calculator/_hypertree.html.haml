@@ -71,16 +71,16 @@
                   $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id, function(data) {
                     var json = data;
                     
-                    ht.op.sum(json, {
-                        type: 'replot'
-                    });
-                    
-                    // ht.op.morph(json, { 
-                    //   type: 'fade', 
-                    //   duration: 1000, 
-                    //   hideLabels: false, 
-                    //   transition: Trans.Quart.easeOut 
+                    // ht.op.sum(json, {
+                    //     type: 'replot'
                     // });
+                    
+                    ht.op.morph(json, { 
+                      type: 'fade', 
+                      duration: 1000, 
+                      hideLabels: false, 
+                      transition: Trans.Quart.easeOut 
+                    });
                     ht.refresh();
                     ht.controller.onAfterCompute();
                   });

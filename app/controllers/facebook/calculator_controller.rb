@@ -79,15 +79,38 @@ ROOTJSON
       
       render :text => root_json
     else
+      @friends_with_app = @facebook_session.user.friends_with_this_app
+
+      @friends_footprints = @friends_with_app.collect { |friend|
+        query = Query.find_by_facebook_uid(friend.uid)
+
+        if query
+          {
+            :friend => friend,
+            :footprint => query.algorithmic_footprint
+          }
+        else
+          nil
+        end
+      }.compact
+
+      footprints = @friends_footprints.collect { |friend_footprint| friend_footprint[:footprint] }
+      footprints = footprints + [@calculator_result.total_footprint]
+
+      @max = footprints.max
+      
+      
+      friend_footprint = @friends_footprints.find{|ff| ff[:friend].uid.to_i == params[:node].to_i }
+      
       
       root_json=<<ROOTJSON
 {
   'data' : {
-    '$color' : '#f70700',
-    '$dim' : 60.0
+    '$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}',
+    '$dim' : #{friend_footprint[:footprint].to_i/1.5}
   },
   'id' : '#{params[:node].to_i}',
-  'name' : 'Bill Tomlinson - 90.41',
+  'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}',
   'children' : [
     {
       'id' : '33',
