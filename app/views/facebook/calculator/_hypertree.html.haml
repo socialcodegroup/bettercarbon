@@ -64,7 +64,6 @@
           onCreateLabel: function(domElement, node){
               domElement.innerHTML = node.name;
               addEvent(domElement, 'click', function () {
-                  ht.onClick(node.id);
                   
                   //st.onClick(node.id);
                   // Log.write("node:" + node.id);
@@ -80,11 +79,13 @@
                       duration: 1000, 
                       hideLabels: false, 
                       transition: Trans.Quart.easeOut,
-                      id: "#{@facebook_session.user.uid}"
+                      id: node.id
                     });
                     ht.refresh();
                     ht.controller.onAfterCompute();
                   });
+                  
+                  ht.onClick(node.id);
               });
           },
           //Change node styles when labels are placed
