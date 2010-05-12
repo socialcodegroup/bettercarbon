@@ -9,6 +9,7 @@ class Facebook::CalculatorController < ApplicationController
   # ensure_application_is_installed_by_facebook_user :only => ["index", "do_refine"]
   
   skip_before_filter :verify_authenticity_token
+  before_filter :set_facebook_params, :only => :hypertree_subtree
   
   filter_parameter_logging :fb_sig_friends, :password
   
@@ -294,4 +295,12 @@ class Facebook::CalculatorController < ApplicationController
     # def redirect_to_saved
     #   redirect_to( cookies[:last_request] || url_for("/")) and return false
     # end  
+    
+    protected
+    
+      def set_facebook_params
+        @fb_params = params.inject({}) do |collection, pair|
+        collection[pair.first] = pair.second if pair.first =~ /^fb_sig/
+        collection
+      end
 end
