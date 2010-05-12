@@ -69,7 +69,7 @@
                   //st.onClick(node.id);
                   // Log.write("node:" + node.id);
                   $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}', function(data) {
-                    var json = normalizeJSON(data);
+                    var json = data;
                     if (node.loaded == undefined || node.loaded == false) {
                       ht.addSubtree(json, 'animate');
                       node.loaded = true;
