@@ -81,25 +81,25 @@ ROOTJSON
     else
       
       root_json=<<ROOTJSON
-  {
-    'id' : '22',
-    'name' : 'Root',
-    'children' : [
-      {
-        'id' : '33',
-        'name' : 'child',
-        'children' : [],
-        'data' : {
-          '$aw : 5',
-          '$color' : '#f55'
-        }
+{
+  'data' : {
+    '$color' : '#f70700',
+    '$dim' : 60.0
+  },
+  'id' : '#{params[:node].to_i}',
+  'name' : 'Bill Tomlinson - 90.41',
+  'children' : [
+    {
+      'id' : '33',
+      'name' : 'child',
+      'children' : [],
+      'data' : {
+        '$aw : 5',
+        '$color' : '#f55'
       }
-    ],
-    'data' : {
-      '$aw' : 10,
-      '$color' : '#f55'
     }
-  }
+  ]
+}
 ROOTJSON
       render :text => root_json
     end
