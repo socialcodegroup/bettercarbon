@@ -101,8 +101,22 @@ class CalculatorController < ApplicationController
     cache_path = "/cached/#{Digest::SHA1.hexdigest(params[:address])}"
     Rails.cache.delete(cache_path)
     
+    
+    puts "---------------------------------------------------------------------------"
+    puts "---------------------------------------------------------------------------"
+    puts params[:profile].inspect
+    puts "---------------------------------------------------------------------------"
+    puts "---------------------------------------------------------------------------"
+    
     old_mod_results = @old_calculator_result.per_module_results
     stripped_values = strip_existing_values_from_refined_values(old_mod_results, params[:profile])
+    
+    puts "---------------------------------------------------------------------------"
+    puts "---------------------------------------------------------------------------"
+    puts stripped_values.inspect
+    puts "---------------------------------------------------------------------------"
+    puts "---------------------------------------------------------------------------"
+    
     
     stripped_values.each do |mod, values|
       mod = CarbonCalculator.modules.select{|c|c.name == mod}.first
