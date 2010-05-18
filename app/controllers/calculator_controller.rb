@@ -102,16 +102,23 @@ class CalculatorController < ApplicationController
     Rails.cache.delete(cache_path)
     
     
-    RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
+    RAILS_DEFAULT_LOGGER.error "1---------------------------------------------------------------------------"
     RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
     RAILS_DEFAULT_LOGGER.error params[:profile].inspect
     RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
     RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
     
     old_mod_results = @old_calculator_result.per_module_results
+    
+    RAILS_DEFAULT_LOGGER.error "3---------------------------------------------------------------------------"
+    RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
+    RAILS_DEFAULT_LOGGER.error old_mod_results.inspect
+    RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
+    RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
+    
     stripped_values = strip_existing_values_from_refined_values(old_mod_results, params[:profile])
     
-    RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
+    RAILS_DEFAULT_LOGGER.error "2---------------------------------------------------------------------------"
     RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
     RAILS_DEFAULT_LOGGER.error stripped_values.inspect
     RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
