@@ -69,6 +69,8 @@ class CalculatorController < ApplicationController
         # @calculator_result = CarbonCalculator.process(@calculator_input)
         @calculator_input.user_input.update_attribute(:algorithmic_footprint, @calculator_result.total_footprint)
         @old_calculator_result = nil
+        
+        Rails.cache.write("#{current_user.id}-refine-module-results", @calculator_result.per_module_results)
       else
         @not_an_address = @calculator_input.user_input.percision != "address"
         session[:return_to] = refine_calculator_path(:address => @calculator_input.address)
@@ -108,7 +110,8 @@ class CalculatorController < ApplicationController
     RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
     RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
     
-    old_mod_results = @old_calculator_result.per_module_results
+    # old_mod_results = @old_calculator_result.per_module_results
+    old_mod_results = Rails.cache.fetch("#{current_user.id}-refine-module-results")
     
     RAILS_DEFAULT_LOGGER.error "3---------------------------------------------------------------------------"
     RAILS_DEFAULT_LOGGER.error "---------------------------------------------------------------------------"
