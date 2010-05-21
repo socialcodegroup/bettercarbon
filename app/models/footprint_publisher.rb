@@ -2,7 +2,7 @@ class FootprintPublisher < Facebooker::Rails::Publisher
   helper :application
 
   def calculate_feed_template
-    calculate = link_to("Calculate your footprint!", 'calculator')
+    calculate_back = link_to("Calculate your footprint!", 'calculator')
     # one_line_story_template "{*actor*} {*result*} {*defender*} with a {*move*}. #{attack_back}"
     one_line_story_template "{*actor*} calculated their environmental impact using Better Carbon. #{calculate_back}"
     short_story_template "{*actor*} calculated their environmental impact using Better Carbon.","#{calculate_back}"
