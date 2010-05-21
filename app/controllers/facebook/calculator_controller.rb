@@ -197,7 +197,7 @@ ROOTJSON
     render :layout => false
   end
   
-  def index
+  def calculate
     @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
     @calculator_result = CarbonCalculator.process(@calculator_input)
     
