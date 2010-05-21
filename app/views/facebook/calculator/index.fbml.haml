@@ -1,6 +1,4 @@
-- facebook_form_for(:calculator_profile, CalculatorProfile.new, :url => '/bettercarbon/calculator/do_refine', :labelwidth => '250', :width => '500') do |f|
-  - index = 0
-  - @calculator_result.per_module_results.each do |module_name, module_values|
-    = render :partial => 'refine_fields_for_module', :locals => {:module_name => module_name, :module_values => module_values, :index => index, :form => f}
-    - index += 1
-  = f.buttons "Calculate"
+%h3 Calculate your carbon footprint on BetterCarbon
+%p
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  = link_to("Calculate your footprint", "/bettercarbon/calculator/calculate")
