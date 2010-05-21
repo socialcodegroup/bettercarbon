@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   
   # include AuthenticatedSystem
   
+  # before_filter :redirect_bad_fb_url
   
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
@@ -69,4 +70,8 @@ class ApplicationController < ActionController::Base
   # def after_facebook_login_url
   #   request.request_uri
   # end
+  
+  def redirect_bad_fb_url
+    redirect_to("/")
+  end
 end
