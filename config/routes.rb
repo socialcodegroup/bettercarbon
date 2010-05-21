@@ -16,6 +16,7 @@ ActionController::Routing::Routes.draw do |map|
     # facebook.resource :calculator, :collection => {:framed_visualization => :get}, :controller => 'calculator'
   end
   map.fb_root  '/facebook', :controller => 'facebook/calculator', :action => 'index'
+  map.fb_error_root  '/facebook/facebook', :controller => 'application', :action => 'redirect_bad_fb_url'
   
   
   
