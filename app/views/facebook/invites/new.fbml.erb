@@ -1,6 +1,6 @@
 <% content_for("invite_message") do %>
   Calculate your environmental impact and compare with friends.
-	<%= fb_req_choice("Calculate", "")%>
+	<%= fb_req_choice("Calculate", "calculator")%>
 <% end %>
 <% fb_request_form("Better Carbon","invite_message", "/bettercarbon/invites") do %>
   <%= fb_multi_friend_selector(
