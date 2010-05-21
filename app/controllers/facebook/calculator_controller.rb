@@ -282,7 +282,11 @@ ROOTJSON
     
     if request.post?
     #   redirect_to('/bettercarbon/invites/new')
-      FootprintPublisher.deliver_calculate_feed(facebook_session) rescue nil
+      begin
+        FootprintPublisher.deliver_calculate_feed(facebook_session)
+      rescue Exception => e
+        RAILS_DEFAULT_LOGGER.error e
+      end
     end
     
     # FacebookerPublisher.deliver_templatized_news_feed(facebook_session.user)

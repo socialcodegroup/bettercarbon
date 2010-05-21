@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100304180004) do
+ActiveRecord::Schema.define(:version => 20100521180345) do
 
   create_table "claimed_addresses", :force => true do |t|
     t.integer  "query_id"
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(:version => 20100304180004) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "facebook_templates", :force => true do |t|
+    t.string "template_name", :null => false
+    t.string "content_hash",  :null => false
+    t.string "bundle_id"
+  end
+
+  add_index "facebook_templates", ["template_name"], :name => "index_facebook_templates_on_template_name", :unique => true
 
   create_table "housing_stats", :force => true do |t|
     t.string   "state"
