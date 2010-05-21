@@ -72,6 +72,6 @@ class ApplicationController < ActionController::Base
   # end
   
   def redirect_bad_fb_url
-    redirect_to("/")
+    redirect_to("/bettercarbon")
   end
 end
