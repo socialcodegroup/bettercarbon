@@ -72,6 +72,6 @@ class ApplicationController < ActionController::Base
   # end
   
   def redirect_bad_fb_url
-    redirect_to("/bettercarbon")
+    redirect_to("/bettercarbon/#{params[:path].join('/')}")
   end
 end
