@@ -1,9 +1,10 @@
-<fb:fbml>
-  <fb:request-form
-    action="/bettercarbon/invites" method="POST" invite="true" type="BetterCarbon Invite"
-    content="Check out your carbon footprint! <%=h "<fb:req-choice url=\"/invites/new?from=#{@from_user_id}&canvas=true\" label=\"Go!\" />"%>"
-      <fb:multi-friend-selector
-      showborder="false"
-      actiontext="Invite your friends to check their carbon footprint." />
-  </fb:request-form>
-</fb:fbml>
+<% content_for("invite_message") do %>
+  Come join my Karate Poke Dojo and fight your friends.
+	<%= fb_req_choice("Calculate", "/invites/new?from=#{@from_user_id}&canvas=true")%>
+<% end %>
+<% fb_request_form("Better Carbon","invite_message", "/bettercarbon/invites") do %>
+  <%= fb_multi_friend_selector(
+    "Invite your friends to calculate their footprint.") %>
+  <br />
+  <%= fb_request_form_submit %>
+<% end %>
