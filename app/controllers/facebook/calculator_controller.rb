@@ -280,9 +280,10 @@ ROOTJSON
 # FRIEND
     }.join(',')
     
-    # if request.post?
+    if request.post?
     #   redirect_to('/bettercarbon/invites/new')
-    # end
+      FootprintPublisher.deliver_calculate_feed(facebook_session) rescue nil
+    end
     
     # FacebookerPublisher.deliver_templatized_news_feed(facebook_session.user)
   end

@@ -1,6 +1,0 @@
-- facebook_form_for(:calculator_profile, CalculatorProfile.new, :url => '/bettercarbon/calculator/do_refine', :labelwidth => '250', :width => '500') do |f|
-  - index = 0
-  - @calculator_result.per_module_results.each do |module_name, module_values|
-    = render :partial => 'refine_fields_for_module', :locals => {:module_name => module_name, :module_values => module_values, :index => index, :form => f}
-    - index += 1
-  = f.buttons "Calculate"
