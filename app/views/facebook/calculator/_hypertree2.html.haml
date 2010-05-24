@@ -64,7 +64,6 @@
           onCreateLabel: function(domElement, node){
               domElement.innerHTML = node.name;
               addEvent(domElement, 'click', function () {
-                  rgraph.onClick(node.id);
                   
                   //st.onClick(node.id);
                   // Log.write("node:" + node.id);
@@ -98,7 +97,7 @@
                     
                     rgraph.refresh();
                     rgraph.controller.onAfterCompute();
-                    
+                    rgraph.onClick(node.id);
                   });
               });
           },
