@@ -65,13 +65,13 @@
             domElement.innerHTML = node.name;
             addEvent(domElement, 'click', function () {
               alert("ok");
-              $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id, function(data) {
-                alert("okay");
-                console.log(data);
-                rgraph.op.morph(data, { 
-                  type: 'fade', 
-                  duration: 1000
-                });
+              
+              $.ajax({
+                url: ('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id,
+                dataType: 'json',
+                success: function(data) {
+                  alert("okay");
+                }
               });
                             
               rgraph.onClick(node.id);
