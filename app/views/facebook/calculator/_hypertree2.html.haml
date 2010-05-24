@@ -67,7 +67,7 @@
               alert("ok");
               
               $.ajax({
-                url: ('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id,
+                url: '#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id,
                 dataType: 'json',
                 success: function(data) {
                   alert("okay");
