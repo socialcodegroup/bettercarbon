@@ -75,7 +75,11 @@
                     // });
                     
                     rgraph.op.sum(json, {  
-                        type: 'replot'
+                        type: 'fade:seq',
+                        duration: 1000,
+                        onComplete: function() { 
+                          console.log("done");
+                        }
                     });
                     
                     // rgraph.op.morph(json, { 
