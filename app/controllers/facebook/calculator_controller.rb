@@ -66,7 +66,7 @@ class Facebook::CalculatorController < ApplicationController
       }.join(',')
       
       root_json=<<ROOTJSON
-[{
+{
   "id": "#{@facebook_session.user.uid}",
   "name": "You",
   "children": [#{@friends_footprints_json}],
@@ -74,7 +74,7 @@ class Facebook::CalculatorController < ApplicationController
     '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
     '$color' : '#{CalcMath::number_to_intensity(@calculator_result.total_footprint, 0, @max)}'
   }
-}]
+}
 ROOTJSON
       
       render :text => root_json
@@ -104,24 +104,25 @@ ROOTJSON
       
       
       root_json=<<ROOTJSON
-[{
+{
   'data' : {
     '$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}',
     '$dim' : #{friend_footprint[:footprint].to_i/1.5}
   },
   'id' : '#{params[:node].to_i}',
   'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}',
-  'children' : []
-},
-{
-  'id' : '33111',
-  'name' : 'child',
-  'children' : [],
-  'data' : {
-    '$aw : 5',
-    '$color' : '#f55'
-  }
-}]
+  'children' : [
+    {
+      'id' : '33',
+      'name' : 'child',
+      'children' : [],
+      'data' : {
+        '$aw : 5',
+        '$color' : '#f55'
+      }
+    }
+  ]
+}
 ROOTJSON
       render :text => root_json
     end
