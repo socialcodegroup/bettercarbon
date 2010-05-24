@@ -104,7 +104,7 @@ ROOTJSON
       
       
       root_json=<<ROOTJSON
-{
+[{
   'data' : {
     '$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}',
     '$dim' : #{friend_footprint[:footprint].to_i/1.5}
@@ -122,7 +122,7 @@ ROOTJSON
       }
     }
   ]
-}
+}]
 ROOTJSON
       render :text => root_json
     end
