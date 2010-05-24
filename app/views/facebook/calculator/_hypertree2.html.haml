@@ -83,6 +83,7 @@
                     // });
                     
                     console.log("a");
+                    
                     rgraph.op.morph(data, { 
                       type: 'fade', 
                       duration: 1000, 
@@ -93,12 +94,14 @@
                         console.log("done");
                       }
                     });
+                    
                     console.log("b");
                     
                     rgraph.refresh();
                     rgraph.controller.onAfterCompute();
-                    rgraph.onClick(node.id);
                   });
+                  
+                  rgraph.onClick(node.id);
               });
           },
           //Change node styles when labels are placed
