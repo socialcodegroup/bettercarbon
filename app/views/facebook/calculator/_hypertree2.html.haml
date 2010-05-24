@@ -74,18 +74,18 @@
                     //     type: 'replot'
                     // });
                     
-                    ht.op.morph(json, { 
+                    rgraph.op.morph(json, { 
                       type: 'fade', 
                       duration: 1000, 
                       hideLabels: false, 
                       transition: Trans.Quart.easeOut,
                       id: node.id
                     });
-                    ht.refresh();
-                    ht.controller.onAfterCompute();
+                    rgraph.refresh();
+                    rgraph.controller.onAfterCompute();
                   });
                   
-                  ht.onClick(node.id);
+                  rgraph.onClick(node.id);
               });
           },
           //Change node styles when labels are placed
@@ -115,13 +115,13 @@
       });
 
       //load JSON data.
-      ht.loadJSON(json);
+      rgraph.loadJSON(json);
       
       //compute positions and plot.
-      ht.refresh();
+      rgraph.refresh();
       //end
       
-      ht.controller.onAfterCompute();
+      rgraph.controller.onAfterCompute();
   }
   
   window.onload = function() {
