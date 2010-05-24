@@ -67,7 +67,7 @@
               alert("ok");
               $.get('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id, function(data) {
                 alert("okay");
-                console.log(eval('(' + data + ')'));
+                console.log('(' + data + ')');
                 rgraph.op.morph(eval('(' + data + ')'), { 
                   type: 'fade', 
                   duration: 1000
