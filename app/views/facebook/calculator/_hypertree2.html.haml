@@ -74,13 +74,17 @@
                     //     type: 'replot'
                     // });
                     
-                    rgraph.op.morph(json, { 
-                      type: 'fade', 
-                      duration: 1000, 
-                      hideLabels: false, 
-                      transition: Trans.Quart.easeOut,
-                      id: node.id
+                    rgraph.op.sum(json, {  
+                        type: 'replot'
                     });
+                    
+                    // rgraph.op.morph(json, { 
+                    //   type: 'fade', 
+                    //   duration: 1000, 
+                    //   hideLabels: false, 
+                    //   transition: Trans.Quart.easeOut,
+                    //   id: node.id
+                    // });
                     rgraph.refresh();
                     rgraph.controller.onAfterCompute();
                   });
