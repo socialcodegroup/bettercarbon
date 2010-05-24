@@ -64,6 +64,7 @@
           onCreateLabel: function(domElement, node){
               domElement.innerHTML = node.name;
               addEvent(domElement, 'click', function () {
+                  rgraph.onClick(node.id);
                   
                   //st.onClick(node.id);
                   // Log.write("node:" + node.id);
@@ -74,26 +75,31 @@
                     //     type: 'replot'
                     // });
                     
-                    rgraph.op.sum(json, {  
-                        type: 'fade:seq',
-                        duration: 1000,
-                        onComplete: function() { 
-                          console.log("done");
-                        }
-                    });
+                    / rgraph.op.sum(json, {  
+                    /     type: 'fade:seq',
+                    /     duration: 1000,
+                    /     onComplete: function() { 
+                    /       console.log("done");
+                    /     }
+                    / });
                     
-                    // rgraph.op.morph(json, { 
-                    //   type: 'fade', 
-                    //   duration: 1000, 
-                    //   hideLabels: false, 
-                    //   transition: Trans.Quart.easeOut,
-                    //   id: node.id
-                    // });
+                    console.log("a");
+                    rgraph.op.morph(data, { 
+                      type: 'fade', 
+                      duration: 1000, 
+                      hideLabels: false, 
+                      transition: Trans.Quart.easeOut,
+                      
+                      onComplete: function() {
+                        console.log("done");
+                      }
+                    });
+                    console.log("b");
+                    
                     rgraph.refresh();
                     rgraph.controller.onAfterCompute();
+                    
                   });
-                  
-                  rgraph.onClick(node.id);
               });
           },
           //Change node styles when labels are placed
