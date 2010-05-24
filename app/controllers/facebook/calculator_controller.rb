@@ -111,17 +111,16 @@ ROOTJSON
   },
   'id' : '#{params[:node].to_i}',
   'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}',
-  'children' : [
-    {
-      'id' : '33',
-      'name' : 'child',
-      'children' : [],
-      'data' : {
-        '$aw : 5',
-        '$color' : '#f55'
-      }
-    }
-  ]
+  'children' : []
+},
+{
+  'id' : '33111',
+  'name' : 'child',
+  'children' : [],
+  'data' : {
+    '$aw : 5',
+    '$color' : '#f55'
+  }
 }]
 ROOTJSON
       render :text => root_json
