@@ -64,10 +64,12 @@
           onCreateLabel: function(domElement, node){
             domElement.innerHTML = node.name;
             addEvent(domElement, 'click', function () {
-              alert("done");
-              
               $.get('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id, function(data) {
-                alert("Data Loaded: " + data);
+                rgraph.op.morph(eval('(' + data + ')'), { 
+                  type: 'fade', 
+                  duration: 1000,
+                  transition: Trans.Quart.easeOut
+                });
               });
                             
               rgraph.onClick(node.id);
