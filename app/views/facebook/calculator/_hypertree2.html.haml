@@ -62,48 +62,15 @@
           //labels. This method is only triggered on label
           //creation
           onCreateLabel: function(domElement, node){
-              domElement.innerHTML = node.name;
-              addEvent(domElement, 'click', function () {
-                  
-                  //st.onClick(node.id);
-                  // Log.write("node:" + node.id);
-                  $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id, function(data) {
-                  alert("done");
-                    var json = data;
-                    
-                    // ht.op.sum(json, {
-                    //     type: 'replot'
-                    // });
-                    
-                    // rgraph.op.sum(json, {  
-                    //     type: 'fade:seq',
-                    //     duration: 1000,
-                    //     onComplete: function() { 
-                    //       console.log("done");
-                    //     }
-                    // });
-                    
-                    console.log("a");
-                    
-                    rgraph.op.morph(data, { 
-                      type: 'fade', 
-                      duration: 1000, 
-                      hideLabels: false, 
-                      transition: Trans.Quart.easeOut,
-                      
-                      onComplete: function() {
-                        console.log("done");
-                      }
-                    });
-                    
-                    console.log("b");
-                    
-                    rgraph.refresh();
-                    rgraph.controller.onAfterCompute();
-                  });
-                  
-                  rgraph.onClick(node.id);
+            domElement.innerHTML = node.name;
+            addEvent(domElement, 'click', function () {
+              $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id, function(data) {
+                alert("done");
+                console.log("dasdas..");
               });
+                  
+              rgraph.onClick(node.id);
+            });
           },
           //Change node styles when labels are placed
           //or moved.
