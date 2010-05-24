@@ -65,10 +65,11 @@
             domElement.innerHTML = node.name;
             addEvent(domElement, 'click', function () {
               alert("done");
-              $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id, function(data) {
-                console.log("dasdas..");
-              });
               
+              $.get('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id, function(data) {
+                alert("Data Loaded: " + data);
+              });
+                            
               rgraph.onClick(node.id);
             });
           },
