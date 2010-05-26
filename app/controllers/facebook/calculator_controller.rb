@@ -117,7 +117,7 @@ ROOTJSON
       'name' : 'child',
       'children' : [],
       'data' : {
-        '$aw'' : 5,
+        '$aw' : 5,
         '$color' : '#f55'
       }
     }
