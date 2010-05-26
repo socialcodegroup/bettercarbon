@@ -335,7 +335,7 @@ ROOTJSON
     if request.post?
     #   redirect_to('/bettercarbon/invites/new')
       begin
-        facebook_session.user.publish_activity({ :message => '{actor} calculated their footprint on Better Carbon.', :action_link => { :text => 'Calculate your footprint', :href => 'http://apps.facebook.com/bettercarbon/' }})
+        facebook_session.user.publish_activity({ :message => '{*actor*} calculated their footprint on Better Carbon.', :action_link => { :text => 'Calculate your footprint', :href => 'http://apps.facebook.com/bettercarbon/' }})
         FacebookerPublisher.deliver_news_feed(facebook_session.user, " Better Carbon Calculator", " Calculated their footprint on Better Carbon, calculate your own footprint here.")
         FootprintPublisher.deliver_calculate_feed(facebook_session)
       rescue Exception => e
