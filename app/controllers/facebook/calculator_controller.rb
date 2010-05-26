@@ -18,13 +18,19 @@ class Facebook::CalculatorController < ApplicationController
   def hypertree_subtree
     params[:calculator_profile] ||= {}
     
-    @facebook_session = Facebooker::Session.create
-    @facebook_session.secure_with!(params[:fb_sig_session_key], params[:fb_sig_user], 1.hour.from_now)
-    
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
-    @calculator_result = CarbonCalculator.process(@calculator_input)
+    # @facebook_session = Facebooker::Session.create
+    # @facebook_session.secure_with!(params[:fb_sig_session_key], params[:fb_sig_user], 1.hour.from_now)
+    # 
+    # @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+    # @calculator_result = CarbonCalculator.process(@calculator_input)
     
     if @facebook_session.user.uid.to_i == params[:node].to_i
+      @facebook_session = Facebooker::Session.create
+      @facebook_session.secure_with!(params[:fb_sig_session_key], params[:fb_sig_user], 1.hour.from_now)
+
+      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+      @calculator_result = CarbonCalculator.process(@calculator_input)
+      
       # lookup footprint of friends (who have calculated their footprint)
       @friends_with_app = @facebook_session.user.friends_with_this_app
 
@@ -53,21 +59,6 @@ class Facebook::CalculatorController < ApplicationController
       @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
         
       @friends_footprints_json = @friends_footprints_json.join(',')
-        # #{sprintf('%.2f', friend_footprint[:footprint])}
-
-    # friend=<<FRIEND
-    #   {
-    #     'id' : '#{friend_footprint[:friend].uid}',
-    #     'name' : '#{friend_footprint[:friend].name}',
-    #     'children' : [],
-    #     'data' : {
-    #       '$aw' : 20,
-    #       '$color' : '#f55'
-    #     }
-    #   }
-    # FRIEND
-      # }.join(',')
-      
       root_json=<<ROOTJSON
 {
   "id": "#{@facebook_session.user.uid}",
@@ -82,6 +73,13 @@ ROOTJSON
       
       render :text => root_json
     elsif params[:node].to_i != -1
+      @facebook_session = Facebooker::Session.create
+      @facebook_session.secure_with!(params[:fb_sig_session_key], params[:node].to_i, 1.hour.from_now)
+
+      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+      @calculator_result = CarbonCalculator.process(@calculator_input)
+      
+      # lookup footprint of friends (who have calculated their footprint)
       @friends_with_app = @facebook_session.user.friends_with_this_app
 
       @friends_footprints = @friends_with_app.collect { |friend|
@@ -101,62 +99,26 @@ ROOTJSON
       footprints = footprints + [@calculator_result.total_footprint]
 
       @max = footprints.max
-      
-      
-      friend_footprint = @friends_footprints.find{|ff| ff[:friend].uid.to_i == params[:node].to_i }
-      
-      fb_average_footprint = Query.sum(:algorithmic_footprint, :conditions => ['facebook_uid is not null']) / Query.count(:all, :conditions => ['facebook_uid is not null'])
-      bettercarbon_average_footprint = Query.sum(:algorithmic_footprint) / Query.count(:all)
-      world_average_footprint = 5
-      
+
+      @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
+        "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}', 'children' : []}"}
+
+
+      @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
+
+      @friends_footprints_json = @friends_footprints_json.join(',')
       root_json=<<ROOTJSON
 {
-  'data' : {
-    '$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}',
-    '$dim' : #{friend_footprint[:footprint].to_i/1.5}
-  },
-  'id' : '#{params[:node].to_i}',
-  'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}',
-  'children' : [
-    {
-      "id": "#{@facebook_session.user.uid}",
-      "name": "You",
-      "children": [],
-      "data": {
-        '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
-        '$color' : '#{CalcMath::number_to_intensity(@calculator_result.total_footprint, 0, @max)}'
-      }
-    },
-    {
-      'id' : '-1_fb_avg',
-      'name' : 'Facebook Average Footprint - #{sprintf('%.2f', fb_average_footprint)}',
-      'children' : [],
-      'data' : {
-        '$color' : '#{CalcMath::number_to_intensity(fb_average_footprint, 0, @max)}',
-        '$dim' : #{fb_average_footprint.to_i/1.5}
-      }
-    },
-    {
-      'id' : '-1_bettercarbon_avg',
-      'name' : 'Better Carbon Avg Footprint - #{sprintf('%.2f', bettercarbon_average_footprint)}',
-      'children' : [],
-      'data' : {
-        '$color' : '#{CalcMath::number_to_intensity(bettercarbon_average_footprint, 0, @max)}',
-        '$dim' : #{bettercarbon_average_footprint.to_i/1.5}
-      }
-    },
-    {
-      'id' : '-1_world_avg',
-      'name' : 'World Avg Footprint - #{sprintf('%.2f', world_average_footprint)}',
-      'children' : [],
-      'data' : {
-        '$color' : '#{CalcMath::number_to_intensity(world_average_footprint, 0, @max)}',
-        '$dim' : #{world_average_footprint.to_i/1.5}
-      }
-    }
-  ]
+  "id": "#{@facebook_session.user.uid}",
+  "name": '#{@facebook_session.user.name}',
+  "children": [#{@friends_footprints_json}],
+  "data": {
+    '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
+    '$color' : '#{CalcMath::number_to_intensity(@calculator_result.total_footprint, 0, @max)}'
+  }
 }
 ROOTJSON
+
       render :text => root_json
     else
       render :nothing => true
