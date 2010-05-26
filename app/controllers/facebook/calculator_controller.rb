@@ -335,6 +335,7 @@ ROOTJSON
     if request.post?
     #   redirect_to('/bettercarbon/invites/new')
       begin
+        FacebookerPublisher.deliver_news_feed(facebook_session.user, " Better Carbon Calculator", " Calculated their footprint on Better Carbon, calculate your own footprint here.")
         FootprintPublisher.deliver_calculate_feed(facebook_session)
       rescue Exception => e
         RAILS_DEFAULT_LOGGER.error e

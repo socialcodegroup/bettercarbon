@@ -1,6 +1,7 @@
 class FootprintPublisher < Facebooker::Rails::Publisher
   helper :application
 
+  # add footprint # here
   def calculate_feed_template
     calculate_back = link_to("Calculate your footprint!", 'calculator')
     # one_line_story_template "{*actor*} {*result*} {*defender*} with a {*move*}. #{attack_back}"
