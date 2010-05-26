@@ -78,10 +78,10 @@
               style.cursor = 'pointer';
               
               if (node._depth <= 1) {
-                  style.fontSize = "0.5em";
+                  style.fontSize = "0.6em";
                   style.color = "#ffffff";
               } else if(node._depth == 2){
-                  style.fontSize = "0.4em";
+                  style.fontSize = "0.5em";
                   style.color = "#ffffff";
               }
 
@@ -94,16 +94,21 @@
           requestGraph: function(node_id) {
             var that = this, id = node_id;
             
-            $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
-              rgraph.op.morph(data, {
-                'id': id,
-                type: 'fade',
-                duration:2000,
-                hideLabels:true,
-                onComplete: function() {
-                }
+            if (node_id == "-2") {
+              parent.location.href='/bettercarbon/invites/new' 
+            }
+            else {
+              $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
+                rgraph.op.morph(data, {
+                  'id': id,
+                  type: 'fade',
+                  duration:2000,
+                  hideLabels:true,
+                  onComplete: function() {
+                  }
+                });
               });
-            });
+            }
           },
           
           onBeforeCompute: function(node) {

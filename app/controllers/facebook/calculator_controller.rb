@@ -126,7 +126,7 @@ ROOTJSON
     },
     {
       'id' : '-1_fb_avg',
-      'name' : 'Facebook Users Average Footprint',
+      'name' : 'Facebook Average Footprint',
       'children' : [],
       'data' : {
         '$color' : '#{CalcMath::number_to_intensity(fb_average_footprint, 0, @max)}',
@@ -135,7 +135,7 @@ ROOTJSON
     },
     {
       'id' : '-1_bettercarbon_avg',
-      'name' : 'Better Carbon Users Average Footprint',
+      'name' : 'Better Carbon Avg Footprint',
       'children' : [],
       'data' : {
         '$color' : '#{CalcMath::number_to_intensity(bettercarbon_average_footprint, 0, @max)}',
@@ -144,7 +144,7 @@ ROOTJSON
     },
     {
       'id' : '-1_world_avg',
-      'name' : 'World Average Footprint',
+      'name' : 'World Avg Footprint',
       'children' : [],
       'data' : {
         '$color' : '#{CalcMath::number_to_intensity(world_average_footprint, 0, @max)}',
@@ -224,7 +224,11 @@ ROOTJSON
   #     }
   #   }
   # FRIEND
-    }.join(',')
+    }
+    
+    @friends_footprints_json << "{'data' : {'$color' : '#ffa500'}', '$dim' : 10},  'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
+    
+    @friends_footprints_json = @friends_footprints_json.join(',')
     
     render :layout => false
   end
