@@ -52,7 +52,7 @@ class Facebook::CalculatorController < ApplicationController
         "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}', 'children' : []}"}
         
         
-      @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 10}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
+      @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
         
       @friends_footprints_json = @friends_footprints_json.join(',')
         # #{sprintf('%.2f', friend_footprint[:footprint])}
@@ -231,7 +231,7 @@ ROOTJSON
   # FRIEND
     }
     
-    @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 10}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
+    @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
     
     @friends_footprints_json = @friends_footprints_json.join(',')
     
