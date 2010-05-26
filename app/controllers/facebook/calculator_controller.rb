@@ -49,7 +49,12 @@ class Facebook::CalculatorController < ApplicationController
       @max = footprints.max
 
       @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
-        "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}', 'children' : []}"
+        "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}', 'children' : []}"}
+        
+        
+      @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 10}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
+        
+      @friends_footprints_json = @friends_footprints_json.join(',')
         # #{sprintf('%.2f', friend_footprint[:footprint])}
 
     # friend=<<FRIEND
@@ -63,7 +68,7 @@ class Facebook::CalculatorController < ApplicationController
     #     }
     #   }
     # FRIEND
-      }.join(',')
+      # }.join(',')
       
       root_json=<<ROOTJSON
 {
@@ -244,6 +249,17 @@ ROOTJSON
     @inputs_set2 = possible_inputs_set2.sort_by{rand}[0..1]
 
     @all_allowed_inputs = @inputs_set1 + @inputs_set2
+    
+    respond_to do |format|
+      format.fbml
+    end
+  end
+  
+  def calculate_full
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+    @calculator_result = CarbonCalculator.process(@calculator_input)
+    
+    @all_inputs_are_allowed = true
     
     respond_to do |format|
       format.fbml

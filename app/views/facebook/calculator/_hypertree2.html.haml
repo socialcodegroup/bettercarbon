@@ -66,8 +66,8 @@
             domElement.innerHTML = node.name;
             
             addEvent(domElement, 'click', function() {
-              self.requestGraph(node.id);
               rgraph.onClick(node.id);
+              self.requestGraph(node.id);
             });
           },
           //Change node styles when labels are placed
@@ -95,7 +95,7 @@
             var that = this, id = node_id;
             
             if (node_id == "-2") {
-              parent.location.href='/bettercarbon/invites/new' 
+              parent.location.href='http://apps.facebook.com/bettercarbon/invites/new' 
             }
             else {
               $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {

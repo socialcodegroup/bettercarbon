@@ -2,6 +2,7 @@
   = fb_tab_item "Friend Graph", '?view=fg', :selected => params['view'].blank? || params['view'] == 'fg'
   = fb_tab_item "Bar Graph", '?view=bg', :selected => params['view'] == 'bg'
   = fb_tab_item "Footprint Breakdown", '?view=fb', :selected => params['view'] == 'fb'
+  = fb_tab_item "Refine Variables", '/bettercarbon/calculator/calculate_full', :align => "right"
   = fb_tab_item "Invite Friends", '/bettercarbon/invites/new', :align => "right"
   = fb_tab_item "Help &amp; Feedback", fb_about_url, :align => "right"
 
