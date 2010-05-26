@@ -41,6 +41,9 @@
       style.marginLeft = style.marginTop = "25px";
       //init Hypertree
       var rgraph = new RGraph(canvas, {
+          clickedNodeId: "",
+          clickedNodeName: "",
+          
           //Change node and edge styles such as
           //color, width and dimensions.
           
@@ -87,7 +90,30 @@
           
           requestGraph: function() {
             var that = this, id = this.clickedNodeId;
-            alert("ok");
+            
+            $.ajax({
+              url: '#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + this.clickedNodeId,
+              dataType: 'json',
+              success: function(data) {
+                GraphOp.morph(rgraph, data, {
+                  'id': id,
+                  'type': 'fade',
+                  'duration':2000,
+                  hideLabels:true,
+                  onComplete: function() {
+                    that.getDescription();              
+                  },
+
+                  onAfterCompute: $empty,
+                  onBeforeCompute: $empty
+                });
+              }
+            });
+          },
+          
+          onBeforeCompute: function(node) {
+            this.clickedNodeId = node.id;
+            this.clickedNodeName = node.name;
           },
           
           onAfterCompute: function(){
