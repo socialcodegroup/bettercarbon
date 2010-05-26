@@ -64,10 +64,9 @@
           onCreateLabel: function(domElement, node){
             domElement.innerHTML = node.name;
             addEvent(domElement, 'click', function () {
-              rgraph.onClick(node.id);
-              
               addEvent(domElement, 'click', function () {
                 this.requestGraph(node.id);
+                rgraph.onClick(node.id);
               });
             });
           },
@@ -92,8 +91,8 @@
               style.left = (left - (w / 2)) + 'px';
           },
           
-          requestGraph: function(clickedNodeId) {
-            var that = this, id = clickedNodeId;
+          requestGraph: function(node_id) {
+            var that = this, id = node_id;
             
             $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
               rgraph.op.morph(data, {
@@ -111,10 +110,6 @@
             this.clickedNodeId = node.id;
             this.clickedNodeName = node.name;
           },
-          
-          onAfterCompute: function(){
-            this.requestGraph();
-          }
       });
 
       //load JSON data.
