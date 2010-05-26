@@ -226,7 +226,7 @@ ROOTJSON
   # FRIEND
     }
     
-    @friends_footprints_json << "{'data' : {'$color' : '#ffa500'}', '$dim' : 10},  'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
+    @friends_footprints_json << "{'data' : {'$color' : '#ffa500'', '$dim' : 10}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
     
     @friends_footprints_json = @friends_footprints_json.join(',')
     
