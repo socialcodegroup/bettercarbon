@@ -63,11 +63,9 @@
           //creation
           onCreateLabel: function(domElement, node){
             domElement.innerHTML = node.name;
-            addEvent(domElement, 'click', function () {
-              addEvent(domElement, 'click', function () {
-                this.requestGraph(node.id);
-                rgraph.onClick(node.id);
-              });
+            addEvent(domElement, 'click', function() {
+              rgraph.requestGraph(node.id);
+              rgraph.onClick(node.id);
             });
           },
           //Change node styles when labels are placed
