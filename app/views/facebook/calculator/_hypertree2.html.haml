@@ -55,25 +55,12 @@
               color: "#088"
           },
           
-          onBeforeCompute: function(node){
-              Log.write("centering");
-          },
           //Attach event handlers and add text to the
           //labels. This method is only triggered on label
           //creation
           onCreateLabel: function(domElement, node){
             domElement.innerHTML = node.name;
             addEvent(domElement, 'click', function () {
-              alert("ok");
-              
-              $.ajax({
-                url: '#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key])}' + '&node=' + node.id,
-                dataType: 'json',
-                success: function(data) {
-                  alert("okay");
-                }
-              });
-                            
               rgraph.onClick(node.id);
             });
           },
@@ -97,9 +84,14 @@
               var w = domElement.offsetWidth;
               style.left = (left - (w / 2)) + 'px';
           },
-
+          
+          requestGraph: function() {
+            var that = this, id = this.clickedNodeId;
+            alert("ok");
+          },
+          
           onAfterCompute: function(){
-              Log.write("done");
+            this.requestGraph();
           }
       });
 
