@@ -78,7 +78,7 @@ class Facebook::CalculatorController < ApplicationController
 ROOTJSON
       
       render :text => root_json
-    else
+    elsif params[:node].to_i != -1
       @friends_with_app = @facebook_session.user.friends_with_this_app
 
       @friends_footprints = @friends_with_app.collect { |friend|
@@ -102,6 +102,9 @@ ROOTJSON
       
       friend_footprint = @friends_footprints.find{|ff| ff[:friend].uid.to_i == params[:node].to_i }
       
+      fb_average_footprint = Query.sum(:algorithmic_footprint, :conditions => ['facebook_uid is not null']) / Query.count(:all, :conditions => ['facebook_uid is not null'])
+      bettercarbon_average_footprint = Query.sum(:algorithmic_footprint) / Query.count(:all)
+      world_average_footprint = 5
       
       root_json=<<ROOTJSON
 {
@@ -122,18 +125,38 @@ ROOTJSON
       }
     },
     {
-      'id' : '33',
-      'name' : 'child',
+      'id' : '-1_fb_avg',
+      'name' : 'Facebook Users Average Footprint',
       'children' : [],
       'data' : {
-        '$aw' : 5,
-        '$color' : '#f55'
+        '$color' : '#{CalcMath::number_to_intensity(fb_average_footprint, 0, @max)}',
+        '$dim' : #{fb_average_footprint.to_i/1.5}
+      }
+    },
+    {
+      'id' : '-1_bettercarbon_avg',
+      'name' : 'Better Carbon Users Average Footprint',
+      'children' : [],
+      'data' : {
+        '$color' : '#{CalcMath::number_to_intensity(bettercarbon_average_footprint, 0, @max)}',
+        '$dim' : #{bettercarbon_average_footprint.to_i/1.5}
+      }
+    },
+    {
+      'id' : '-1_world_avg',
+      'name' : 'World Average Footprint',
+      'children' : [],
+      'data' : {
+        '$color' : '#{CalcMath::number_to_intensity(world_average_footprint, 0, @max)}',
+        '$dim' : #{world_average_footprint.to_i/1.5}
       }
     }
   ]
 }
 ROOTJSON
       render :text => root_json
+    else
+      render :nothing => true
     end
   end
   
