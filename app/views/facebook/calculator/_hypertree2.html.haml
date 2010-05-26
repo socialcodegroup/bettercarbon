@@ -91,21 +91,17 @@
           requestGraph: function() {
             var that = this, id = this.clickedNodeId;
             
-            $.ajax({
-              url: '#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id,
-              dataType: 'json',
-              success: function(data) {
-                alert(data);
-                GraphOp.morph(rgraph, data, {
-                  'id': id,
-                  'type': 'fade',
-                  'duration':2000,
-                  hideLabels:true,
-                  onComplete: function() {
-                    alert("done");
-                  }
-                });
-              }
+            $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
+              alert(data);
+              GraphOp.morph(rgraph, data, {
+                'id': id,
+                'type': 'fade',
+                'duration':2000,
+                hideLabels:true,
+                onComplete: function() {
+                  alert("done");
+                }
+              });
             });
           },
           
