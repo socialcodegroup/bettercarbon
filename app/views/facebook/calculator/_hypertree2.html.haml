@@ -66,8 +66,9 @@
             domElement.innerHTML = node.name;
             
             addEvent(domElement, 'click', function() {
-              rgraph.onClick(node.id);
-              self.requestGraph(node.id);
+              self.requestGraph(node.id, function() {
+                rgraph.onClick(node.id);
+              });
             });
           },
           //Change node styles when labels are placed
@@ -91,7 +92,7 @@
               style.left = (left - (w / 2)) + 'px';
           },
           
-          requestGraph: function(node_id) {
+          requestGraph: function(node_id, onSuccess) {
             var that = this, id = node_id;
             
             if (node_id == "-2") {
@@ -105,6 +106,7 @@
                   duration:2000,
                   hideLabels:true,
                   onComplete: function() {
+                    onSuccess();
                   }
                 });
               });
