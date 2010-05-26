@@ -131,7 +131,7 @@ ROOTJSON
     },
     {
       'id' : '-1_fb_avg',
-      'name' : 'Facebook Average Footprint',
+      'name' : 'Facebook Average Footprint - #{sprintf('%.2f', fb_average_footprint)}',
       'children' : [],
       'data' : {
         '$color' : '#{CalcMath::number_to_intensity(fb_average_footprint, 0, @max)}',
@@ -140,7 +140,7 @@ ROOTJSON
     },
     {
       'id' : '-1_bettercarbon_avg',
-      'name' : 'Better Carbon Avg Footprint',
+      'name' : 'Better Carbon Avg Footprint - #{sprintf('%.2f', bettercarbon_average_footprint)}',
       'children' : [],
       'data' : {
         '$color' : '#{CalcMath::number_to_intensity(bettercarbon_average_footprint, 0, @max)}',
@@ -149,7 +149,7 @@ ROOTJSON
     },
     {
       'id' : '-1_world_avg',
-      'name' : 'World Avg Footprint',
+      'name' : 'World Avg Footprint - #{sprintf('%.2f', world_average_footprint)}',
       'children' : [],
       'data' : {
         '$color' : '#{CalcMath::number_to_intensity(world_average_footprint, 0, @max)}',
