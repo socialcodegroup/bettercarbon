@@ -1,4 +1,4 @@
-#infovis{:style => 'height:350px;'}
+#infovis{:style => 'height:500px;background-color:#000000;'}
 
 :javascript
   var Log = {
@@ -78,11 +78,11 @@
               style.cursor = 'pointer';
               
               if (node._depth <= 1) {
-                  style.fontSize = "0.7em";
-                  style.color = "#000000";
-              } else if(node._depth == 2){
                   style.fontSize = "0.5em";
-                  style.color = "#000000";
+                  style.color = "#ffffff";
+              } else if(node._depth == 2){
+                  style.fontSize = "0.4em";
+                  style.color = "#ffffff";
               }
 
               var left = parseInt(style.left);
