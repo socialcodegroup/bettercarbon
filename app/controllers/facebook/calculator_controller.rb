@@ -113,6 +113,15 @@ ROOTJSON
   'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}',
   'children' : [
     {
+      "id": "#{@facebook_session.user.uid}",
+      "name": "You",
+      "children": [],
+      "data": {
+        '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
+        '$color' : '#{CalcMath::number_to_intensity(@calculator_result.total_footprint, 0, @max)}'
+      }
+    },
+    {
       'id' : '33',
       'name' : 'child',
       'children' : [],
