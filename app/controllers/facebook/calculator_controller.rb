@@ -19,11 +19,16 @@ class Facebook::CalculatorController < ApplicationController
     @facebook_session = Facebooker::Session.create
     @facebook_session.secure_with!(params[:fb_sig_session_key], params[:fb_sig_user], 1.hour.from_now)
     
-    @friends_with_app = @facebook_session.user.friends_with_this_app
-    friend = @friends_with_app.select { |friend| friend.uid == params[:node].to_i }.first
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => friend)
+    if params[:node].to_i == @facebook_session.user.uid
+      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+    else
+      @friends_with_app = @facebook_session.user.friends_with_this_app
+      friend = @friends_with_app.select { |friend| friend.uid == params[:node].to_i }.first
+      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => friend)
+    end
+    
     @calculator_result = CarbonCalculator.process(@calculator_input)
-    render(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => @calculator_result})
+    render(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => @calculator_result, :user => user})
   end
   
   def overview

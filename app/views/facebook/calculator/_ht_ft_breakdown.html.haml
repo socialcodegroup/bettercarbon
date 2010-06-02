@@ -1,4 +1,28 @@
-%h4= "Breakdown:"
+%style{:type => "text/css", :media => "screen"}
+  :plain
+    #footprint-breakdown {
+      font-family: "verdana";
+      background-color: #eeeeee;
+      padding: 10px;
+    }
+    
+    #footprint-breakdown h4 {
+      margin: 0;
+      padding: 0;
+      :font-size 16px;
+    }
+    
+    #footprint-breakdown ul {
+      font-size:14px;
+      margin:0;
+      padding:0 0 0 15px;
+    }
+    
+    #footprint-breakdown ul li {
+      padding: 3px 0;
+    }
+    
+%h4= "#{@calculator_input.fb_user.name}'s Footprint Breakdown"
 %ul
   - cr_for_breakdown.per_module_results.collect do |k, v|
     %li= "#{k.pretty_module_name}: #{v[:footprint]}"
