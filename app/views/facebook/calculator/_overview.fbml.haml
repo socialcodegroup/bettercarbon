@@ -1,0 +1,5 @@
+= render(:partial => 'facebook/calculator/tab_bar')
+
+%h2{:style => 'font-size:16px; margin: 10px 0;'}= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C02/year"
+
+%p Now that you've calculated your carbon footprint you can compare yourself to your friends. You can also view a breakdown of your footprint here.
