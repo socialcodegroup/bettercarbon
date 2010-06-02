@@ -9,11 +9,13 @@ class Facebook::InvitesController < ApplicationController
   layout "facebook"
   
   def index
-    redirect_to('/bettercarbon/calculator/overview')
+    redirect_to('/bettercarbon/calculator/graph')
   end
   
   def new
     @from_user_id = facebook_session.user.to_s
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => facebook_session.user)
+    @calculator_result = CarbonCalculator.process(@calculator_input)
   end
   
   def create
@@ -28,7 +30,7 @@ class Facebook::InvitesController < ApplicationController
     
     # facebook_session.send_notification(@sent_to_ids, message)
     
-    redirect_to('/bettercarbon/calculator/overview')
+    redirect_to('/bettercarbon/calculator/graph')
   end
   
   # def select
