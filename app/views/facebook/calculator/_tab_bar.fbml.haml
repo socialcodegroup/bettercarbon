@@ -1,6 +1,6 @@
 - fb_tabs do
-  = fb_tab_item "Friend Graph", '?view=fg', :selected => params['view'].blank? || params['view'] == 'fg'
-  = fb_tab_item "Footprint Breakdown", '?view=fb', :selected => params['view'] == 'fb'
+  = fb_tab_item "Friend Graph", '/calculator/do_refine?view=fg', :selected => params[:controller] == 'calculator' && (params['view'].blank? || params['view'] == 'fg')
+  = fb_tab_item "Footprint Breakdown", '/calculator/do_refine?view=fb', :selected => params['view'] == 'fb'
   = fb_tab_item "Refine Variables", '/bettercarbon/calculator/calculate_full', :align => "right", :selected => params[:action] == 'calculate_full'
   = fb_tab_item "Invite Friends", '/bettercarbon/invites/new', :align => "right", :selected => params[:controller] == 'invites'
   = fb_tab_item "Help &amp; Feedback", fb_about_url, :align => "right"
