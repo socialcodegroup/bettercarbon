@@ -115,10 +115,10 @@
                     onSuccess();
                   }
                 });
+                $('#footprint-breakdown').slideUp('slow');
+                $('#footprint-breakdown').html(data.breakdown);
+                $('#footprint-breakdown').slideDown('slow');
               });
-              $('#footprint-breakdown').slideUp('slow');
-              $('#footprint-breakdown').html(data.breakdown);
-              $('#footprint-breakdown').slideDown('slow');
             }
           },
           
