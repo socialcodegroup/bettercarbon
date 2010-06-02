@@ -177,7 +177,7 @@ ROOTJSON
     '$color' : '#{CalcMath::number_to_intensity(@calculator_result.total_footprint, 0, @max)}'
   }
   },
-  breakdown: "#{render_to_string(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => cr_for_breakdown})}"
+  breakdown: ""
 }
 ROOTJSON
 
