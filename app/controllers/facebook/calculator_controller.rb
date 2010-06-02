@@ -129,7 +129,7 @@ ROOTJSON
       @friend = @root_friends_with_app.select { |friend| friend.uid == params[:node].to_i }.first
       
       # lookup footprint of friends (who have calculated their footprint)
-      @friends_with_app = @friend.friends.select{|f|@root_friends_with_app_ids.include?(f.uid)}
+      @friends_with_app = @friend.friends.select{|f|@root_friends_with_app_ids.include?(f.uid) || f.uid == @facebook_session.user.uid}
 
       @friends_footprints = @friends_with_app.collect { |friend|
         query = Query.find_by_facebook_uid(friend.uid)
