@@ -1,3 +1,4 @@
+%h4= "Breakdown:"
 %ul
   - cr_for_breakdown.per_module_results.collect do |k, v|
     %li= "#{k.pretty_module_name}: #{v[:footprint]}"

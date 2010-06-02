@@ -106,6 +106,12 @@
             }
             else {
               $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
+                $.get('#{url_for(:controller => 'facebook/calculator', :action => 'ht_breakdown', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
+                  $('#footprint-breakdown').slideUp('slow');
+                  $('#footprint-breakdown').html(data);
+                  $('#footprint-breakdown').slideDown('slow');
+                }
+              
                 rgraph.op.morph(data, {
                   'id': id,
                   type: 'fade',
