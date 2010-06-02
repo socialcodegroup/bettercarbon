@@ -126,7 +126,6 @@ class Modules::AirTravel
   def self.process_input(calculator_input, refined_params, reset = true)
     if calculator_input.user_input.send(REFINED_MODEL)
       if !reset
-        refined_params[:meat_fish_protein] ||= calculator_input.user_input.send(REFINED_MODEL).meat_fish_protein
         refined_params[:num_short_trips] ||= calculator_input.user_input.send(REFINED_MODEL).num_short_trips
         refined_params[:num_medium_trips] ||= calculator_input.user_input.send(REFINED_MODEL).num_medium_trips
         refined_params[:num_long_trips] ||= calculator_input.user_input.send(REFINED_MODEL).num_long_trips
