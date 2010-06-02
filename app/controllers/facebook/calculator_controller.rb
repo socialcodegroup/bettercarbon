@@ -119,8 +119,8 @@ ROOTJSON
       
       render :text => root_json
     elsif params[:node].to_i != -1
-      @facebook_session = Facebooker::Session.create
-      @facebook_session.secure_with!(params[:fb_sig_session_key], params[:node].to_i, 1.hour.from_now)
+      # @facebook_session = Facebooker::Session.create
+      # @facebook_session.secure_with!(params[:fb_sig_session_key], params[:node].to_i, 1.hour.from_now)
 
       @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
       @calculator_result = CarbonCalculator.process(@calculator_input)
