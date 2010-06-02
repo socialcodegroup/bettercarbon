@@ -21,14 +21,18 @@ class Facebook::CalculatorController < ApplicationController
     
     if params[:node].to_i == @facebook_session.user.uid
       @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+      compare_breakdown = nil
     else
       @friends_with_app = @facebook_session.user.friends_with_this_app
       friend = @friends_with_app.select { |friend| friend.uid == params[:node].to_i }.first
       @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => friend)
+      
+      @compare_calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+      compare_breakdown = CarbonCalculator.process(@compare_calculator_input)
     end
     
     @calculator_result = CarbonCalculator.process(@calculator_input)
-    render(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => @calculator_result})
+    render(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => @calculator_result, :compare_breakdown => compare_breakdown})
   end
   
   def overview
