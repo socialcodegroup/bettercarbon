@@ -165,8 +165,16 @@ class Modules::HomeEnergy
     }
   end
   
-  def self.process_input(calculator_input, refined_params)
+  def self.process_input(calculator_input, refined_params, reset = true)
     if calculator_input.user_input.send(REFINED_MODEL)
+      if !reset
+        refined_params[:electricity_costs] ||= calculator_input.user_input.send(REFINED_MODEL).electricity_costs
+        refined_params[:natural_gas_costs] ||= calculator_input.user_input.send(REFINED_MODEL).natural_gas_costs
+        refined_params[:other_fuel_costs] ||= calculator_input.user_input.send(REFINED_MODEL).other_fuel_costs
+        refined_params[:water_and_sewage_costs] ||= calculator_input.user_input.send(REFINED_MODEL).water_and_sewage_costs
+        refined_params[:square_feet_of_household] ||= calculator_input.user_input.send(REFINED_MODEL).square_feet_of_household
+      end
+      
       calculator_input.user_input.send(REFINED_MODEL).destroy
     end
     

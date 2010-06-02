@@ -153,8 +153,16 @@ class Modules::Transportation
     }
   end
   
-  def self.process_input(calculator_input, refined_params)
+  def self.process_input(calculator_input, refined_params, reset = true)
     if calculator_input.user_input.send(REFINED_MODEL)
+      if !reset
+        refined_params[:miles_driven] ||= calculator_input.user_input.send(REFINED_MODEL).miles_driven
+        refined_params[:mpg] ||= calculator_input.user_input.send(REFINED_MODEL).mpg
+        refined_params[:fuel_type] ||= calculator_input.user_input.send(REFINED_MODEL).fuel_type
+        refined_params[:vehicle_size] ||= calculator_input.user_input.send(REFINED_MODEL).vehicle_size
+        refined_params[:miles_public_transport] ||= calculator_input.user_input.send(REFINED_MODEL).miles_public_transport
+      end
+      
       calculator_input.user_input.send(REFINED_MODEL).destroy
     end
     

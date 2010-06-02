@@ -302,7 +302,7 @@ ROOTJSON
     
     stripped_values.each do |mod, values|
       mod = CarbonCalculator.modules.select{|c|c.to_s.gsub(':', '') == mod}.first
-      mod.process_input(@calculator_input, values)
+      mod.process_input(@calculator_input, values, !params[:freset].blank?)
     end
     
     @calculator_input.destroy_cache

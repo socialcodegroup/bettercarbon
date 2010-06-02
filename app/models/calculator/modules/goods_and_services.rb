@@ -119,8 +119,15 @@ class Modules::GoodsAndServices
     }
   end
   
-  def self.process_input(calculator_input, refined_params)
+  def self.process_input(calculator_input, refined_params, reset = true)
     if calculator_input.user_input.send(REFINED_MODEL)
+      if !reset
+        refined_params[:clothing] ||= calculator_input.user_input.send(REFINED_MODEL).clothing
+        refined_params[:furnishings] ||= calculator_input.user_input.send(REFINED_MODEL).furnishings
+        refined_params[:other_goods] ||= calculator_input.user_input.send(REFINED_MODEL).other_goods
+        refined_params[:services] ||= calculator_input.user_input.send(REFINED_MODEL).services
+      end
+      
       calculator_input.user_input.send(REFINED_MODEL).destroy
     end
     
