@@ -106,7 +106,7 @@
             }
             else {
               $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
-                rgraph.op.morph(data, {
+                rgraph.op.morph(data.graph, {
                   'id': id,
                   type: 'fade',
                   duration: 2000,

@@ -103,10 +103,12 @@ class Facebook::CalculatorController < ApplicationController
         
         
       @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
-        
+      
+      cr_for_breakdown = @calculator_result
       @friends_footprints_json = @friends_footprints_json.join(',')
       root_json=<<ROOTJSON
 {
+  graph: {
   "id": "#{@facebook_session.user.uid}",
   "name": "#{@facebook_session.user.name} - #{@calculator_result.total_footprint.to_i}",
   "children": [#{@friends_footprints_json}],
@@ -114,6 +116,8 @@ class Facebook::CalculatorController < ApplicationController
     '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
     '$color' : '#{CalcMath::number_to_intensity(@calculator_result.total_footprint, 0, @max)}'
   }
+  },
+  breakdown: "#{render_to_string(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => cr_for_breakdown})}"
 }
 ROOTJSON
       
@@ -151,10 +155,15 @@ ROOTJSON
 
 
       @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
+      
+      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+      @calculator_result = CarbonCalculator.process(@calculator_input)
 
+      cr_for_breakdown = @calculator_result
       @friends_footprints_json = @friends_footprints_json.join(',')
       root_json=<<ROOTJSON
 {
+  graph: {
   "id": "#{@facebook_session.user.uid}",
   "name": "#{@facebook_session.user.name} - #{@calculator_result.total_footprint.to_i}",
   "children": [#{@friends_footprints_json}],
@@ -162,6 +171,8 @@ ROOTJSON
     '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
     '$color' : '#{CalcMath::number_to_intensity(@calculator_result.total_footprint, 0, @max)}'
   }
+  },
+  breakdown: "#{render_to_string(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => cr_for_breakdown})}"
 }
 ROOTJSON
 
