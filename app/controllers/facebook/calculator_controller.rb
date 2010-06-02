@@ -121,14 +121,15 @@ ROOTJSON
       
       render :text => root_json
     elsif params[:node].to_i != -1
-      # @facebook_session = Facebooker::Session.create
-      # @facebook_session.secure_with!(params[:fb_sig_session_key], params[:node].to_i, 1.hour.from_now)
-
       @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
       @calculator_result = CarbonCalculator.process(@calculator_input)
-
+      
+      @root_friends_with_app = @facebook_session.user.friends_with_this_app
+      @root_friends_with_app_ids = @facebook_session.user.friends_with_this_app.collect{|f| f.uid }
+      @friend = @root_friends_with_app.select { |friend| friend.uid == params[:node].to_i }.first
+      
       # lookup footprint of friends (who have calculated their footprint)
-      @friends_with_app = @facebook_session.user.friends_with_this_app
+      @friends_with_app = @friend.friends_with_this_app
 
       @friends_footprints = @friends_with_app.collect { |friend|
         query = Query.find_by_facebook_uid(friend.uid)
@@ -157,8 +158,8 @@ ROOTJSON
       @friends_footprints_json = @friends_footprints_json.join(',')
       root_json=<<ROOTJSON
 {
-  "id": "#{@facebook_session.user.uid}",
-  "name": '#{@facebook_session.user.name}',
+  "id": "#{@friend.uid}",
+  "name": '#{@friend.name}',
   "children": [#{@friends_footprints_json}],
   "data": {
     '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
