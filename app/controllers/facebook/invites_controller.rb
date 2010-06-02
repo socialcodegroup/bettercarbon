@@ -9,7 +9,7 @@ class Facebook::InvitesController < ApplicationController
   layout "facebook"
   
   def index
-    redirect_to('/bettercarbon/calculator/do_refine')
+    redirect_to('/bettercarbon/calculator/overview')
   end
   
   def new
@@ -28,7 +28,7 @@ class Facebook::InvitesController < ApplicationController
     
     # facebook_session.send_notification(@sent_to_ids, message)
     
-    redirect_to('/bettercarbon/calculator/do_refine')
+    redirect_to('/bettercarbon/calculator/overview')
   end
   
   # def select
