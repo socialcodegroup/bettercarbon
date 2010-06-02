@@ -22,7 +22,25 @@
       padding: 3px 0;
     }
     
-%h4= "#{@calculator_input.fb_user.name}'s Footprint Breakdown"
-%ul
-  - cr_for_breakdown.per_module_results.collect do |k, v|
-    %li= "#{k.pretty_module_name}: #{number_with_delimiter(number_with_precision(v[:footprint], :precision => 2))} tons of C02/year"
+    #footprint-breakdown .left
+      float: left
+      width: 250px;
+    
+    #footprint-breakdown .right
+      border-left: 1px solid #cccccc;
+      margin: 0 0 0 15px;
+      float: left
+      width: 250px;
+
+.left
+  %h4= "#{@calculator_input.fb_user.name}'s Footprint Breakdown"
+  %ul
+    - cr_for_breakdown.per_module_results.collect do |k, v|
+      %li= "#{k.pretty_module_name}: #{number_with_delimiter(number_with_precision(v[:footprint], :precision => 2))} tons of C02/year"
+
+- unless compare_breakdown.blank?
+.right
+  %h4= "#{@compare_calculator_input.fb_user.name}'s Footprint Breakdown"
+  %ul
+    - compare_breakdown.per_module_results.collect do |k, v|
+      %li= "#{k.pretty_module_name}: #{number_with_delimiter(number_with_precision(v[:footprint], :precision => 2))} tons of C02/year"
