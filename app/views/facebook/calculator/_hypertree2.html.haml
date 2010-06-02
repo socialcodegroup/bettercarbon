@@ -17,7 +17,7 @@
       //init data
       var json = {
           "id": "#{@facebook_session.user.uid}",
-          "name": "You",
+          "name": "#{@facebook_session.user.name} - #{@calculator_result.total_footprint.to_i}",
           "children": [#{@friends_footprints_json}],
           "data": {
             '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
