@@ -28,7 +28,7 @@ class Facebook::CalculatorController < ApplicationController
     end
     
     @calculator_result = CarbonCalculator.process(@calculator_input)
-    render(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => @calculator_result, :user => user})
+    render(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => @calculator_result})
   end
   
   def overview
