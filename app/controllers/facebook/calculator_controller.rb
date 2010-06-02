@@ -124,54 +124,7 @@ ROOTJSON
       # @facebook_session = Facebooker::Session.create
       # @facebook_session.secure_with!(params[:fb_sig_session_key], params[:node].to_i, 1.hour.from_now)
       
-      @root_friends_with_app = @facebook_session.user.friends_with_this_app
-      @root_friends_with_app_ids = @facebook_session.user.friends_with_this_app.collect{|f| f.uid }
-      
-      @friend = @root_friends_with_app.select { |friend| friend.uid == params[:node].to_i }.first
-      
-      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @friend)
-      @calculator_result = CarbonCalculator.process(@calculator_input)
-      
-      # lookup footprint of friends (who have calculated their footprint)
-      @friends_with_app = @friend.friends_with_this_app.select{|f| @root_friends_with_app_ids.include?(f.uid) }
-
-      @friends_footprints = @friends_with_app.collect { |friend|
-        query = Query.find_by_facebook_uid(friend.uid)
-
-        if query
-          {
-            :friend => friend,
-            :footprint => query.algorithmic_footprint
-          }
-        else
-          nil
-        end
-      }.compact
-
-      footprints = @friends_footprints.collect { |friend_footprint| friend_footprint[:footprint] }
-      footprints = footprints + [@calculator_result.total_footprint]
-
-      @max = footprints.max
-      
-      @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
-        "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{sprintf('%.2f', friend_footprint[:footprint])}', 'children' : []}"}
-
-
-      @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
-
-      @friends_footprints_json = @friends_footprints_json.join(',')
-      root_json=<<ROOTJSON
-{
-  "id": "#{@friend.uid}",
-  "name": '#{@friend.name}',
-  "children": [#{@friends_footprints_json}],
-  "data": {
-    '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
-    '$color' : '#{CalcMath::number_to_intensity(@calculator_result.total_footprint, 0, @max)}'
-  }
-}
-ROOTJSON
-      render :text => root_json
+      render :text => "done"
     else
       render :nothing => true
     end
