@@ -125,12 +125,17 @@ ROOTJSON
     elsif params[:node].to_i != -1
       # @facebook_session = Facebooker::Session.create
       # @facebook_session.secure_with!(params[:fb_sig_session_key], params[:node].to_i, 1.hour.from_now)
-
-      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+      
+      @root_friends_with_app = @facebook_session.user.friends_with_this_app
+      @root_friends_with_app_ids = @facebook_session.user.friends_with_this_app.collect{|f| f.uid }
+      
+      @friend = @root_friends_with_app.select { |friend| friend.uid == params[:node].to_i }
+      
+      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @friend)
       @calculator_result = CarbonCalculator.process(@calculator_input)
       
       # lookup footprint of friends (who have calculated their footprint)
-      @friends_with_app = @facebook_session.user.friends_with_this_app
+      @friends_with_app = @friend.friends_with_this_app.select{|f| @root_friends_with_app_ids.include?(f.uid) }
 
       @friends_footprints = @friends_with_app.collect { |friend|
         query = Query.find_by_facebook_uid(friend.uid)
@@ -156,7 +161,7 @@ ROOTJSON
 
       @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
       
-      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+      @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @friend)
       @calculator_result = CarbonCalculator.process(@calculator_input)
 
       cr_for_breakdown = @calculator_result
@@ -164,8 +169,8 @@ ROOTJSON
       root_json=<<ROOTJSON
 {
   graph: {
-  "id": "#{@facebook_session.user.uid}",
-  "name": "#{@facebook_session.user.name} - #{@calculator_result.total_footprint.to_i}",
+  "id": "#{@friend.uid}",
+  "name": "#{@friend.name} - #{@calculator_result.total_footprint.to_i}",
   "children": [#{@friends_footprints_json}],
   "data": {
     '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
