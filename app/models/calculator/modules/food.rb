@@ -148,7 +148,7 @@ class Modules::Food
   def self.process_input(calculator_input, refined_params, reset = true)
     if calculator_input.user_input.send(REFINED_MODEL)
       if !reset
-        refined_params[:meat_fish_protein] ||= calculator_input.user_input.send(REFINED_MODEL).clothing
+        refined_params[:meat_fish_protein] ||= calculator_input.user_input.send(REFINED_MODEL).meat_fish_protein
         refined_params[:cereals_bakery_products] ||= calculator_input.user_input.send(REFINED_MODEL).cereals_bakery_products
         refined_params[:dairy] ||= calculator_input.user_input.send(REFINED_MODEL).dairy
         refined_params[:fruits_and_veg] ||= calculator_input.user_input.send(REFINED_MODEL).fruits_and_veg
