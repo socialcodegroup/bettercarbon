@@ -129,7 +129,7 @@ ROOTJSON
       @root_friends_with_app = @facebook_session.user.friends_with_this_app
       @root_friends_with_app_ids = @facebook_session.user.friends_with_this_app.collect{|f| f.uid }
       
-      @friend = @root_friends_with_app.select { |friend| friend.uid == params[:node].to_i }
+      @friend = @root_friends_with_app.select { |friend| friend.uid == params[:node].to_i }.first
       
       @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @friend)
       @calculator_result = CarbonCalculator.process(@calculator_input)
