@@ -15,7 +15,7 @@
         = text_field_tag :address, "my address, my city, my state", :onclick => '$("#calculator_input_address").select();$("#calculator_input_address").css("fontStyle", "normal");', :id => 'calculator_input_address', :style => "font-style:italic;"
         .buttons= submit_tag 'View Carbon Footprint', :class => 'action-button'
     #info-panel
-      = link_to(image_tag('fb-banner.png'))
+      = link_to(image_tag('fb-banner.png'), 'http://apps.facebook.com/bettercarbon')
       %br
       #links
         .links.sidebar_column_left

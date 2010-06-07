@@ -2,6 +2,8 @@
 
 %p{:style => 'font-size: 22px;padding: 10px;'}= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C0<sup>2</sup>/year"
 
+#footprint-breakdown= render(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => @calculator_result, :compare_breakdown => nil})
+
 %p{:style => 'font-size: 22px;padding: 10px;'} Now that you've calculated your carbon footprint you can compare yourself to your friends.
 
 %p{:style => 'padding: 5px 10px; font-size: 16px;margin:0;'}= link_to('Compare me with my friends', '/bettercarbon/invites/new')
