@@ -1,9 +1,9 @@
 #footprint-breakdown= render(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => @calculator_result, :compare_breakdown => nil})
 
-#loading-indicator{:style => 'display:none;text-align:center;'}
-  %span{:style => 'padding: 3px 5px; color: red; font-size: 14px; font-weight: bold;'} Loading
+#loading-indicator{:style => 'text-align:center;'}
+  %span#loading-indicator-span{:style => 'padding: 3px 5px; color: red; font-size: 14px; font-weight: bold;'} Loading
 
-#infovis{:style => 'height:500px;background-color:#000000;'}
+#infovis{:style => 'height:500px;background-color:#eeeeee;'}
 
 :javascript
   var Log = {
@@ -108,7 +108,7 @@
               parent.location.href='http://apps.facebook.com/bettercarbon/invites/new' 
             }
             else {
-              $('#loading-indicator').show();
+              $('#loading-indicator-span').val('Loading');
               $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
                 $.get('#{url_for(:controller => 'facebook/calculator', :action => 'ht_breakdown', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
                   $('#footprint-breakdown').slideUp('slow');
@@ -125,7 +125,7 @@
                     onSuccess();
                   }
                 });
-                $('#loading-indicator').hide();
+                $('#loading-indicator-span').val('&nbsp;');
               });
             }
           },
