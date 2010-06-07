@@ -1,5 +1,5 @@
 - fb_tabs do
-  = fb_tab_item "Overview (#{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C0<sup>2</sup>)", '/bettercarbon/calculator/overview', :selected => params[:controller] == 'facebook/calculator' && params[:action] == 'overview'
+  = fb_tab_item "Overview (#{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C02)", '/bettercarbon/calculator/overview', :selected => params[:controller] == 'facebook/calculator' && params[:action] == 'overview'
   = fb_tab_item "Compare to Friends", '/bettercarbon/calculator/graph?view=fg', :selected => params[:controller] == 'facebook/calculator' && params[:action] == 'graph' && (params['view'].blank? || params['view'] == 'fg')
   / = fb_tab_item "Footprint Breakdown", '/bettercarbon/calculator/graph?view=fb', :selected => params[:controller] == 'facebook/calculator' && params['view'] == 'fb'
   = fb_tab_item "View Details", '/bettercarbon/calculator/calculate_full', :align => "right", :selected => params[:action] == 'calculate_full'
