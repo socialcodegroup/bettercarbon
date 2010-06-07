@@ -1,6 +1,6 @@
 = render(:partial => 'facebook/calculator/tab_bar')
 
-%p{:style => 'font-size: 22px;padding: 10px;'}= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C0<sup>2</sup>/year"
+%p{:style => 'font-size: 22px;padding: 10px; 10px 0px 10px;'}= "Your carbon footprint is #{number_with_delimiter(number_with_precision(@calculator_result.total_footprint, :precision => 2))} tons of C0<sup>2</sup>/year"
 
 #footprint-breakdown= render(:partial => 'facebook/calculator/breakdown', :locals => {:cr_for_breakdown => @calculator_result})
 
