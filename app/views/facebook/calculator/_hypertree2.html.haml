@@ -1,7 +1,7 @@
 #footprint-breakdown= render(:partial => 'facebook/calculator/ht_ft_breakdown', :locals => {:cr_for_breakdown => @calculator_result, :compare_breakdown => nil})
 
 #loading-indicator{:style => 'text-align:center;'}
-  %span#loading-indicator-span{:style => 'padding: 3px 5px; color: red; font-size: 14px; font-weight: bold;'}
+  %span#loading-indicator-span{:style => 'padding: 3px 5px; color: #ff0000; font-size: 14px; font-weight: bold;'}
 
 #infovis{:style => 'height:500px;background-color:#eeeeee;'}
 
@@ -22,7 +22,7 @@
       //init data
       var json = {
           "id": "#{@facebook_session.user.uid}",
-          "name": "#{@facebook_session.user.name} - #{@calculator_result.total_footprint.round}",
+          "name": "#{@facebook_session.user.name} - #{@calculator_result.total_footprint.round} tons",
           "children": [#{@friends_footprints_json}],
           "data": {
             '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
@@ -109,13 +109,13 @@
             }
             else {
               $('#loading-indicator-span').val('Loading');
-              $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
-                $.get('#{url_for(:controller => 'facebook/calculator', :action => 'ht_breakdown', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
-                  $('#footprint-breakdown').slideUp('slow');
-                  $('#footprint-breakdown').html(data);
-                  $('#footprint-breakdown').slideDown('slow');
-                });
+              $.get('#{url_for(:controller => 'facebook/calculator', :action => 'ht_breakdown', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
+                $('#footprint-breakdown').slideUp('slow');
+                $('#footprint-breakdown').html(data);
+                $('#footprint-breakdown').slideDown('slow');
+              });
               
+              $.getJSON('#{url_for(:controller => 'facebook/calculator', :action => 'hypertree_subtree', :fb_sig_user => @facebook_session.user.uid, :fb_sig_session_key => params[:fb_sig_session_key], :escape => false)}' + '&node=' + id, function(data) {
                 rgraph.op.morph(data, {
                   'id': id,
                   type: 'fade',
