@@ -41,8 +41,8 @@ class Facebook::CalculatorController < ApplicationController
   end
   
   def graph
-    # @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
-    # @calculator_result = CarbonCalculator.process(@calculator_input)
+    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+    @calculator_result = CarbonCalculator.process(@calculator_input)
 
     # lookup footprint of friends (who have calculated their footprint)
     # @friends_with_app = facebook_session.user.friends_with_this_app
