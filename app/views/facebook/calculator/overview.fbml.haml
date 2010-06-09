@@ -4,8 +4,6 @@
 
 #footprint-breakdown= render(:partial => 'facebook/calculator/breakdown', :locals => {:cr_for_breakdown => @calculator_result})
 
-= fb_iframe 'http://bettercarbon.com/facebook/calculator/framed_visualization?v=fb', :width => "100%", :height => 160, :frameborder => 0
-
 %p{:style => 'padding: 5px 10px; font-size: 16px;margin:0;'}= link_to('Compare me with my friends', '/bettercarbon/invites/new')
 
 %p{:style => 'padding: 5px 10px; font-size: 16px;margin:0;'}= link_to('Fill out a more detailed profile for more accurate results', '/bettercarbon/calculator/calculate_full')
