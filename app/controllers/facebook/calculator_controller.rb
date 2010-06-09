@@ -41,32 +41,32 @@ class Facebook::CalculatorController < ApplicationController
   end
   
   def graph
-    @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
-    @calculator_result = CarbonCalculator.process(@calculator_input)
+    # @calculator_input = CalculatorInput.new(:facebook => true, :fb_user => @facebook_session.user)
+    # @calculator_result = CarbonCalculator.process(@calculator_input)
 
     # lookup footprint of friends (who have calculated their footprint)
-    @friends_with_app = facebook_session.user.friends_with_this_app
+    # @friends_with_app = facebook_session.user.friends_with_this_app
 
-    @friends_footprints = @friends_with_app.collect { |friend|
-      query = Query.find_by_facebook_uid(friend.uid)
+    # @friends_footprints = @friends_with_app.collect { |friend|
+    #   query = Query.find_by_facebook_uid(friend.uid)
+    # 
+    #   if query
+    #     {
+    #       :friend => friend,
+    #       :footprint => query.algorithmic_footprint
+    #     }
+    #   else
+    #     nil
+    #   end
+    # }.compact
 
-      if query
-        {
-          :friend => friend,
-          :footprint => query.algorithmic_footprint
-        }
-      else
-        nil
-      end
-    }.compact
+    # footprints = @friends_footprints.collect { |friend_footprint| friend_footprint[:footprint] }
+    # footprints = footprints + [@calculator_result.total_footprint]
 
-    footprints = @friends_footprints.collect { |friend_footprint| friend_footprint[:footprint] }
-    footprints = footprints + [@calculator_result.total_footprint]
+    # @max = footprints.max
 
-    @max = footprints.max
-
-    @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
-      "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{friend_footprint[:footprint].round}', 'children' : []}"
+    # @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
+    #   "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{friend_footprint[:footprint].round}', 'children' : []}"
       # #{sprintf('%.2f', friend_footprint[:footprint])}
 
   # friend=<<FRIEND
@@ -80,7 +80,7 @@ class Facebook::CalculatorController < ApplicationController
   #     }
   #   }
   # FRIEND
-    }.join(',')
+    # }.join(',')
   end
   
   def hypertree_subtree
@@ -129,7 +129,7 @@ class Facebook::CalculatorController < ApplicationController
       root_json=<<ROOTJSON
 {
   "id": "#{@facebook_session.user.uid}",
-  "name": "#{@facebook_session.user.name} - #{@calculator_result.total_footprint.round} / #{@calculator_result.total_footprint.to_i}",
+  "name": "#{@facebook_session.user.name} - #{@calculator_result.total_footprint.round}",
   "children": [#{@friends_footprints_json}],
   "data": {
     '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
@@ -179,7 +179,7 @@ ROOTJSON
       root_json=<<ROOTJSON
 {
   "id": "#{@friend.uid}",
-  "name": '#{@friend.name} - #{@calculator_result.total_footprint.round} - #{@calculator_result.total_footprint.to_i}',
+  "name": '#{@friend.name} - #{@calculator_result.total_footprint.round}',
   "children": [#{@friends_footprints_json}],
   "data": {
     '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
@@ -244,7 +244,7 @@ ROOTJSON
     @max = footprints.max
 
     @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
-      "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{friend_footprint[:footprint].round} - #{friend_footprint[:footprint].to_i}', 'children' : []}"
+      "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{friend_footprint[:footprint].round}', 'children' : []}"
       # #{sprintf('%.2f', friend_footprint[:footprint])}
 
   # friend=<<FRIEND
