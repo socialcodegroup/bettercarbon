@@ -119,7 +119,7 @@ class Facebook::CalculatorController < ApplicationController
       @max = footprints.max
 
       @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
-        "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{friend_footprint[:footprint].round} tons', 'children' : []}"}
+        "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name}: #{friend_footprint[:footprint].round} tons', 'children' : []}"}
         
         
       @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
@@ -129,7 +129,7 @@ class Facebook::CalculatorController < ApplicationController
       root_json=<<ROOTJSON
 {
   "id": "#{@facebook_session.user.uid}",
-  "name": "#{@facebook_session.user.name} - #{@calculator_result.total_footprint.round} tons",
+  "name": "#{@facebook_session.user.name}: #{@calculator_result.total_footprint.round} tons",
   "children": [#{@friends_footprints_json}],
   "data": {
     '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
@@ -170,7 +170,7 @@ ROOTJSON
       @max = footprints.max
 
       @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
-        "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{friend_footprint[:footprint].round} tons', 'children' : []}"}
+        "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name}: #{friend_footprint[:footprint].round} tons', 'children' : []}"}
       
       
       @friends_footprints_json << "{'data' : {'$color' : '#ffa500', '$dim' : 20}, 'id' : '-2', 'name' : 'Add a Friend', 'children' : []}"
@@ -179,7 +179,7 @@ ROOTJSON
       root_json=<<ROOTJSON
 {
   "id": "#{@friend.uid}",
-  "name": '#{@friend.name} - #{@calculator_result.total_footprint.round} tons',
+  "name": '#{@friend.name}: #{@calculator_result.total_footprint.round} tons',
   "children": [#{@friends_footprints_json}],
   "data": {
     '$dim' : #{@calculator_result.total_footprint.to_i/1.5},
@@ -244,7 +244,7 @@ ROOTJSON
     @max = footprints.max
 
     @friends_footprints_json = @friends_footprints.collect { |friend_footprint|
-      "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name} - #{friend_footprint[:footprint].round} tons', 'children' : []}"
+      "{'data' : {'$color' : '#{CalcMath::number_to_intensity(friend_footprint[:footprint], 0, @max)}', '$dim' : #{friend_footprint[:footprint].to_i/1.5}},  'id' : '#{friend_footprint[:friend].uid}', 'name' : '#{friend_footprint[:friend].name}: #{friend_footprint[:footprint].round} tons', 'children' : []}"
       # #{sprintf('%.2f', friend_footprint[:footprint])}
 
   # friend=<<FRIEND
