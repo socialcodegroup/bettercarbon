@@ -127,11 +127,11 @@ class Modules::Transportation
   
   def self.possible_inputs
     [
-      {:type => :text_field,  :name => 'miles_driven',            :title => 'Number of miles driven per year'},
-      {:type => :text_field,  :name => 'mpg',                     :title => 'Miles per gallon'},
-      {:type => :select,      :name => 'fuel_type',               :title => 'Vehicle fuel type', :options => {'Gasoline' => "0", 'Diesel' => "1"}},
-      {:type => :select,      :name => 'vehicle_size',            :title => 'Vehicle size', :options => {'Small car' => "0", 'Mid-sized car' => "1", 'Van/SUV' => "2", 'Truck' => "3", 'Pickup' => "4"}},
-      {:type => :text_field,  :name => 'miles_public_transport',  :title => 'Miles traveled via public transportation per month'}
+      {:type => :text_field,  :name => 'miles_driven',            :title => 'About how many miles do you drive each year?'},
+      {:type => :text_field,  :name => 'mpg',                     :title => 'How many miles per gallon (mpg) does your car get? (Put 0 if you have no car)'},
+      {:type => :select,      :name => 'fuel_type',               :title => 'What kind of fuel does your car use?', :options => {'Gasoline' => "0", 'Diesel' => "1"}},
+      {:type => :select,      :name => 'vehicle_size',            :title => 'How big is your car?', :options => {'Small car' => "0", 'Mid-sized car' => "1", 'Van/SUV' => "2", 'Truck' => "3", 'Pickup' => "4", "None" => "5"}},
+      {:type => :text_field,  :name => 'miles_public_transport',  :title => 'About how many miles do you travel via public transportation (bus, train, etc) each month?'}
     ]
   end
   

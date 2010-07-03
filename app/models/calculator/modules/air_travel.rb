@@ -94,10 +94,10 @@ class Modules::AirTravel
   
   def self.possible_inputs
     [
-      {:type => :text_field,  :name => 'num_short_trips',    :title => 'Number of short trips (<400mi) per year. (Round trips are 2 flights)',},
-      {:type => :text_field,  :name => 'num_medium_trips',   :title => 'Number of medium trips (400-1500mi) per year. (Round trips are 2 flights)'},
-      {:type => :text_field,  :name => 'num_long_trips',     :title => 'Number of long trips (1500-3000mi) per year. (Round trips are 2 flights)'},
-      {:type => :text_field,  :name => 'num_extended_trips', :title => 'Number of extended trips (>3000mi) per year. (Round trips are 2 flights)'}
+      {:type => :text_field,  :name => 'num_short_trips',    :title => 'How many short (<400mi) plane flights do you take each year? (A round trip is 2 flights)',},
+      {:type => :text_field,  :name => 'num_medium_trips',   :title => 'How many medium (400-1500mi) plane flights do you take each year? (A round trip is 2 flights)'},
+      {:type => :text_field,  :name => 'num_long_trips',     :title => 'How many long (1500-3000mi) plane flights do you take each year? (A round trip is 2 flights)'},
+      {:type => :text_field,  :name => 'num_extended_trips', :title => 'How many extended (>3000mi) plane flights do you take each year? (A round trip is 2 flights)'}
       
       # Just examples
       # {:type => :check_box,   :name => 'num_extended_trips', :title => 'I have a car that runs on gas.'},

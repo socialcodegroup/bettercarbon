@@ -94,10 +94,10 @@ class Modules::GoodsAndServices
   
   def self.possible_inputs
     [
-      {:type => :text_field, :name => 'clothing',                 :title => '$ spent on clothing per month'},
-      {:type => :text_field, :name => 'furnishings',              :title => '$ spent on furnishings per month'},
-      {:type => :text_field, :name => 'other_goods',              :title => '$ spent on other goods per month'},
-      {:type => :text_field, :name => 'services',                 :title => '$ spent on other services per month'}
+      {:type => :text_field, :name => 'clothing',                 :title => 'How much money do you spend on clothing each month?'},
+      {:type => :text_field, :name => 'furnishings',              :title => 'How much money do you spend on home furnishings each month?'},
+      {:type => :text_field, :name => 'other_goods',              :title => 'How much money do you spend on other goods each month?'},
+      {:type => :text_field, :name => 'services',                 :title => 'How much money do you spend on other services (including healthcare, insurance, etc) each month?'}
     ]
   end
   

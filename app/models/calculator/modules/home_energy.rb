@@ -139,11 +139,11 @@ class Modules::HomeEnergy
   
   def self.possible_inputs
     [
-      {:type => :text_field, :name => 'electricity_costs',        :title => '$ spent on electricity per month'},
-      {:type => :text_field, :name => 'natural_gas_costs',        :title => '$ spent on natural gas per month'},
-      {:type => :text_field, :name => 'other_fuel_costs',         :title => '$ spent on other fuel per month'},
-      {:type => :text_field, :name => 'water_and_sewage_costs',   :title => '$ spent on water and sewage per month'},
-      {:type => :text_field, :name => 'square_feet_of_household', :title => 'Square feet of household'}
+      {:type => :text_field, :name => 'electricity_costs',        :title => 'How much money do you spend on your electricity bill each month?'},
+      {:type => :text_field, :name => 'natural_gas_costs',        :title => 'How much money do you spend on natural gas each month?'},
+      {:type => :text_field, :name => 'other_fuel_costs',         :title => 'How much money do you spend on other household fuels each month?'},
+      {:type => :text_field, :name => 'water_and_sewage_costs',   :title => 'How much money do you spend on your water and sewage bills each month?'},
+      {:type => :text_field, :name => 'square_feet_of_household', :title => 'How large (in square feet) is your home?'}
     ]
   end
   

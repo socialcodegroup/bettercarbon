@@ -117,13 +117,13 @@ class Modules::Food
   
   def self.possible_inputs
     [
-      {:type => :text_field,  :name => 'meat_fish_protein',         :title => '$ spent on meat, fish, and protein per month'},
-      {:type => :text_field,  :name => 'cereals_bakery_products',   :title => '$ spent on cereals and bakery products per month'},
-      {:type => :text_field,  :name => 'dairy',                     :title => '$ spent on dairy per month'},
-      {:type => :text_field,  :name => 'fruits_and_veg',            :title => '$ spent on fruits and vegetables per month'},
-      {:type => :text_field,  :name => 'eating_out',                :title => '$ spent on eating out per month'},
-      {:type => :text_field,  :name => 'other_foods',               :title => '$ spent on other foods per month'},
-      {:type => :select,      :name => 'eat_organic_food',          :title => 'Eat organic food', :options => { 'Never or rarely' => '0', 'Sometimes' => "1", 'Most of the time' => "2"}}
+      {:type => :text_field,  :name => 'meat_fish_protein',         :title => 'How much money do you spend on meat, fish, and other protein products each month?'},
+      {:type => :text_field,  :name => 'cereals_bakery_products',   :title => 'How much money do you spend on cereals and bakery products each month?'},
+      {:type => :text_field,  :name => 'dairy',                     :title => 'How much money do you spend on dairy products each month?'},
+      {:type => :text_field,  :name => 'fruits_and_veg',            :title => 'How much money do you spend on fruits and vegetables each month?'},
+      {:type => :text_field,  :name => 'eating_out',                :title => 'How much money do you spend eating out each month?'},
+      {:type => :text_field,  :name => 'other_foods',               :title => 'How much money do you spend on other food each month?'},
+      {:type => :select,      :name => 'eat_organic_food',          :title => 'How often do you buy organic food products?', :options => { 'Never or rarely' => '0', 'Sometimes' => "1", 'Most of the time' => "2"}}
     ]
   end
   
