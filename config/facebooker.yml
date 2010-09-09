@@ -1,7 +1,7 @@
 development:
- api_key: 5f3c45dfddfabb4cce9621bd71e35b17
- secret_key: 0b00fd94eeff88a9d9c9631dfb1c9e57
- canvas_page_name: bettercarbon
+  api_key: 599b62ef49381cb4eb50333c8118d3a8
+  secret_key: ec16ebf171db9165747fda3f5431b2d1
+  canvas_page_name: bettercarbon
  # callback_url: http://staging.travelerstable.com:8888
  # pretty_errors: true
  # set_asset_host_to_callback_url: true
@@ -12,10 +12,10 @@ development:
  #     local_port: 3000
  #     server_alive_interval: 0
 test:
-  api_key: 5f3c45dfddfabb4cce9621bd71e35b17
-  secret_key: 0b00fd94eeff88a9d9c9631dfb1c9e57
+  api_key: 599b62ef49381cb4eb50333c8118d3a8
+  secret_key: ec16ebf171db9165747fda3f5431b2d1
   canvas_page_name: bettercarbon
 production:
-  api_key: 1b6c0e8ecfdea2ce9091a252aa90b216
-  secret_key: db4e70da6e2b9948b6a52765f71c7a1e
+  api_key: 599b62ef49381cb4eb50333c8118d3a8
+  secret_key: ec16ebf171db9165747fda3f5431b2d1
   canvas_page_name: bettercarbon
